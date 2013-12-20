@@ -1,0 +1,27 @@
+#ifndef METAPROG_GET_TYPE_N_H
+#define METAPROG_GET_TYPE_N_H
+
+namespace libmda
+{
+namespace metaprog
+{
+
+template<int N, typename... T> 
+struct get_type_n_; // getParameterPackType
+
+template<int N, typename U, typename... T> 
+struct get_type_n_<N,U,T...>
+{
+   typedef typename get_type_n_<N-1,T...>::type type;
+};
+
+template<typename U, typename... T> 
+struct get_type_n_<0,U,T...>
+{
+   typedef U type;
+};
+
+} // namespace metaprog
+} // namespace libmda
+
+#endif /* METAPROG_GET_TYPE_N_H */

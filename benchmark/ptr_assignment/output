@@ -1,0 +1,58 @@
+SIZE 5
+
+g++ -O3 -fexpensive-optimizations -Drestrict= -std=c++0x -o main main.cc  
+./main
+ TEST: oper at 2d tens
+ did 20000000 runs and  used: 960000 clocks  (in 0.96s).
+ TEST: oper at 3d tens
+ did 20000000 runs and  used: 5960000 clocks  (in 5.96s).
+ TEST: oper at 4d tens
+ did 20000000 runs and  used: 32370000 clocks  (in 32.37s).
+ TEST: oper at 5d tens
+ did 20000000 runs and  used: 145620000 clocks  (in 145.62s).
+ TEST: oper parenteses 2d tens
+ did 20000000 runs and  used: 900000 clocks  (in 0.9s).
+ TEST: oper parenteses 3d tens
+ did 20000000 runs and  used: 4520000 clocks  (in 4.52s).
+ TEST: oper parenteses 4d tens
+ did 20000000 runs and  used: 26530000 clocks  (in 26.53s).
+ TEST: oper parenteses 5d tens
+ did 20000000 runs and  used: 152080000 clocks  (in 152.08s).
+ TEST: vec access 2d tens
+ did 20000000 runs and  used: 270000 clocks  (in 0.27s).
+ TEST: vec access 3d tens
+ did 20000000 runs and  used: 1040000 clocks  (in 1.04s).
+ TEST: vec access 4d tens
+ did 20000000 runs and  used: 5210000 clocks  (in 5.21s).
+ TEST: vec access 5d tens
+ did 20000000 runs and  used: 25060000 clocks  (in 25.06s).
+Finished tests in 400.52s, 0.0299611 tests/s, 0 assertions/s 
+12 tests, 0 assertions, 0 failed 
+g++ -O3 -fexpensive-optimizations -Drestrict= -std=c++0x -o main main.cc  
+./main
+ TEST: oper at 2d tens
+ did 20000000 runs and  used: 820000 clocks  (in 0.82s).
+ TEST: oper at 3d tens
+ did 20000000 runs and  used: 4540000 clocks  (in 4.54s).
+ TEST: oper at 4d tens
+ did 20000000 runs and  used: 25220000 clocks  (in 25.22s).
+ TEST: oper at 5d tens
+ did 20000000 runs and  used: 134860000 clocks  (in 134.86s).
+ TEST: oper parenteses 2d tens
+ did 20000000 runs and  used: 920000 clocks  (in 0.92s).
+ TEST: oper parenteses 3d tens
+ did 20000000 runs and  used: 4520000 clocks  (in 4.52s).
+ TEST: oper parenteses 4d tens
+ did 20000000 runs and  used: 27010000 clocks  (in 27.01s).
+ TEST: oper parenteses 5d tens
+ did 20000000 runs and  used: 153700000 clocks  (in 153.7s).
+ TEST: vec access 2d tens
+ did 20000000 runs and  used: 270000 clocks  (in 0.27s).
+ TEST: vec access 3d tens
+ did 20000000 runs and  used: 1060000 clocks  (in 1.06s).
+ TEST: vec access 4d tens
+ did 20000000 runs and  used: 5420000 clocks  (in 5.42s).
+ TEST: vec access 5d tens
+ did 20000000 runs and  used: 25570000 clocks  (in 25.57s).
+Finished tests in 383.91s, 0.0312573 tests/s, 0 assertions/s 
+12 tests, 0 assertions, 0 failed 

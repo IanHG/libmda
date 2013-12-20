@@ -1,0 +1,33 @@
+#######################
+# 
+#  TO DO list... unordered...
+#
+########################
+
+# 1 #
+1. make nice error messages, when char indicies do not align...
+
+# 2 # DONE!
+2. make run-time check on dimensions, 
+that can be compiled IN or OUT for production run
+
+# 3 # IMPORTANT !
+3. Make scalars for char_expressions
+
+# 4 #
+4. Make variable expressions.. (also mda variables... )
+
+# 5 #
+5. Make self contractions for char_expressions...
+
+# 6 # PARTLY DONE
+Make N-dimensional array class...
+
+# 7 #
+check todo list in interface.h
+
+# 8 # SET-UP IS DONE... NOW MAKE TESTS FOR EVERYTHING!
+make performance AND unit tests
+
+# 9 
+CLEAN UP CODE !!! 

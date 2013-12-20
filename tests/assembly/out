@@ -1,0 +1,16 @@
+clang++ -O3 -std=c++0x -o main main.cc 
+main.cc:28:14: error: unknown type name 'loop'
+   using l = loop<0,10>;
+             ^
+main.cc:28:18: error: expected ';' after alias declaration
+   using l = loop<0,10>;
+                 ^
+                 ;
+main.cc:29:9: error: use of undeclared identifier 'begin'
+   Forr<begin<l>, end<l> >();
+        ^
+main.cc:29:15: error: use of undeclared identifier 'l'
+   Forr<begin<l>, end<l> >();
+              ^
+4 errors generated.
+make: *** [clang] Error 1

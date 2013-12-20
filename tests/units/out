@@ -1,0 +1,36 @@
+clang++ -O3 -std=c++0x -o main main.cc 
+In file included from main.cc:3:
+In file included from ./../../units/interface.h:4:
+In file included from ./../../units/quantity.h:6:
+./../../units/unit.h:125:4: error: static_assert failed "not same system"
+   static_assert(Is_same<Unit_system<U1>,Unit_system<U2> >(),"not same system");
+   ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./../../units/../basic_using.h:9:1: note: in instantiation of template class 'libmda::units::detail::UnitPlus_<libmda::units::Unit<libmda::units::au::au, libmda::units::detail::UnitVec_<1, 0, 0, 0, 0> >, libmda::units::Unit<libmda::units::si::si, libmda::units::detail::UnitVec_<-1, 0, 0, 0, 0, 0, 0> > >' requested here
+using Type       = typename A::type;
+^
+./../../units/unit.h:132:1: note: in instantiation of template type alias 'Type' requested here
+using UnitPlus = Type<detail::UnitPlus_<U1,U2> >;
+^
+./../../units/operators.h:32:44: note: in instantiation of template type alias 'UnitPlus' requested here
+template<class u_L, class u_R, class u_A = UnitPlus<u_L,u_R> >
+                                           ^
+./../../units/operators.h:33:16: note: in instantiation of default argument for 'operator*<libmda::units::Unit<libmda::units::au::au, libmda::units::detail::UnitVec_<1, 0, 0, 0, 0> >, libmda::units::Unit<libmda::units::si::si, libmda::units::detail::UnitVec_<-1, 0, 0, 0, 0, 0, 0> > >' required here
+quantity_<u_A> operator*(const quantity_<u_L> a_lhs, const quantity_<u_R> a_rhs)
+               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+./../../units/operators.h:33:16: note: while substituting deduced template arguments into function template 'operator*' [with u_L = libmda::units::Unit<libmda::units::au::au, libmda::units::detail::UnitVec_<1, 0, 0, 0, 0> >, u_R = libmda::units::Unit<libmda::units::si::si, libmda::units::detail::UnitVec_<-1, 0, 0, 0, 0, 0, 0> >, u_A = <no value>]
+quantity_<u_A> operator*(const quantity_<u_L> a_lhs, const quantity_<u_R> a_rhs)
+               ^
+main.cc:13:7: error: invalid operands to binary expression ('quantity<bohr<1> >' (aka 'libmda::units::quantity_<libmda::units::Unit<libmda::units::au::au, libmda::units::detail::UnitVec_<1, 0, 0, 0, 0> > >') and 'quantity<kg<-1> >' (aka 'libmda::units::quantity_<libmda::units::Unit<libmda::units::si::si, libmda::units::detail::UnitVec_<-1, 0, 0, 0, 0, 0, 0> > >'))
+   bb * ddddd;
+   ~~ ^ ~~~~~
+./../../units/operators.h:48:16: note: candidate function [with u_A = libmda::units::Unit<libmda::units::si::si, libmda::units::detail::UnitVec_<-1, 0, 0, 0, 0, 0, 0> >] not viable: no known conversion from 'quantity<bohr<1> >' (aka 'libmda::units::quantity_<libmda::units::Unit<libmda::units::au::au, libmda::units::detail::UnitVec_<1, 0, 0, 0, 0> > >') to 'const double' for 1st argument
+quantity_<u_A> operator*(const double d, const quantity_<u_A> a_rhs)
+               ^
+./../../units/operators.h:55:16: note: candidate function [with u_A = libmda::units::Unit<libmda::units::au::au, libmda::units::detail::UnitVec_<1, 0, 0, 0, 0> >] not viable: no known conversion from 'quantity<kg<-1> >' (aka 'libmda::units::quantity_<libmda::units::Unit<libmda::units::si::si, libmda::units::detail::UnitVec_<-1, 0, 0, 0, 0, 0, 0> > >') to 'const double' for 2nd argument
+quantity_<u_A> operator*(const quantity_<u_A> a_lhs, const double d)
+               ^
+./../../units/operators.h:33:16: note: candidate template ignored: couldn't infer template argument 'u_A'
+quantity_<u_A> operator*(const quantity_<u_L> a_lhs, const quantity_<u_R> a_rhs)
+               ^
+2 errors generated.
+make: *** [clang] Error 1
