@@ -4,26 +4,40 @@
 #include "../../units/au_unit.h"
 using namespace libmda::units::si;
 using namespace libmda::units::au;
+#include"../../units/meta_string.h"
 
 int main()
 {
-   quantity<bohr<1> > bb = quantity<bohr<1> >(2.0);
-   quantity<kg<-1> > ddddd = 2.0/10.0_kg;
+   libmda::util::meta_string<'a','b','c'>  ms1;
+   libmda::util::meta_string<'d','e','f'>  ms2;
+   libmda::util::Int_to_meta_string<-1213> msi1;
+   libmda::util::Int_to_meta_string< 1213> msi2;
 
-   //bb * ddddd;
+   auto ms3 = libmda::util::Catenate<decltype(ms1),decltype(msi1)>(); 
+   
+   std::cout << ms1 << std::endl;
+   std::cout << ms3 << std::endl;
+   std::cout << msi1 << std::endl;
+   std::cout << msi2 << std::endl;
+   std::cout << msi2+msi2 << std::endl;
 
-   quantity<m<1> > delta_length = 10.0_m;
-   quantity<m<1> > delta_length2 = 12.0_m;
-   
-   quantity<s<1> > delta_s = 5.57_s;
-   quantity<s<1> > delta_s2 = 12.0_s;
+   //quantity<bohr<1> > bb = quantity<bohr<1> >(2.0);
+   //quantity<kg<-1> > ddddd = 2.0/10.0_kg;
 
-   quantity<m<1>,s<-1> > velocity1 = delta_length/delta_s;
-   quantity<m<1>,s<-1> > velocity2 = delta_length2/delta_s;
-   
-   quantity<m<1>,s<-2> > acc = (velocity2-velocity1)/delta_s2;
-   
-   std::cout << acc << std::endl;
+   ////bb * ddddd;
+
+   //quantity<m<1> > delta_length = 10.0_m;
+   //quantity<m<1> > delta_length2 = 12.0_m;
+   //
+   //quantity<s<1> > delta_s = 5.57_s;
+   //quantity<s<1> > delta_s2 = 12.0_s;
+
+   //quantity<m<1>,s<-1> > velocity1 = delta_length/delta_s;
+   //quantity<m<1>,s<-1> > velocity2 = delta_length2/delta_s;
+   //
+   //quantity<m<1>,s<-2> > acc = (velocity2-velocity1)/delta_s2;
+   //
+   //std::cout << acc << std::endl;
    
    return 0;
 }

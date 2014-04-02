@@ -5,19 +5,19 @@
 using std::cout;
 using std::endl;
 
-#include "../../metaprog/get_type_n_.h"
-using libmda::metaprog::get_type_n_;
+#include "../../meta/get_type_n_.h"
+using libmda::meta::get_type_n_;
 #include "../../testing/testing_interface.h"
-#include "../../utility/for_loop_expand.h"
+#include "../../util/for_loop_expand.h"
 
-#include "../../utility/sequence.h"
+#include "../../util/sequence.h"
 
 namespace libmda
 {
 namespace benchmark
 {
 
-using libmda::utility::sequence;
+using libmda::util::sequence;
 
 #define PTR_SIZE 250000000
 

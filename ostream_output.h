@@ -1,9 +1,12 @@
 #ifndef LIBMDA_OSTREAM_OUTPUT_H_INCLUDED
 #define LIBMDA_OSTREAM_OUTPUT_H_INCLUDED
 
+#include <iostream>
+#include <iomanip>
+
 #include "IMDA.h"
-#include "utility/for_loop_expand.h"
-#include "utility/require.h"
+#include "util/for_loop_expand.h"
+#include "util/require.h"
 
 namespace libmda
 {
@@ -18,15 +21,29 @@ struct op_output
 };
 
 /***************************/
+/* number output           */
+/***************************/
+template<class A, Require_order<A,0> = 0>
+std::ostream& operator<<(std::ostream& a_ostream, const IMDAAccessComb<A>& mda)
+{
+   a_ostream << mda.at();
+   return a_ostream;
+}
+
+/***************************/
 /* vector output           */
 /***************************/
 template<class A, Require_order<A,1> = 0>
 std::ostream& operator<<(std::ostream& a_ostream, const IMDAAccessComb<A>& mda)
 {
    a_ostream << "(";
-   for(Size_type<A> i = 0; i<mda.size()-1; ++i)
-      a_ostream << mda.at(i) << ",";
-   a_ostream << mda.at(mda.size()-1) << ")";
+   if(mda.size() > 0)
+   {
+      for(Size_type<A> i = 0; i<mda.size()-1; ++i)
+         a_ostream << mda.at(i) << ",";
+      a_ostream << mda.at(mda.size()-1);
+   }
+   a_ostream << ")";
    return a_ostream;
 }
 
@@ -36,6 +53,8 @@ std::ostream& operator<<(std::ostream& a_ostream, const IMDAAccessComb<A>& mda)
 template<class A, Require_order<A,2> = 0>
 std::ostream& operator<<(std::ostream& a_ostream, const IMDAAccessComb<A>& mda)
 {
+   a_ostream << std::fixed << std::setprecision(3) << std::endl;
+
    a_ostream << mda.template extent<0>() << "x" 
              << mda.template extent<1>() << "\n";
    for(Size_type<A> i=0; i<mda.template extent<0>(); ++i)
@@ -75,7 +94,7 @@ std::ostream& operator<<(std::ostream& a_ostream, const IMDAAccessComb<A>& mda)
 template<class A, Require_order_geq<A,4> = 0>
 std::ostream& operator<<(std::ostream& a_ostream, const IMDAAccessComb<A>& mda)
 {
-   utility::for_loop_expand<op_output>::apply(mda,a_ostream);
+   util::for_loop_expand<op_output>::apply(mda,a_ostream);
    return a_ostream;
 }
 

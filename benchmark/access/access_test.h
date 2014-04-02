@@ -5,10 +5,10 @@
 using std::cout;
 using std::endl;
 
-#include "../../metaprog/get_type_n_.h"
-using libmda::metaprog::get_type_n_;
+#include "../../meta/get_type_n_.h"
+using libmda::meta::get_type_n_;
 #include "../../testing/testing_interface.h"
-#include "../../utility/for_loop_expand.h"
+#include "../../util/for_loop_expand.h"
 
 namespace libmda
 {

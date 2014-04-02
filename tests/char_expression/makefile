@@ -3,30 +3,36 @@ FUNC=
 CXX=g++
 CXXOPTIMFLAGS=-O3
 CXXDEBUGFLAGS=-g -O0
-
+LIB=../../lib/libmda.a
 
 gcc: $(OBJ) $(FUNC)
-	$(CXX) $(CXXOPTIMFLAGS) -fexpensive-optimizations -Drestrict= -std=c++0x -o main $(OBJ) $(FUNC)
+	export LIBMDA_COMPILER_SETTING="$(CXX) $(CXXOPTIMFLAGS) -std=c++11" && cd ../../lib && make
+	$(CXX) $(CXXOPTIMFLAGS) -fexpensive-optimizations -Drestrict= -std=c++0x -o main $(OBJ) $(FUNC) $(LIB)
 	./main
 
 gcc_debug: $(OBJ) $(FUNC)
-	$(CXX) $(CXXDEBUGFLAGS) -std=c++0x -o main $(OBJ) $(FUNC)
+	export LIBMDA_COMPILER_SETTING="$(CXX) $(CXXDEBUGFLAGS) -std=c++11" && cd ../../lib && make
+	$(CXX) $(CXXDEBUGFLAGS) -std=c++0x -o main $(OBJ) $(FUNC) $(LIB)
 	valgrind --tool=memcheck --leak-check=yes ./main
 
 intel: $(OBJ)
-	icpc $(CXXOPTIMFLAGS) -ip -ipo -fast -std=c++11 -Wcontext-limit=100 -o main $(OBJ)
+	export LIBMDA_COMPILER_SETTING="icpc -O3 -ip -ipo -fast -std=c++11" && cd ../../lib && make
+	icpc $(CXXOPTIMFLAGS) -ip -ipo -fast -std=c++11 -Wcontext-limit=100 -o main $(OBJ) $(LIB)
 	./main
 
 intel_debug: $(OBJ)
-	icpc $(CXXDEBUGFLAGS) -std=c++11 -Wcontext-limit=100 -o main $(OBJ)
+	export LIBMDA_COMPILER_SETTING="icpc $(CXXDEBUGFLAGS) -std=c++11" && cd ../../lib && make
+	icpc $(CXXDEBUGFLAGS) -std=c++11 -Wcontext-limit=100 -o main $(OBJ) $(LIB)
 	valgrind --tool=memcheck --leak-check=yes ./main
 
 clang: $(OBJ)
-	clang++ $(CXXOPTIMFLAGS) -std=c++0x -o main $(OBJ)
+	export LIBMDA_COMPILER_SETTING="clang++ $(CXXOPTIMFLAGS) -std=c++11" && cd ../../lib && make
+	clang++ $(CXXOPTIMFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
 	./main
 
 clang_debug: $(OBJ)
-	clang++ $(CXXDEBUGFLAGS) -std=c++0x -o main $(OBJ)
+	export LIBMDA_COMPILER_SETTING="clang++ $(CXXDEBUGFLAGS) -std=c++11" && cd ../../lib && make
+	clang++ $(CXXDEBUGFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
 	valgrind --tool=memcheck --leak-check=yes ./main
 
 clean:

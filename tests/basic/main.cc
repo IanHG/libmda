@@ -15,13 +15,16 @@ struct the_test: public virtual unit_test
       double m_number;
    
    public:
-   the_test(const double a_number): m_number(a_number) { };
+      the_test(const double a_number): 
+         m_number(a_number) 
+      { 
+      };
 
-   void do_test() throw(test_failed)
-   { 
-      cout << " im testing with template " << N
-           << " and number " << m_number << endl; 
-   }
+      void do_test() throw(test_failed)
+      { 
+         cout << " im testing with template " << N
+              << " and number " << m_number << endl; 
+      }
 };
 
 struct mult_test: public virtual unit_test

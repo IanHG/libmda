@@ -1,442 +1,109 @@
 clang++ -O3 -std=c++0x -o main main.cc 
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:23:
-./../../arrays/../IMDA.h:43:18: error: static_assert expression is not an integral constant expression
-   static_assert(utility::has_size<type,size_type>::value,"doesn't have size()");
-                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-./../../arrays/../IMDA.h:59:28: note: in instantiation of template class 'libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > >' requested here
-struct IMDAAccess<true,A>: A
-                           ^
-./../../arrays/../IMDA.h:97:24: note: in instantiation of template class 'libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > >' requested here
-struct IMDAAccessComb: A { };
-                       ^
-./../../arrays/../IMDA.h:106:31: note: in instantiation of template class 'libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > >' requested here
-struct IMDAVecAccess<true,A>: A
-                              ^
-./../../arrays/../IMDA.h:127:27: note: in instantiation of template class 'libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > >' requested here
-struct IMDAVecAccessComb: A { };
-                          ^
-./../../arrays/../interface.h:68:47: note: in instantiation of template class 'libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > >' requested here
-    template<class A> struct expression_base: A { };
-                                              ^
-./../../arrays/../operators/expression_binary_operators.h:48:1: note: (skipping 21 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_divisable,/)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:23:
-In file included from ./../../arrays/../IMDA.h:6:
-In file included from ./../../arrays/../utility/for_loop_expand.h:4:
-In file included from ./../../arrays/../utility/../metaprog/loop.h:4:
-In file included from ./../../arrays/../metaprog/int_.h:5:
-In file included from ./../../arrays/../metaprog/iterator.h:6:
-./../../arrays/../metaprog/../basic_using.h:11:1: error: no type named 'value_type' in 'libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > >'
-using Value_type = typename A::value_type;
-^~~~~
-./../../arrays/../IMDA.h:109:12: note: in instantiation of template type alias 'Value_type' requested here
-   typedef Value_type<A> value_type;
-           ^
-./../../arrays/../IMDA.h:127:27: note: in instantiation of template class 'libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > >' requested here
-struct IMDAVecAccessComb: A { };
-                          ^
-./../../arrays/../interface.h:68:47: note: in instantiation of template class 'libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > >' requested here
-    template<class A> struct expression_base: A { };
-                                              ^
-./../../arrays/../operators/expression_binary_operators.h:48:1: note: in instantiation of template class 'libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > >' requested here
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_divisable,/)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/../operators/expression_binary_operators.h:47:1: note: in instantiation of template class 'libmda::operators::libmda_divisable<oper_div, libmda::expr::binary_expression, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > >' requested here
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_multiplicable,*)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/../operators/expression_binary_operators.h:46:1: note: (skipping 19 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_subtractable,-)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:23:
-In file included from ./../../arrays/../IMDA.h:6:
-In file included from ./../../arrays/../utility/for_loop_expand.h:4:
-In file included from ./../../arrays/../utility/../metaprog/loop.h:4:
-In file included from ./../../arrays/../metaprog/int_.h:5:
-In file included from ./../../arrays/../metaprog/iterator.h:6:
-./../../arrays/../metaprog/../basic_using.h:13:1: error: no type named 'size_type' in 'libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > >'
-using Size_type  = typename A::size_type;
-^~~~~
-./../../arrays/../IMDA.h:110:12: note: in instantiation of template type alias 'Size_type' requested here
-   typedef Size_type<A>  size_type;
-           ^
-./../../arrays/../IMDA.h:127:27: note: in instantiation of template class 'libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > >' requested here
-struct IMDAVecAccessComb: A { };
-                          ^
-./../../arrays/../interface.h:68:47: note: in instantiation of template class 'libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > >' requested here
-    template<class A> struct expression_base: A { };
-                                              ^
-./../../arrays/../operators/expression_binary_operators.h:48:1: note: in instantiation of template class 'libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > >' requested here
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_divisable,/)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/../operators/expression_binary_operators.h:47:1: note: in instantiation of template class 'libmda::operators::libmda_divisable<oper_div, libmda::expr::binary_expression, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > >' requested here
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_multiplicable,*)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/../operators/expression_binary_operators.h:46:1: note: (skipping 19 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_subtractable,-)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:23:
-./../../arrays/../IMDA.h:111:34: error: no member named 'num_dim' in 'libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > >'
-   static const int num_dim = A::num_dim;
-                              ~~~^
-./../../arrays/../IMDA.h:127:27: note: in instantiation of template class 'libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > >' requested here
-struct IMDAVecAccessComb: A { };
-                          ^
-./../../arrays/../interface.h:68:47: note: in instantiation of template class 'libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > >' requested here
-    template<class A> struct expression_base: A { };
-                                              ^
-./../../arrays/../operators/expression_binary_operators.h:48:1: note: in instantiation of template class 'libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > >' requested here
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_divisable,/)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/../operators/expression_binary_operators.h:47:1: note: in instantiation of template class 'libmda::operators::libmda_divisable<oper_div, libmda::expr::binary_expression, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > >' requested here
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_multiplicable,*)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/../operators/expression_binary_operators.h:46:1: note: in instantiation of template class 'libmda::operators::libmda_multiplicable<oper_mult, libmda::expr::binary_expression, libmda::operators::libmda_divisable<oper_div, libmda::expr::binary_expression, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > >' requested here
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_subtractable,-)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/../operators/expression_binary_operators.h:45:1: note: (skipping 18 contexts in backtrace; use -ftemplate-backtrace-limit=0 to see all)
-LIBMDA_CREATE_BINARY_OPERATOR(libmda_addable,+)
-^
-./../../arrays/../operators/expression_binary_operators.h:35:21: note: expanded from macro 'LIBMDA_CREATE_BINARY_OPERATOR'
-struct NAME: public A \
-                    ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:23:
-In file included from ./../../arrays/../IMDA.h:6:
-In file included from ./../../arrays/../utility/for_loop_expand.h:4:
-In file included from ./../../arrays/../utility/../metaprog/loop.h:4:
-In file included from ./../../arrays/../metaprog/int_.h:5:
-In file included from ./../../arrays/../metaprog/iterator.h:6:
-./../../arrays/../metaprog/../basic_using.h:9:1: error: no type named 'type' in 'libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > >'
-using Type       = typename A::type;
-^~~~~
-./../../arrays/../expr/char_expression.h:246:24: note: in instantiation of template type alias 'Type' requested here
-   mda_char_expression<Type<A>, cints...> c_expr(const cints... ci)
-                       ^
-./../../arrays/../IMDA.h:155:24: note: in instantiation of template class 'libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > >' requested here
-struct IMDAElemAssign: A
-                       ^
-./../../arrays/../IMDA.h:208:28: note: in instantiation of template class 'libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > >' requested here
-struct IMDAElemAssignMult: A
-                           ^
-./../../arrays/../expr/expression.h:374:30: note: in instantiation of template class 'libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > >' requested here
-struct scalar_assign: public A
-                             ^
-./../../arrays/../expr/interface.h:16:11: note: in instantiation of template class 'libmda::scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >' requested here
-   public libmda::scalar_assign<
-          ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:23:
-In file included from ./../../arrays/../IMDA.h:6:
-In file included from ./../../arrays/../utility/for_loop_expand.h:4:
-In file included from ./../../arrays/../utility/../metaprog/loop.h:4:
-In file included from ./../../arrays/../metaprog/int_.h:5:
-In file included from ./../../arrays/../metaprog/iterator.h:6:
-./../../arrays/../metaprog/../basic_using.h:9:1: error: no type named 'type' in 'libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > >'
-using Type       = typename A::type;
-^~~~~
-./../../arrays/../metaprog/../basic_using.h:13:1: error: no type named 'size_type' in 'libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > >'
-using Size_type  = typename A::size_type;
-^~~~~
-./../../arrays/../IMDA.h:159:12: note: in instantiation of template type alias 'Size_type' requested here
-   typedef Size_type<A> size_type;
-           ^
-./../../arrays/../IMDA.h:208:28: note: in instantiation of template class 'libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > >' requested here
-struct IMDAElemAssignMult: A
-                           ^
-./../../arrays/../expr/expression.h:374:30: note: in instantiation of template class 'libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > >' requested here
-struct scalar_assign: public A
-                             ^
-./../../arrays/../expr/interface.h:16:11: note: in instantiation of template class 'libmda::scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >' requested here
-   public libmda::scalar_assign<
-          ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:23:
-./../../arrays/../IMDA.h:213:10: error: using declaration refers into 'IMDAElemAssign<dimensions_nocheck, char_expression_interface<expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, expression_base<IMDAVecAccessComb<IMDAVecAccess<true, IMDAAccessComb<IMDAAccess<true, IMDABasic<IMDA<SDArray2D<double, allocator<double>, index_nocheck>, traits<SDArray2D<double, allocator<double>, index_nocheck> > > > > > > > > > > > > > >::', which is not a base class of 'IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > >'
-   using A::operator=;
-         ^~~
-./../../arrays/../expr/expression.h:374:30: note: in instantiation of template class 'libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > >' requested here
-struct scalar_assign: public A
-                             ^
-./../../arrays/../expr/interface.h:16:11: note: in instantiation of template class 'libmda::scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >' requested here
-   public libmda::scalar_assign<
-          ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:80:
-./../../arrays/../expr/expression.h:378:24: error: no type named 'value_type' in 'libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > >'
-   typedef typename A::value_type value_type;
-           ~~~~~~~~~~~~^~~~~~~~~~
-./../../arrays/../expr/interface.h:16:11: note: in instantiation of template class 'libmda::scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >' requested here
-   public libmda::scalar_assign<
-          ^
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:5:
-In file included from ./../../arrays/../interface.h:80:
-./../../arrays/../expr/expression.h:379:10: error: using declaration refers into 'IMDAElemAssignMult<dimensions_nocheck, IMDAElemAssign<dimensions_nocheck, char_expression_interface<expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, expression_base<IMDAVecAccessComb<IMDAVecAccess<true, IMDAAccessComb<IMDAAccess<true, IMDABasic<IMDA<SDArray2D<double, allocator<double>, index_nocheck>, traits<SDArray2D<double, allocator<double>, index_nocheck> > > > > > > > > > > > > > > >::', which is not a base class of 'scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >'
-   using A::operator=;
-         ^~~
-./../../arrays/../expr/expression.h:380:10: error: using declaration refers into 'IMDAElemAssignMult<dimensions_nocheck, IMDAElemAssign<dimensions_nocheck, char_expression_interface<expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, expression_base<IMDAVecAccessComb<IMDAVecAccess<true, IMDAAccessComb<IMDAAccess<true, IMDABasic<IMDA<SDArray2D<double, allocator<double>, index_nocheck>, traits<SDArray2D<double, allocator<double>, index_nocheck> > > > > > > > > > > > > > > >::', which is not a base class of 'scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >'
-   using A::operator+=;
-         ^~~
-./../../arrays/../expr/expression.h:381:10: error: using declaration refers into 'IMDAElemAssignMult<dimensions_nocheck, IMDAElemAssign<dimensions_nocheck, char_expression_interface<expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, expression_base<IMDAVecAccessComb<IMDAVecAccess<true, IMDAAccessComb<IMDAAccess<true, IMDABasic<IMDA<SDArray2D<double, allocator<double>, index_nocheck>, traits<SDArray2D<double, allocator<double>, index_nocheck> > > > > > > > > > > > > > > >::', which is not a base class of 'scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >'
-   using A::operator-=;
-         ^~~
-./../../arrays/../expr/expression.h:382:10: error: using declaration refers into 'IMDAElemAssignMult<dimensions_nocheck, IMDAElemAssign<dimensions_nocheck, char_expression_interface<expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, expression_base<IMDAVecAccessComb<IMDAVecAccess<true, IMDAAccessComb<IMDAAccess<true, IMDABasic<IMDA<SDArray2D<double, allocator<double>, index_nocheck>, traits<SDArray2D<double, allocator<double>, index_nocheck> > > > > > > > > > > > > > > >::', which is not a base class of 'scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >'
-   using A::operator*=;
-         ^~~
-./../../arrays/../expr/expression.h:383:10: error: using declaration refers into 'IMDAElemAssignMult<dimensions_nocheck, IMDAElemAssign<dimensions_nocheck, char_expression_interface<expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, expression_base<IMDAVecAccessComb<IMDAVecAccess<true, IMDAAccessComb<IMDAAccess<true, IMDABasic<IMDA<SDArray2D<double, allocator<double>, index_nocheck>, traits<SDArray2D<double, allocator<double>, index_nocheck> > > > > > > > > > > > > > > >::', which is not a base class of 'scalar_assign<libmda::IMDAElemAssignMult<libmda::utility::dimensions_nocheck, libmda::IMDAElemAssign<libmda::utility::dimensions_nocheck, libmda::char_expr::char_expression_interface<libmda::operators::expression_scalar_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_scal_div, libmda::operators::expression_trigonometri_functions<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_cos, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sin, libmda::operators::expression_unary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_plus, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_unary_minus, libmda::operators::expression_binary_operators<operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_add, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_sub, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_mult, operator_traits<SDArray2D<double, allocator<double>, index_nocheck> >::oper_div, libmda::expr::expression_base<libmda::IMDAVecAccessComb<libmda::IMDAVecAccess<true, libmda::IMDAAccessComb<libmda::IMDAAccess<true, libmda::IMDABasic<libmda::IMDA<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> > > > > > > > > > > > > > > > >'
-   using A::operator/=;
-         ^~~
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:10:
-./../../arrays/../expr/interface.h:55:10: error: using declaration refers into 'imda_interface::', which is not a base class of 'expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>'
-   using imda_interface::operator=;
-         ^~~~~~~~~~~~~~~~
-./../../arrays/SDArray2D.h:27:11: note: in instantiation of template class 'libmda::expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>' requested here
-   public libmda::expression_interface<SDArray2D<T,Allocator,index_check_policy> > 
-          ^
-./../../arrays/../utility/has_member.h:86:1: note: in instantiation of template class 'midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>' requested here
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:40: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-                                       ^
-./../../arrays/../utility/has_member.h:86:1: note: while substituting explicitly-specified template arguments into function template 'test' 
-LIBMDA_CREATE_HAS_MEMBER_FUNCTION(basic_has_size,size)
-^
-./../../arrays/../utility/has_member.h:71:4: note: expanded from macro 'LIBMDA_CREATE_HAS_MEMBER_FUNCTION'
-   test(decltype(static_cast<sig<B> >(&B::FUNC))) \
-   ^
-./../../arrays/../utility/has_member.h:94:30: note: in instantiation of template class 'libmda::utility::basic_has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, sig>' requested here
-   static const bool value = basic_has_size<A,sig>::value;
-                             ^
-main.cc:106:34: note: in instantiation of template class 'libmda::utility::has_size<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, unsigned long>' requested here
-   std::cout << libmda::utility::has_size<midas::mmv::SDArray2D<double>, size_t>::value << std::endl;
-                                 ^
-In file included from main.cc:3:
-In file included from ./../../arrays/SDArray2D.h:10:
-./../../arrays/../expr/interface.h:56:10: error: using declaration refers into 'imda_interface::', which is not a base class of 'expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>'
-   using imda_interface::operator+=;
-         ^~~~~~~~~~~~~~~~
-./../../arrays/../expr/interface.h:57:10: error: using declaration refers into 'imda_interface::', which is not a base class of 'expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>'
-   using imda_interface::operator-=;
-         ^~~~~~~~~~~~~~~~
-./../../arrays/../expr/interface.h:58:10: error: using declaration refers into 'imda_interface::', which is not a base class of 'expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>'
-   using imda_interface::operator*=;
-         ^~~~~~~~~~~~~~~~
-./../../arrays/../expr/interface.h:59:10: error: using declaration refers into 'imda_interface::', which is not a base class of 'expression_interface<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck>, traits<midas::mmv::SDArray2D<double, std::allocator<double>, libmda::utility::index_nocheck> >, libmda::utility::dimensions_nocheck>'
-   using imda_interface::operator/=;
-         ^~~~~~~~~~~~~~~~
-fatal error: too many errors emitted, stopping now [-ferror-limit=]
-20 errors generated.
+main.cc:37:14: error: invalid operands to binary expression ('ostream' (aka 'basic_ostream<char>') and 'void')
+   std::cout << mda_slice.get_slice().permute<libmda::meta::tuple<mpsize_t<1>,mpsize_t<0>> >() << std::endl;
+   ~~~~~~~~~ ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:107:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to '__ostream_type &(*)(__ostream_type &)'
+      operator<<(__ostream_type& (*__pf)(__ostream_type&))
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:116:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to '__ios_type &(*)(__ios_type &)'
+      operator<<(__ios_type& (*__pf)(__ios_type&))
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:126:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'std::ios_base &(*)(std::ios_base &)'
+      operator<<(ios_base& (*__pf) (ios_base&))
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:165:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'long'
+      operator<<(long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:169:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'unsigned long'
+      operator<<(unsigned long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:173:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'bool'
+      operator<<(bool __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:177:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'short'
+      operator<<(short __n);
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:180:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'unsigned short'
+      operator<<(unsigned short __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:188:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'int'
+      operator<<(int __n);
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:191:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'unsigned int'
+      operator<<(unsigned int __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:200:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'long long'
+      operator<<(long long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:204:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'unsigned long long'
+      operator<<(unsigned long long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:219:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'double'
+      operator<<(double __f)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:223:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'float'
+      operator<<(float __f)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:231:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'long double'
+      operator<<(long double __f)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:244:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'const void *'
+      operator<<(const void* __p)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:269:7: note: candidate function not viable: cannot convert argument of incomplete type 'void' to '__streambuf_type *' (aka 'basic_streambuf<char, std::char_traits<char> > *')
+      operator<<(__streambuf_type* __sb);
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:475:5: note: candidate function [with _CharT = char, _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'char'
+    operator<<(basic_ostream<_CharT, _Traits>& __out, char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:481:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'char'
+    operator<<(basic_ostream<char, _Traits>& __out, char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:487:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'signed char'
+    operator<<(basic_ostream<char, _Traits>& __out, signed char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:492:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'unsigned char'
+    operator<<(basic_ostream<char, _Traits>& __out, unsigned char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:529:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'const char *'
+    operator<<(basic_ostream<char, _Traits>& __out, const char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:542:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'const signed char *'
+    operator<<(basic_ostream<char, _Traits>& __out, const signed char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:547:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'const unsigned char *'
+    operator<<(basic_ostream<char, _Traits>& __out, const unsigned char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/bits/ostream.tcc:320:5: note: candidate function [with _CharT = char, _Traits = std::char_traits<char>] not viable: cannot convert argument of incomplete type 'void' to 'const char *'
+    operator<<(basic_ostream<_CharT, _Traits>& __out, const char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:470:5: note: candidate template ignored: deduced conflicting types for parameter '_CharT' ('char' vs. 'void')
+    operator<<(basic_ostream<_CharT, _Traits>& __out, _CharT __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/bits/basic_string.h:2752:5: note: candidate template ignored: could not match 'basic_string<type-parameter-0-0, type-parameter-0-1, type-parameter-0-2>' against 'void'
+    operator<<(basic_ostream<_CharT, _Traits>& __os,
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:512:5: note: candidate template ignored: could not match 'const _CharT *' against 'void'
+    operator<<(basic_ostream<_CharT, _Traits>& __out, const _CharT* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:601:5: note: candidate template ignored: substitution failure [with _CharT = char, _Traits = std::char_traits<char>, _Tp = void]: cannot form a reference to 'void'
+    operator<<(basic_ostream<_CharT, _Traits>&& __os, const _Tp& __x)
+    ^                                                          ~
+In file included from main.cc:6:
+In file included from ./../../arrays/Mda_slice.h:11:
+./../../arrays/../util/sequence.h:143:10: error: no matching constructor for initialization of 'detail::sequence_permutation_help<0, meta::begin<tuple<mpsize_t<1>, mpsize_t<0> > >, meta::end<tuple<mpsize_t<1>, mpsize_t<0> > > >'
+         detail::sequence_permutation_help<0,meta::begin<P>,meta::end<P> >(s,m_sequence);
+         ^                                                                 ~~~~~~~~~~~~
+./../../arrays/Mda_slice.h:285:29: note: in instantiation of function template specialization 'libmda::util::sequence<2, unsigned long>::permute<libmda::meta::tuple<libmda::meta::mpsize_t<1>, libmda::meta::mpsize_t<0> > >' requested here
+         m_extents.template permute<P>();
+                            ^
+main.cc:37:39: note: in instantiation of function template specialization 'libmda::arrays::Mda_slice<2, unsigned long>::permute<libmda::meta::tuple<libmda::meta::mpsize_t<1>, libmda::meta::mpsize_t<0> > >' requested here
+   std::cout << mda_slice.get_slice().permute<libmda::meta::tuple<mpsize_t<1>,mpsize_t<0>> >() << std::endl;
+                                      ^
+./../../arrays/../util/sequence.h:40:8: note: candidate constructor (the implicit default constructor) not viable: requires 0 arguments, but 2 were provided
+struct sequence_permutation_help
+       ^
+./../../arrays/../util/sequence.h:40:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 2 were provided
+./../../arrays/../util/sequence.h:40:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 2 were provided
+2 errors generated.
 make: *** [clang] Error 1

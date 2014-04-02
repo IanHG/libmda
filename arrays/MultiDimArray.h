@@ -4,15 +4,16 @@
 #include<algorithm>
 #include<iostream>
 
-#include "../utility/TPN.h"
-#include "../metaprog/check_type_.h"
-#include "../metaprog/std_wrappers.h"
+#include "../util/TPN.h"
+#include "../meta/check_type_.h"
+#include "../meta/std_wrappers.h"
 
 #include "../interface.h"
 #include "../expr/char_expression.h"
 #include "../expr/interface.h"
 
-#include "../utility/Requesting.h"
+#include "../util/Requesting.h"
+#include "scalar.h"
 
 namespace libmda
 {
@@ -34,26 +35,40 @@ public:
    using imda_interface::operator=;
 
 private:
-	int _n[D];	       // Size of dimensions. 
+	int _n[D];	       // Size of extents
 	int _intervals[D]; // Intervals needed to convert to 1D index - make const (may use _intervals(setIntervals()) with setIntervals() returning _intervals - other options?)
                       // Max value of int serious issue for 1D index 14^4 is too much! - Same issue in pointer to pointer when allocate! - Just need to use larger int in the class - may use it less in pointer to pointer
-	utility::TPN<T,D> _m;// T with D stars
-	T* _data;					   // To access data as 1D array
+	int _size;
+
+   util::TPN<T,D> _m; // T with D stars
+	T* _data;          // To access data as 1D array
 
 	void allocate();
 	void setIntervals() 
    { 
-      int size = 1; 
-      for(int i=D-1;i>=0;i--) { _intervals[i] = size; size*=_n[i]; }
+      _size = 1; 
+      for(int i=D-1;i>=0;i--) 
+      { 
+         _intervals[i] = _size; 
+         _size*=_n[i]; 
+      }
    } // size non-optimal name
 	
    // private copy c-tor for now
 public:
-   MDA(const MDA&);						// Copy constructor
+   MDA(const MDA& other): _m(nullptr), _data(nullptr) // Copy constructor
+   {
+      for(int i=0; i<D; ++i)
+         _n[i] = other._n[i];
+      setIntervals();
+      allocate();
+      for(int i=0; i<D; ++i)
+         _data[i] = other._data[i];
+   }
    template<typename... U, 
-            iEnable_if<metaprog::check_type_and_size_<D,int,metaprog::Remove_reference<U>...>::value> = 0
+            iEnable_if<meta::check_type_and_size_<D,int,meta::Remove_reference<U>...>::value> = 0
    > 
-   MDA(U&&... u): _n{ std::forward<U>(u)... }, _m(NULL)  // c-tor from ints
+   MDA(U&&... u): _n{ static_cast<int>(std::forward<U>(u))... }, _m(NULL)  // c-tor from ints
    { setIntervals(); allocate(); }
 	~MDA() { if(_m) {deallocate<T,D>::apply(_m); _m = NULL;} }
    
@@ -61,29 +76,29 @@ public:
    { return imda_interface::operator=(a_other); }     // Copy assignment
 
     // Access by [] works trivially - delete
-	utility::TPN<T,D-1> operator[](int i) { return _m[i]; }
-	const utility::TPN<T,D-1> operator[](int i) const { return _m[i]; }
+	util::TPN<T,D-1> operator[](int i) { return _m[i]; }
+	const util::TPN<T,D-1> operator[](int i) const { return _m[i]; }
 	 
    /* ----- libmda interface ----- */
     // implementation of at(...) function
     template<typename... ints, 
-             iEnable_if<metaprog::check_type_and_size_<D,int,ints...>::value> = 0>
-             //iEnable_if<utility::detail::requesting_elem<D,int,ints...>::value> = 0>
-             //utility::Requesting_elem<D,int, ints...> = 0>
+             iEnable_if<meta::check_type_and_size_<D,int,ints...>::value> = 0>
+             //iEnable_if<util::detail::requesting_elem<D,int,ints...>::value> = 0>
+             //util::Requesting_elem<D,int, ints...> = 0>
     T& at(const ints... i) 
     { return parantesesImpl<T,D,ints...>::apply(_m, i...); }
     
     template<typename... ints, 
-             iEnable_if<metaprog::check_type_and_size_<D,int,ints...>::value> = 0>
-             //iEnable_if<utility::detail::requesting_elem<D,int,ints...>::value> = 0>
-             //utility::Requesting_elem<D,int, ints...> = 0>
+             iEnable_if<meta::check_type_and_size_<D,int,ints...>::value> = 0>
+             //iEnable_if<util::detail::requesting_elem<D,int,ints...>::value> = 0>
+             //util::Requesting_elem<D,int, ints...> = 0>
     T const& at(const ints... i) const
     { return parantesesImpl<T,D,ints...>::apply(_m, i...); }
     
     // Access by calculating 1D array entry
-    //template<typename... ints, iEnable_if<metaprog::check_type_and_size_<D,int,ints...>::value> = 0> 
+    //template<typename... ints, iEnable_if<meta::check_type_and_size_<D,int,ints...>::value> = 0> 
     //T& att(ints... i) { return _data[to1DIndex<D,ints...>::apply(_intervals,i...)]; }
-    //template<typename... ints, iEnable_if<metaprog::check_type_and_size_<D,int,ints...>::value> = 0> 
+    //template<typename... ints, iEnable_if<meta::check_type_and_size_<D,int,ints...>::value> = 0> 
     //const T& att(ints... i) const { return _data[to1DIndex<D,ints...>::apply(_intervals,i...)]; }
 
     int size() const
@@ -104,22 +119,22 @@ public:
    //}
    // Access by () less trivial but nicer in main
     template<typename... ints, 
-             typename std::enable_if<metaprog::check_type_and_size_<D,int,ints...>::value, int>::type = 0>
-             //iEnable_if<utility::detail::requesting_elem<D,int,ints...>::value> = 0>
-             //utility::Requesting_elem<D,int, ints...> = 0>
+             typename std::enable_if<meta::check_type_and_size_<D,int,ints...>::value, int>::type = 0>
+             //iEnable_if<util::detail::requesting_elem<D,int,ints...>::value> = 0>
+             //util::Requesting_elem<D,int, ints...> = 0>
     T&       operator()(const ints... i)   //    { return at(i...); }
     { return parantesesImpl<T,D,ints...>::apply(_m, i...); }
     
     template<typename... ints,
-             typename std::enable_if<metaprog::check_type_and_size_<D,int,ints...>::value, int>::type = 0>
-             //iEnable_if<utility::detail::requesting_elem<D,int,ints...>::value> = 0>
-             //utility::Requesting_elem<D,int, ints...> = 0>
+             typename std::enable_if<meta::check_type_and_size_<D,int,ints...>::value, int>::type = 0>
+             //iEnable_if<util::detail::requesting_elem<D,int,ints...>::value> = 0>
+             //util::Requesting_elem<D,int, ints...> = 0>
     T const& operator()(const ints... i) const //{ return at(i...); }
     { return parantesesImpl<T,D,ints...>::apply(_m, i...); }
     
     template<typename... ints,
-             iEnable_if<utility::detail::requesting_slice<D,ints...>::value> = 0>
-             //utility::Requesting_slice<D,ints...> = 0>
+             iEnable_if<util::detail::requesting_slice<D,ints...>::value> = 0>
+             //util::Requesting_slice<D,ints...> = 0>
     libmda::char_expr::mda_char_expression<MDA<T,D>, ints...>
     operator()(const ints... i) // -> decltype(imda_interface::operator()(i...))
     { return imda_interface::c_expr(i...); } 
@@ -143,30 +158,13 @@ public:
     }
 };
 
-//template<typename T, int D>
-//std::ostream& operator<<(std::ostream& a_ostream, const MDA<T,D>& mda)
-//{
-//   for(int i=0; i<mda.size(); ++i)
-//      a_ostream << " " << mda.vec_at(i);
-//   return a_ostream;
-//}
 //
-//template<typename T>
-//std::ostream& operator<<(std::ostream& a_ostream, const MDA<T,3>& mda)
-//{
-//   a_ostream << "\n";
-//   for(int k=0; k<mda.template extent<2>(); ++k)
-//   {
-//      for(int i=0; i<mda.template extent<0>(); ++i)
-//      {
-//         for(int j=0; j<mda.template extent<1>(); ++j)
-//            a_ostream << " " << mda.at(i,j,k);
-//         a_ostream << "\n";
-//      }
-//      a_ostream << "\n";
-//   }
-//   return a_ostream;
-//}
+// specialization for 0-dimensional (number)
+//
+template<class T>
+class MDA<T,0>: public arrays::scalar<T,int>
+{
+};
 
 } // namespace libmda
 

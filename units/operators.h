@@ -14,61 +14,77 @@ namespace operators
 /*********************************/
 /* quantity_ operator+ quantity_ */
 /*********************************/
-template<class u_A>
-quantity_<u_A> operator+(const quantity_<u_A> a_lhs, const quantity_<u_A> a_rhs)
-{ return quantity_<u_A>(a_lhs.val()+a_rhs.val()); }
+template<class U_A, class T>
+quantity_<U_A,T> operator+(const quantity_<U_A,T> a_lhs, const quantity_<U_A,T> a_rhs)
+{ 
+   return quantity_<U_A,T>(a_lhs.val()+a_rhs.val()); 
+}
 
 /*********************************/
 /* quantity_ operator- quantity_ */
 /*********************************/
-template<class u_A>
-quantity_<u_A> operator-(const quantity_<u_A> a_lhs, const quantity_<u_A> a_rhs)
-{ return quantity_<u_A>(a_lhs.val()-a_rhs.val()); }
+template<class U_A, class T>
+quantity_<U_A,T> operator-(const quantity_<U_A,T> a_lhs, const quantity_<U_A,T> a_rhs)
+{ 
+   return quantity_<U_A,T>(a_lhs.val()-a_rhs.val()); 
+}
 
 /*********************************/
 /* quantity_ operator* quantity_ */
 /*********************************/
 //template<class u_L, class u_R, class u_A = UnitVecPlus<u_L,u_R> >
-template<class u_L, class u_R, class u_A = UnitPlus<u_L,u_R> >
-quantity_<u_A> operator*(const quantity_<u_L> a_lhs, const quantity_<u_R> a_rhs)
-{ return quantity_<u_A>(a_lhs.val()*a_rhs.val()); }
+template<class U_L, class U_R, class T, class U_A = UnitPlus<U_L,U_R> >
+quantity_<U_A,T> operator*(const quantity_<U_L,T> a_lhs, const quantity_<U_R,T> a_rhs)
+{ 
+   return quantity_<U_A,T>(a_lhs.val()*a_rhs.val()); 
+}
 
 /*********************************/
 /* quantity_ operator/ quantity_ */
 /*********************************/
 //template<class u_L, class u_R, class u_S = UnitVecMinus<u_L,u_R> >
-template<class u_L, class u_R, class u_S = UnitMinus<u_L,u_R> >
-quantity_<u_S> operator/(const quantity_<u_L> a_lhs, const quantity_<u_R> a_rhs)
-{ return quantity_<u_S>(a_lhs.val()/a_rhs.val()); }
+template<class U_L, class U_R, class T, class U_S = UnitMinus<U_L,U_R> >
+quantity_<U_S,T> operator/(const quantity_<U_L,T> a_lhs, const quantity_<U_R,T> a_rhs)
+{ 
+   return quantity_<U_S,T>(a_lhs.val()/a_rhs.val()); 
+}
 
 /******************************/
 /* double operator* quantity_ */
 /******************************/
-template<class u_A>
-quantity_<u_A> operator*(const double d, const quantity_<u_A> a_rhs)
-{ return quantity_<u_A>(d*a_rhs.val()); }
+template<class U_A, class T>
+quantity_<U_A,T> operator*(const T d, const quantity_<U_A,T> a_rhs)
+{ 
+   return quantity_<U_A,T>(d*a_rhs.val()); 
+}
 
 /******************************/
 /* quantity_ operator* double */
 /******************************/
-template<class u_A>
-quantity_<u_A> operator*(const quantity_<u_A> a_lhs, const double d)
-{ return quantity_<u_A>(a_lhs.val()*d); }
+template<class U_A, class T>
+quantity_<U_A,T> operator*(const quantity_<U_A,T> a_lhs, const T d)
+{ 
+   return quantity_<U_A,T>(a_lhs.val()*d); 
+}
 
 /******************************/
 /* double operator/ quantity_ */
 /******************************/
 //template<class u_A, class u_I = UnitVecInvert<u_A> >
-template<class u_A, class u_I = UnitInvert<u_A> >
-quantity_<u_I> operator/(const double d, const quantity_<u_A> a_rhs)
-{ return quantity_<u_I>(d/a_rhs.val()); }
+template<class U_A, class T, class U_I = UnitInvert<U_A> >
+quantity_<U_I,T> operator/(const T d, const quantity_<U_A,T> a_rhs)
+{ 
+   return quantity_<U_I,T>(d/a_rhs.val()); 
+}
 
 /******************************/
 /* quantity_ operator/ double */
 /******************************/
-template<class u_A>
-quantity_<u_A> operator/(const quantity_<u_A> a_lhs, const double d)
-{ return quantity_<u_A>(a_lhs.val()/d); }
+template<class U_A, class T>
+quantity_<U_A,T> operator/(const quantity_<U_A,T> a_lhs, const T d)
+{ 
+   return quantity_<U_A,T>(a_lhs.val()/d); 
+}
 
 } // namespace operators
 } // namespace units

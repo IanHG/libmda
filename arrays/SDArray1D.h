@@ -10,9 +10,9 @@
 //#include"../expr/expression.h"
 //#include"../expr/char_expression.h"
 #include "../expr/interface.h"
-#include"../utility/index_check.h"
-#include"../utility/sequence.h"
-#include"../utility/require.h"
+#include"../util/index_check.h"
+#include"../util/sequence.h"
+#include"../util/require.h"
 #include"Mda.h"
 #include"Mda_ref.h"
 #include"Mda_slice.h"
@@ -53,7 +53,7 @@ namespace mmv
 
 template<typename T, 
          typename Allocator = std::allocator<T>,
-         typename index_check_policy = libmda::utility::index_nocheck
+         typename index_check_policy = libmda::util::index_nocheck
 >
 class SDArray1D:
    public libmda::expression_interface<SDArray1D<T,Allocator,index_check_policy>,
@@ -139,7 +139,20 @@ class SDArray1D:
 
       size_type size() const { return msSize; }
       
-      template<int N, libmda::iEnable_if<N==0> = 0> size_type extent() const { return msSize; }
+      template<size_t N
+             , libmda::iEnable_if<N==0> = 0
+             > 
+      size_type extent() const 
+      { 
+         return msSize; 
+      }
+
+      void resize(size_t s)
+      {
+         DeallocateArray1D();
+         msSize = s;
+         AllocateArray1D();
+      }
       
       /**
        * copy
@@ -171,10 +184,10 @@ class SDArray1D:
       
       
       template<int N=1, typename... Ts>
-      ::libmda::arrays::mda_impl::Mda_ref<N,value_type,size_type> 
+      ::libmda::arrays::Mda_ref<N,value_type,size_type> 
       sub_array(Ts&&... ts)
       { 
-         return ::libmda::arrays::mda_impl::Mda_ref<N,value_type,size_type>
+         return ::libmda::arrays::Mda_ref<N,value_type,size_type>
             { mptData1D, size_type(std::forward<Ts>(ts))...};
       };
 }; 

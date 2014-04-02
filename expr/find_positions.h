@@ -1,13 +1,13 @@
 #ifndef LIBMDA_METAPROG_FIND_POSITIONS_H
 #define LIBMDA_METAPROG_FIND_POSITIONS_H
 
-#include "../metaprog/std_wrappers.h"
-#include "../metaprog/iterator.h"
-#include "../metaprog/empty.h"
+#include "../meta/std_wrappers.h"
+#include "../meta/iterator.h"
+#include "../meta/empty.h"
 
 namespace libmda
 {
-namespace metaprog
+namespace meta
 {
 namespace detail
 {
@@ -28,7 +28,7 @@ struct find_positions_: find_positions_impl<tuple1, begin<tuple2>, end<tuple2>, 
 template<class tuple1, class tuple2>
 using find_positions = typename detail::find_positions_<tuple1,tuple2>::type;
 
-} // namespace metaprog
+} // namespace meta
 } // namespace libmda
 
 #endif /* LIBMDA_METAPROG_FIND_POSITIONS_H */

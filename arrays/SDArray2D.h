@@ -5,9 +5,10 @@
 #include"../interface.h"
 #include"../expr/char_expression.h"
 #include"../expr/expression.h"
-#include"../utility/index_check.h"
-using libmda::utility::index_nocheck;
+#include"../util/index_check.h"
+using libmda::util::index_nocheck;
 #include"../expr/interface.h"
+#include"Mda_ref.h"
 
 //#include "debug_check.h"
 
@@ -62,18 +63,32 @@ class SDArray2D:
       { return imda_interface::operator=(a_other); }
       
       void Copy(const SDArray2D& a_other)
-      { for(size_type i=0; i<msRows; ++i) for(size_type j=0; j<msCols; ++j) mptData2D[i][j] = a_other(i,j); }
+      { 
+         for(size_type i=0; i<msRows; ++i) 
+            for(size_type j=0; j<msCols; ++j) 
+               mptData2D[i][j] = a_other(i,j); 
+      }
 
       /**
        * use as 2D structure
        **/
-      T*       operator[](size_t asRows)       { return mptData2D[asRows]; }
-      T const* operator[](size_t asRows) const { return mptData2D[asRows]; }
+      T*       operator[](size_t asRows)       
+      { 
+         return mptData2D[asRows]; 
+      }
+      T const* operator[](size_t asRows) const 
+      { 
+         return mptData2D[asRows]; 
+      }
 
       T& operator()(size_t asRows, size_t asCols)
-      { return at(asRows,asCols); }
+      { 
+         return at(asRows,asCols); 
+      }
       T const& operator()(size_t asRows, size_t asCols) const 
-      { return at(asRows,asCols); }
+      { 
+         return at(asRows,asCols); 
+      }
       
       /**
        * use as 1D structure
@@ -120,6 +135,15 @@ class SDArray2D:
       template<int N, libmda::iEnable_if<N==0> = 0> size_t extent() const { return msRows; }
       template<int N, libmda::iEnable_if<N==1> = 0> size_t extent() const { return msCols; }
 
+      void resize(size_t row, size_t col)
+      {
+         DeallocateArray2D();
+         msRows = row;
+         msCols = col;
+         msSize = msRows*msCols;
+         AllocateArray2D();
+      }
+
       class iterator
       {
          private:
@@ -137,6 +161,14 @@ class SDArray2D:
       iterator end()   { return iterator(*this,msSize); }
 
       void DoOutput(std::ostream&) const;
+      
+      template<int N=2, typename... Ts>
+      ::libmda::arrays::Mda_ref<N,value_type,size_type> 
+      sub_array(Ts&&... ts)
+      { 
+         return ::libmda::arrays::Mda_ref<N,value_type,size_type>
+            { mptData1D, size_type(std::forward<Ts>(ts))...};
+      };
 };
 
 template<typename T, typename Allocator, typename index_check_policy>

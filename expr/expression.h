@@ -1,15 +1,18 @@
-#ifndef LIBMDA_EXPR_EXPRESSION_H
-#define LIBMDA_EXPR_EXPRESSION_H
+#ifndef LIBMDA_EXPR_EXPRESSION_H_INCLUDED
+#define LIBMDA_EXPR_EXPRESSION_H_INCLUDED
 
+// std headers
 #include<utility>
 #include<iostream>
 #include<math.h>
+
+// libmda headers
 #include"../interface.h"
-#include"../metaprog/std_wrappers.h"
-#include"../metaprog/check_type_.h"
-#include"../utility/for_loop_expand.h"
-#include"../utility/mixin_if.h"
-#include"../utility/has_member.h"
+#include"../meta/std_wrappers.h"
+#include"../meta/check_type_.h"
+#include"../util/for_loop_expand.h"
+#include"../util/mixin_if.h"
+#include"../util/has_member.h"
 #include"../operators/switches.h"
 #include"take_out_types.h"
 #include"../basic_using.h"
@@ -26,12 +29,13 @@ struct traits;
 template<class A, class trait>
 struct expression:          //// Need typedef nothing in these
    //libmda::expr::assignable_to_scalar<
+   public
    libmda::char_expr::char_expression_interface<
    libmda::operators::expression_scalar_binary_operators<operator_traits<A>::template oper_scal_add, operator_traits<A>::template oper_scal_sub, operator_traits<A>::template oper_scal_mult, operator_traits<A>::template oper_scal_div,
-   utility::mixin_if<Is_addable<A>()      ,operators::libmda_addable<operator_traits<A>::template oper_scal_add, binary_expression,
-   utility::mixin_if<Is_subtractable<A>() ,operators::libmda_subtractable<operator_traits<A>::template oper_scal_sub, binary_expression,
-   utility::mixin_if<Is_multiplicable<A>(),operators::libmda_multiplicable<operator_traits<A>::template oper_scal_mult, binary_expression,
-   utility::mixin_if<Is_divisable<A>()    ,operators::libmda_divisable<operator_traits<A>::template oper_scal_div, binary_expression,
+   util::mixin_if<Is_addable<A>()      ,operators::libmda_addable<operator_traits<A>::template oper_scal_add, binary_expression,
+   util::mixin_if<Is_subtractable<A>() ,operators::libmda_subtractable<operator_traits<A>::template oper_scal_sub, binary_expression,
+   util::mixin_if<Is_multiplicable<A>(),operators::libmda_multiplicable<operator_traits<A>::template oper_scal_mult, binary_expression,
+   util::mixin_if<Is_divisable<A>()    ,operators::libmda_divisable<operator_traits<A>::template oper_scal_div, binary_expression,
    libmda::operators::expression_trigonometri_functions<operator_traits<A>::template oper_cos, operator_traits<A>::template oper_sin,
    libmda::operators::expression_unary_operators<operator_traits<A>::template oper_unary_plus, operator_traits<A>::template oper_unary_minus,
    libmda::operators::expression_binary_operators<operator_traits<A>::template oper_add, operator_traits<A>::template oper_sub, operator_traits<A>::template oper_mult, operator_traits<A>::template oper_div,
@@ -43,7 +47,8 @@ struct expression:          //// Need typedef nothing in these
    A, trait
    > >  > >  > >  > >  > > > > > > > > > >,
    IMDABase
-{ };
+{ 
+};
 
 /**
  * binary expression
@@ -59,58 +64,63 @@ class binary_expression:
       static const int order = Order<Op<L,R> >();
       
       //using base_type = expression<binary_expression<L,R,Op>, traits<binary_expression<L,R,Op> > >;
+      using This = binary_expression<L,R,Op>;
+
    private:
       const L& m_lhs;
       const R& m_rhs;
 
    public:
+      //
       // constructor
+      //
       binary_expression(const L& a_lhs, const R& a_rhs): m_lhs(a_lhs)
-                                                       , m_rhs(a_rhs) { };
-      
+                                                       , m_rhs(a_rhs) 
+      { 
+      };
+
+      //
       // at() implementation
-      template<typename... ints,
-               //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-               //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               utility::Requesting_elem<order,size_type, ints...> = 0>
-      value_type at(const ints... i) const { return Op<L,R>::apply(m_lhs, m_rhs, i...); }
+      //
+      template<class... Is
+             , util::Requesting_elem<order,size_type, Is...> = 0
+             >
+      auto at(Is... is) const 
+         -> decltype(Op<L,R>::apply(std::declval<L>(), std::declval<R>(), is...))
+      { 
+         return Op<L,R>::apply(m_lhs, m_rhs, is...); 
+      }
       
+      //
       // operator() implementation
-      template<typename... ints, 
-               //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-               //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               utility::Requesting_elem<order,size_type, ints...> = 0>
-      value_type operator()(const ints... i) const { return at(i...); }
+      //
+      template<class... Is
+             , util::Requesting_elem<order,size_type, Is...> = 0
+             >
+      auto operator()(Is... is) const 
+         -> decltype(std::declval<const This>().at(is...))
+      { 
+         return at(is...);
+      }
       
-      //template<typename... ints, 
-      //         //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-      //         //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-      //         utility::Requesting_slice<order, ints...> = 0>
-      //auto operator()(const ints... i)       -> decltype(std::declval<base_type>().c_expr(i...)) 
-      //{ return base_type::c_expr(i...); }
-      
-      //template<typename... ints, 
-      //         //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-      //         //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-      //         utility::Requesting_slice<order, ints...> = 0>
-      //auto operator()(const ints... i) const -> decltype(std::declval<base_type>().c_expr(i...)) 
-      //{ return base_type::c_expr(i...); }
-      
-      //using expression<binary_expression<L,R,Op>, traits<binary_expression<L,R,Op> > >::operator();
-
-      // vec_at()
-      /*template<class U = L,
-                 metaprog::iEnable_if<utility::has_vec_at<U>::value && utility::has_vec_at<R>::value && utility::has_apply_vec<Op<L,R>,L,R>::value> = 0
-      >
-      value_type vec_at(const size_type i) const
-      { return Op<L,R>::apply_vec(m_lhs, m_rhs, i); } */
-
+      //
       // size() implementation
-      size_type size() const { return Op<L,R>::size(m_lhs, m_rhs); } 
-
+      //
+      auto size() const 
+         -> decltype(Op<L,R>::size(std::declval<L>(), std::declval<R>()))
+      { 
+         return Op<L,R>::size(m_lhs, m_rhs); 
+      } 
+      
+      //
       // extent() implementation
+      //
       template<int N>
-      size_type extent() const { return Op<L,R>::template extent<N>(m_lhs, m_rhs); }
+      auto extent() const 
+         -> decltype(Op<L,R>::template extent<N>(std::declval<L>(), std::declval<R>())) 
+      { 
+         return Op<L,R>::template extent<N>(m_lhs, m_rhs); 
+      }
 };
 
 /**
@@ -125,48 +135,69 @@ class unary_expression:
       using value_type  = Value_type<traits_type>;
       using size_type   = Size_type<traits_type>;
       static const int order = Order<Op<A> >();
+      
+      using This = unary_expression<A,Op>;
 
    private:
       const A& m_lhs;
 
    public:
+      //
       // constructor
-      unary_expression(const A& a_lhs): m_lhs(a_lhs) { };
-
+      //
+      unary_expression(const A& a_lhs): m_lhs(a_lhs) 
+      { 
+      };
+      
+      //
       // at() implementation
-      template<typename... ints,
-               //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-               //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               utility::Requesting_elem<order,size_type, ints...> = 0>
-      value_type at(const ints... i) const { return Op<A>::apply(m_lhs,i...); }
+      //
+      template<class... Is
+             , util::Requesting_elem<order,size_type, Is...> = 0
+             >
+      auto at(Is... is) const 
+         -> decltype(Op<A>::apply(std::declval<A>(),is...))
+      { 
+         return Op<A>::apply(m_lhs,is...); 
+      }
       
+      //
       // operator() implementation
-      template<typename... ints, 
-               //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-               //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               utility::Requesting_elem<order,size_type, ints...> = 0>
-      value_type operator()(const ints... i) const { return at(i...); }
+      //
+      template<class... Is
+             , util::Requesting_elem<order,size_type, Is...> = 0
+             >
+      auto operator()(Is... is) const 
+         -> decltype(std::declval<const This>().at(is...))
+      { 
+         return at(is...); 
+      }
       
-      // vec_at() implementation
-      /*template<class U = A,
-                 metaprog::iEnable_if<utility::has_vec_at<U>::value && utility::has_apply_vec<Op<A>,A>::value > = 0
-      >
-      value_type vec_at(const size_type i) const
-      { return Op<A>::apply_vec(m_lhs, i); } */
-      
+      //
       // size() implementation
-      size_type size() const { return Op<A>::size(m_lhs); }
+      //
+      auto size() const 
+         -> decltype(Op<A>::size(std::declval<A>()))
+      { 
+         return Op<A>::size(m_lhs); 
+      }
       
+      //
       // extent implementation
+      //
       template<int N>
-      size_type extent() const { return Op<A>::template extent<N>(m_lhs); }
+      auto extent() const 
+         -> decltype(Op<A>::template extent<N>(std::declval<A>()))
+      { 
+         return Op<A>::template extent<N>(m_lhs); 
+      }
 };
 
 // IAN: BELOW IS NOT SAFE AND GOOD I THINK
 template<class A>
 struct assignable_to_scalar: A
 {
-   template<class U = A, metaprog::iEnable_if<U::order==0> = 0> 
+   template<class U = A, meta::iEnable_if<U::order==0> = 0> 
    operator Value_type<A>() { return this->at(); }
 };
 // IAN: NON-SAFE END... REST IS AWESOME
@@ -190,23 +221,35 @@ struct NAME; \
 template<class L, class R> \
 struct NAME \
 { \
-   static const int order = L::order; \
+   static_assert(L::order == R::order, "ORDER NOT THE SAME!"); \
+   \
+   static const size_t order = L::order; \
    \
    template<typename... ints> \
    static Value_type<L> apply(const L& a_lhs, const R& a_rhs, const ints... i) \
-   { return a_lhs.at(i...) OP a_rhs.at(i...); } \
+   { \
+      return a_lhs.at(i...) OP a_rhs.at(i...); \
+   } \
    \
-   template<class U = L, metaprog::iEnable_if<utility::has_vec_at<U>::value && utility::has_vec_at<R>::value> = 0> \
+   template<class U = L \
+          , meta::iEnable_if<util::has_vec_at<U>::value && util::has_vec_at<R>::value> = 0 \
+          > \
    static Value_type<L> \
    apply_vec(const L& a_lhs, const R& a_rhs, const Size_type<L> i) \
-   { return a_lhs.vec_at(i) OP a_rhs.vec_at(i); } \
+   { \
+      return a_lhs.vec_at(i) OP a_rhs.vec_at(i); \
+   } \
    \
    template<int N> \
    static Size_type<L> extent(const L& a_lhs, const R& a_rhs) \
-   {  return a_lhs.template extent<N>(); } \
+   { \
+      return a_lhs.template extent<N>(); \
+   } \
    \
    static Size_type<L> size(const L& a_lhs, const R& a_rhs) \
-   {  return a_lhs.size(); } \
+   { \
+      return a_lhs.size(); \
+   } \
 };
 
 LIBMDA_CREATE_DEFAULT_BINARY_OPERATOR(op_add,+)
@@ -225,12 +268,21 @@ struct NAME \
    static const int order = A::order; \
    \
    template<typename... ints> \
-   static Value_type<A> apply(const A& a_lhs, const ints... i) { return OP a_lhs.at(i...); } \
+   static Value_type<A> apply(const A& a_lhs, const ints... i) \
+   { \
+      return OP a_lhs.at(i...); \
+   } \
    \
    template<int N> \
-   static Size_type<A> extent(const A& a_lhs) {  return a_lhs.template extent<N>(); } \
+   static Size_type<A> extent(const A& a_lhs) \
+   { \
+      return a_lhs.template extent<N>(); \
+   } \
    \
-   static Size_type<A> size(const A& a_lhs) {  return a_lhs.size(); } \
+   static Size_type<A> size(const A& a_lhs) \
+   { \
+      return a_lhs.size();\
+   } \
 }; 
 
 LIBMDA_CREATE_DEFAULT_UNARY_OPERATOR(op_unary_plus,+)
@@ -397,6 +449,11 @@ struct default_operator_traits
 // default operator traits is to inherit from the collected default operators
 template<class A> struct operator_traits: default_operator_traits { };
 
+
+/// MOVE THIS MOVE THIS MOVE THIS ///
+/// MOVE THIS MOVE THIS MOVE THIS ///
+/// MOVE THIS MOVE THIS MOVE THIS ///
+/// MOVE THIS MOVE THIS MOVE THIS ///
 // mixin to assign from scalar
 template<class A>
 struct scalar_assign: public A
@@ -413,31 +470,31 @@ struct scalar_assign: public A
 
    type& operator=(const value_type& v)
    {
-      utility::for_loop_expand<expr::op_equal_scal>::apply((*this),v);
+      util::for_loop_expand<expr::op_equal_scal>::apply((*this),v);
       return this->self();
    }
    type& operator+=(const value_type& v)
    {
-      utility::for_loop_expand<expr::op_plus_equal_scal>::apply((*this),v);
+      util::for_loop_expand<expr::op_plus_equal_scal>::apply((*this),v);
       return this->self();
    }
    type& operator-=(const value_type& v)
    {
-      utility::for_loop_expand<expr::op_sub_equal_scal>::apply((*this),v);
+      util::for_loop_expand<expr::op_sub_equal_scal>::apply((*this),v);
       return this->self();
    }
    type& operator*=(const value_type& v)
    {
-      utility::for_loop_expand<expr::op_mult_equal_scal>::apply((*this),v);
+      util::for_loop_expand<expr::op_mult_equal_scal>::apply((*this),v);
       return this->self();
    }
    type& operator/=(const value_type& v)
    {
-      utility::for_loop_expand<expr::op_div_equal_scal>::apply((*this),v);
+      util::for_loop_expand<expr::op_div_equal_scal>::apply((*this),v);
       return this->self();
    }
 };
 
 } // namespace libmda
 
-#endif /* LIBMDA_EXPR_EXPRESSION_H */
+#endif /* LIBMDA_EXPR_EXPRESSION_H_INCLUDED */

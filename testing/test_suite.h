@@ -2,8 +2,7 @@
 #define LIBMDA_TESTING_TEST_SUITE_H
 
 #include <iostream>
-using std::cout;
-using std::endl;
+
 #include "unit_test.h"
 #include "unit_test_factory.h"
 #include "timer.h"
@@ -50,11 +49,12 @@ class test_suite: public unit_test_holder
             catch(test_failed &e)
             {
                a_ostream << " FAILED TEST: " << get_test(i)->name() << "\n"
-                         << e.what() << endl;
+                         << e.what() << std::endl;
                ++m_failed;
             }
             m_assertions+=get_test(i)->num_assertions();
-            m_num_test  +=get_test(i)->num_test();
+            m_num_test+=get_test(i)->num_test();
+            m_failed+=get_test(i)->num_failed(); // for test case (unit test will return 0 no matter)
             get_test(i)->teardown(); // teardown test
          }
          m_timer.stop();

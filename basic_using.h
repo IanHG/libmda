@@ -1,5 +1,5 @@
-#ifndef LIBMDA_BASIC_USING_H
-#define LIBMDA_BASIC_USING_H
+#ifndef LIBMDA_BASIC_USING_H_INCLUDED
+#define LIBMDA_BASIC_USING_H_INCLUDED
 
 namespace libmda
 {
@@ -14,8 +14,10 @@ using Size_type  = typename A::size_type;
 
 template<class A>
 constexpr int Order()
-{ return A::order; }
+{ 
+   return A::order; 
+}
 
 } // namespace libmda
 
-#endif /* LIBMDA_BASIC_USING_H */
+#endif /* LIBMDA_BASIC_USING_H_INCLUDED */

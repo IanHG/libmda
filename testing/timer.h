@@ -17,28 +17,45 @@ class clock_timer
       clock_t m_stop;
       clock_t m_clocks_tot;
       clock_t m_clocks_rel;
-
-      void get_time(clock_t& a_clock)
-      { a_clock = clock(); }
       
-      void accu_clock(clock_t a_beg, clock_t a_end, clock_t& a_accu)
-      { a_accu = a_end - a_beg; }
+      //
+      // get current clock
+      //
+      void get_time(clock_t& a_clock) const
+      { 
+         a_clock = clock(); 
+      }
+      
+      //
+      // calculate clock difference
+      //
+      void accu_clock(clock_t a_beg, clock_t a_end, clock_t& a_accu) const
+      { 
+         a_accu = a_end - a_beg; 
+      }
 
    public:
-      clock_timer(): m_running(false),
-               m_start(0.0), 
-               m_last(0.0), 
-               m_stop(0.0),
-               m_clocks_tot(0.0),
-               m_clocks_rel(0.0)
-      { };
-
+      clock_timer(): m_running(false)
+                   , m_start(0.0) 
+                   , m_last(0.0) 
+                   , m_stop(0.0)
+                   , m_clocks_tot(0.0)
+                   , m_clocks_rel(0.0)
+      { 
+      }
+      
+      //
+      // start the clock
+      //
       void start()
       { 
          m_running = true;
          get_time(m_start); 
       }
       
+      //
+      //
+      //
       void meassure()
       { 
          if(m_running) 
@@ -48,7 +65,10 @@ class clock_timer
             m_last = now; 
          }
       }
-
+      
+      //
+      // stop the clock
+      //
       void stop()
       { 
          if(m_running) 
@@ -59,15 +79,28 @@ class clock_timer
          } 
       }
       
+      //
+      // some getters
+      //
       clock_t tot_clocks() const
-      { return m_clocks_tot; }
+      { 
+         return m_clocks_tot; 
+      }
+
       clock_t rel_clocks() const
-      { return m_clocks_rel; }
+      { 
+         return m_clocks_rel; 
+      }
 
       double tot_clocks_per_sec() const 
-      { return double(m_clocks_tot)/CLOCKS_PER_SEC; }
+      { 
+         return double(m_clocks_tot)/CLOCKS_PER_SEC; 
+      }
+      
       double rel_clocks_per_sec() const
-      { return double(m_clocks_rel)/CLOCKS_PER_SEC; }
+      { 
+         return double(m_clocks_rel)/CLOCKS_PER_SEC; 
+      }
 };
 
 } // namespace testing

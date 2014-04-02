@@ -93,8 +93,8 @@ struct matrix_construction_test: public virtual unit_test
    void do_test() throw(test_failed)
    { 
       matrix_type mat(m_rows,m_cols);
-      UNIT_ASSERT_EQUAL(mat.template dim<0>(),m_rows,"mat rows not correct after construction");
-      UNIT_ASSERT_EQUAL(mat.template dim<1>(),m_cols,"mat cols not correct after construction");
+      UNIT_ASSERT_EQUAL(mat.template extent<0>(),m_rows,"mat rows not correct after construction");
+      UNIT_ASSERT_EQUAL(mat.template extent<1>(),m_cols,"mat cols not correct after construction");
    }
 };
 

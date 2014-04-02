@@ -1,7 +1,7 @@
 #ifndef MultiDimArrayImpl_H
 #define MultiDimArrayImpl_H
 
-#include "../utility/TPN.h"
+#include "../util/TPN.h"
 
 namespace libmda
 {
@@ -13,7 +13,7 @@ namespace libmda
 template<typename T, int D, typename first, typename... ints> 
 struct parantesesImpl<T,D,first,ints...>
 {
-    static T& apply(utility::TPN<T,D> m, first ii, ints... i)
+    static T& apply(util::TPN<T,D> m, first ii, ints... i)
     {
         return parantesesImpl<T,D-1,ints...>::apply(m[ii],i...);
     }
@@ -46,10 +46,10 @@ template<> struct to1DIndex<0>
 template<typename T, int D, int i> 
 struct allocateImpl
 {
-	static T* apply(utility::TPN<T,i+1>& p, const int* n, int size)
+	static T* apply(util::TPN<T,i+1>& p, const int* n, int size)
 	{
 		size *= n[D-i];
-		p[0] = (utility::TPN<T,i>)malloc(size*sizeof(utility::TPN<T,i-1>));
+		p[0] = (util::TPN<T,i>)malloc(size*sizeof(util::TPN<T,i-1>));
 		for(int j=0;j<size/n[D-i];j++)
 			p[j] = p[0] + j*n[D-i];
 		return allocateImpl<T,D,i-1>::apply(p[0],n,size);
@@ -70,7 +70,7 @@ void MDA<T,D>::allocate()
 {
     int size = _n[0];
 
-	_m = (utility::TPN<T,D>)malloc(size*sizeof(utility::TPN<T,D-1>));
+	_m = (util::TPN<T,D>)malloc(size*sizeof(util::TPN<T,D-1>));
 
 	_data = allocateImpl<T,D,D-1>::apply(_m,_n,size);
 }
@@ -91,7 +91,7 @@ void MDA<T,D>::allocate()
 template<typename T, int i> 
 struct deallocate
 {
-	static void apply(utility::TPN<T,i> a)
+	static void apply(util::TPN<T,i> a)
 	{
 		deallocate<T,i-1>::apply(a[0]);
 		free(a);

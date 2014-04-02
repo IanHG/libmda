@@ -1,14 +1,13 @@
 #ifndef LIBDMA_MDA_I_H
 #define LIBDMA_MDA_I_H
 
-#include "../interface.h"
-#include "../utility/Requesting.h"
+//#include "../interface.h"
+#include "../util/Requesting.h"
+#include "../expr/interface.h"
 
 namespace libmda
 {
 namespace arrays
-{
-namespace mda_impl
 {
 
 // forward declartation of Mda_i
@@ -26,76 +25,102 @@ struct mda_trait<Mda_i<A,N,T,U> >
 };
 
 template<class A, size_t N, class T, class U>
-class Mda_i: public expression_interface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >
-             //public libmda::IMDAInterface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >
+class Mda_i : 
+   public expression_interface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >
 { 
    private:
       /////
       // self functions
       //
       /////
-      A&       self()       { return static_cast<A&>(*this); }
-      A const& self() const { return static_cast<A const&>(*this); }
+      A&       self()       
+      { 
+         return static_cast<A&>(*this); 
+      }
+      
+      A const& self() const 
+      { 
+         return static_cast<A const&>(*this); 
+      }
 
    public:
       typedef T value_type;
       typedef U size_type;
       static const int order = N;
-      using expression_interface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >::operator();
       
-      using libmda::expression_interface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >::operator=;
+      //using expression_interface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >::operator();
+      using expression_interface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >::operator=;
       
       /////
       // size() + extent()
       //
       /////
-      auto size() const -> decltype(self().size()) { return self().size(); }
-      template<size_t D, iEnable_if<D<N> = 0>
+      template<class B = A>
+      auto size() const 
+         -> decltype(std::declval<const B>().self().size()) 
+      { 
+         return self().size(); 
+      }
       
-      auto extent() const -> decltype(self().template extent<D>()) 
-      { return self().template extent<D>(); }
+      template<size_t D, class B = A, iEnable_if<D<N> = 0>
+      auto extent() const 
+         -> decltype(std::declval<const B>().self().template extent<D>()) 
+      { 
+         return self().template extent<D>(); 
+      }
       
-      //template<typename... ints,
-      //         iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-      //         //utility::Requesting_elem<order,size_type,ints...> = 0>
-      //value_type&       operator()(ints... i)       { return self()(i...); }
-      //template<typename... ints, 
-      //         iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-      //         //utility::Requesting_elem<order,size_type,ints...> = 0>
-      //value_type const& operator()(ints... i) const { return self()(i...); }
+      /////
+      // operator ()
+      //
+      ////
+      template<typename... ints, class B = A>
+      auto operator()(ints... i)       
+         //-> decltype(std::declval<B>().self().operator()(i...)) 
+         -> decltype(std::declval<B>().self().at(i...)) 
+      //{ return self().operator()(i...); }
+      { 
+         return self().at(i...); 
+      }
       
-      //template<typename... ints, 
-      //         iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-      //         //utility::Requesting_elem<order,size_type,ints...> = 0>
-      //value_type&       at(ints... i)       { return self().at(i...); }
-      //template<typename... ints,
-      //         iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-      //         //utility::Requesting_elem<order,size_type,ints...> = 0>
-      //value_type const& at(ints... i) const { return self().at(i...); }
+      template<typename... ints, class B = A>
+      auto operator()(ints... i) const 
+         //-> decltype(std::declval<const B>().self().operator()(i...)) 
+         -> decltype(std::declval<const B>().self().at(i...)) 
+      //{ return self().operator()(i...); }
+      { 
+         return self().at(i...); 
+      }
       
-      template<typename... ints>
-      auto operator()(ints... i)       -> decltype(self()(i...)) { return self()(i...); }
+      /////
+      // at ()
+      //
+      ////
+      template<typename... ints, class B = A>
+      auto at(ints... i)       
+         -> decltype(std::declval<B>().self().at(i...)) 
+      { 
+         return self().at(i...); 
+      }
       
-      template<typename... ints>
-      auto operator()(ints... i) const -> decltype(self()(i...)) { return self()(i...); }
-      
-      template<typename... ints>
-      auto at(ints... i)       -> decltype(self().at(i...)) { return self().at(i...); }
-      
-      template<typename... ints>
-      auto at(ints... i) const -> decltype(self().at(i...)) { return self().at(i...); }
+      template<typename... ints, class B = A>
+      auto at(ints... i) const 
+         -> decltype(std::declval<const B>().self().at(i...)) 
+      { 
+         return self().at(i...); 
+      }
 
-   private:
-      
       //////
       // delete copy constructor + copy assignement
       //
       //////
-      Mda_i(const Mda_i&)            = delete;
-      Mda_i& operator=(const Mda_i&) = delete;
+      //Mda_i(const Mda_i&)            = delete;
+      // not the prettiest solution... but it works for now
+      Mda_i& operator=(const Mda_i& other)
+      { 
+         return expression_interface<Mda_i<A,N,T,U>, mda_trait<Mda_i<A,N,T,U> > >::operator=(other); 
+      }
 };
 
-} // namespace mda_impl
 } // namespace arrays
 } // namespace libmda
 #endif /* LIBDMA_MDA_I_H */

@@ -10,7 +10,7 @@ namespace libmda
 template<class A, class B>
 void MDACopy(IMDAAccess<true,A>& mda1, const IMDAAccessComb<B>& mda2)
 {
-   utility::for_loop_expand<op_equal>::apply(mda1,mda2);
+   util::for_loop_expand<op_equal>::apply(mda1,mda2);
 }
 
 struct op_dot
@@ -22,14 +22,20 @@ struct op_dot
    }
 };
 
+//
+// imda_dot
+//
 template<class A, class B>
 Value_type<A> mda_dot(const IMDAAccessComb<A>& mda1, const IMDAAccessComb<B>& mda2)
 {
    Value_type<A> result = 0;
-   utility::for_loop_expand<op_dot>::apply(mda1,mda2,result);
+   util::for_loop_expand<op_dot>::apply(mda1,mda2,result);
    return result;
 }
 
+//
+// imda_norm
+//
 template<class A>
 Value_type<A> mda_norm(const IMDAAccessComb<A>& mda)
 {
@@ -40,6 +46,18 @@ double mda_norm(const double arg)
 {
    return ::sqrt(arg*arg);
 }
+
+//
+// zero
+//
+struct op_zero
+{
+   template<class V, class... Is>
+   static void apply(V& v, Is... is)
+   {
+      v.at(is...) = Value_type<V>{0};
+   }
+};
 
 } // namespace libmda
 

@@ -16,7 +16,7 @@ namespace libmda
 namespace benchmark
 {
 
-using libmda::utility::sequence;
+using libmda::util::sequence;
 
 #define SIZE 5
 

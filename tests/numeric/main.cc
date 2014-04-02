@@ -7,8 +7,9 @@ int main()
 {
    libmda::testing::test_suite suite;
    
-   suite.add_test<libmda::tests::numeric::float_eq_test >();
-   suite.add_test<libmda::tests::numeric::float_neq_test>();
+   suite.add_test<libmda::numeric_test::float_eq_test >();
+   suite.add_test<libmda::numeric_test::float_neq_test>();
+   suite.add_test<libmda::numeric_test::float_sign_test>();
    
    suite.do_tests();
 

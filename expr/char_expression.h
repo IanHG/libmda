@@ -5,13 +5,13 @@
 
 #include"../IMDA.h"
 #include"../basic_using.h"
-#include"../metaprog/check_type_.h"
-#include"../metaprog/nth_type_of.h"
-#include"../metaprog/std_wrappers.h"
-#include"../metaprog/tuple.h"
-#include"../metaprog/unique.h"
-#include"../utility/for_loop_expand.h"
-#include"../utility/get_argument_n.h"
+#include"../meta/check_type_.h"
+#include"../meta/nth_type_of.h"
+#include"../meta/std_wrappers.h"
+#include"../meta/tuple.h"
+#include"../meta/unique.h"
+#include"../util/for_loop_expand.h"
+#include"../util/get_argument_n.h"
 #include"find_positions.h"
 #include"cindex.h"
 #include"check_cindicies.h"
@@ -34,7 +34,7 @@ struct char_expr_traits
    using value_type  = Value_type<traits_type>; 
    using size_type   = Size_type<traits_type>;
    using type        = A;
-   using index_tuple = metaprog::tuple<>;
+   using index_tuple = meta::tuple<>;
    static const int order = traits_type::order;
 };
 
@@ -64,15 +64,15 @@ struct char_expression_access<Ref_access(),A>: A
    static const int order = Order<A>();
 
    template<typename... ints, 
-            //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-            //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-            utility::Requesting_elem<order,size_type, ints...> = 0>
+            //typename std::enable_if<meta::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
+            //iEnable_if<util::detail::requesting_elem<order,size_type,ints...>::value> = 0>
+            util::Requesting_elem<order,size_type, ints...> = 0>
    value_type& at(const ints ...i) { return this->self().at(i...); }
 
    template<typename... ints, 
-            //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-            //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-            utility::Requesting_elem<order,size_type, ints...> = 0>
+            //typename std::enable_if<meta::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
+            //iEnable_if<util::detail::requesting_elem<order,size_type,ints...>::value> = 0>
+            util::Requesting_elem<order,size_type, ints...> = 0>
    value_type const& at(const ints ...i) const { return this->self().at(i...); }  
 };
 
@@ -85,9 +85,9 @@ struct char_expression_access<Value_access(),A>: A
    static const int order = Order<A>();
 
    template<typename... ints, 
-            //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-            //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-            utility::Requesting_elem<order,size_type, ints...> = 0>
+            //typename std::enable_if<meta::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
+            //iEnable_if<util::detail::requesting_elem<order,size_type,ints...>::value> = 0>
+            util::Requesting_elem<order,size_type, ints...> = 0>
    value_type at(const ints ...i) const { return this->self().at(i...); }  
 };
 
@@ -115,7 +115,7 @@ struct char_expression_assign: A  // builds on char_expression_access <true>
    type& operator=(const type& other)
    {
       using oper_type = op_equal<type,type>;
-      utility::for_loop_expand<oper_type>::apply((*this),other);
+      util::for_loop_expand<oper_type>::apply((*this),other);
       return this->self();
    }
    template<class B>
@@ -123,7 +123,7 @@ struct char_expression_assign: A  // builds on char_expression_access <true>
    {
       using oper_type = op_equal<type,B>;
       static_assert(oper_type::is_valid, "operation= not valid");
-      utility::for_loop_expand<oper_type>::apply((*this),other);
+      util::for_loop_expand<oper_type>::apply((*this),other);
       return this->self();
    }
    template<class B>
@@ -131,7 +131,7 @@ struct char_expression_assign: A  // builds on char_expression_access <true>
    {
       using oper_type = op_plus_equal<type,B>;
       static_assert(oper_type::is_valid, "operation+= not valid");
-      utility::for_loop_expand<oper_type>::apply((*this),other);
+      util::for_loop_expand<oper_type>::apply((*this),other);
       return this->self();
    }
    template<class B>
@@ -139,7 +139,7 @@ struct char_expression_assign: A  // builds on char_expression_access <true>
    {
       using oper_type = op_sub_equal<type,B>;
       static_assert(oper_type::is_valid, "operation-= not valid");
-      utility::for_loop_expand<oper_type>::apply((*this),other);
+      util::for_loop_expand<oper_type>::apply((*this),other);
       return this->self();
    }
 };
@@ -150,7 +150,9 @@ struct char_expression_assign: A  // builds on char_expression_access <true>
 /*******************************/
 template<class A>
 struct char_expression: A
-{ using base_type = A; };
+{ 
+   using base_type = A; 
+};
 
 template<class A, typename... cIndicies>
 class mda_char_expression:
@@ -178,7 +180,7 @@ class mda_char_expression:
            mda_char_expression<A, cIndicies...>, traits<mda_char_expression<A,cIndicies...> >
            > > > > > interface_type;
       using interface_type::operator=;
-      typedef libmda::metaprog::tuple<cIndicies...>   index_tuple;
+      typedef meta::tuple<cIndicies...>   index_tuple;
       /*typedef typename traits<typename A::type>::value_type value_type;
       typedef typename traits<typename A::type>::size_type  size_type;
       typedef typename traits<typename A::type>::type       type;
@@ -190,30 +192,45 @@ class mda_char_expression:
       static const int order = Order<A>();
       
       // constructor
-      mda_char_expression(expr_type& a_object): m_object(a_object) { };
+      mda_char_expression(expr_type& a_object): m_object(a_object) 
+      { 
+      }
       
       // assignment operator
       mda_char_expression& operator=(const mda_char_expression& a_other)
-      { return interface_type::operator=(a_other); }
+      { 
+         return interface_type::operator=(a_other); 
+      }
       
       // const and non-const at()
-      template<typename... ints,
-               //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-               //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               utility::Requesting_elem<order,size_type, ints...> = 0>
-      value_type const& at(const ints... i) const { return m_object.at(i...); }
-      template<typename... ints,
-               //typename std::enable_if<metaprog::check_type_and_size_<order,size_type,ints...>::value, int>::type = 0>
-               //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               utility::Requesting_elem<order,size_type, ints...> = 0>
-      value_type&       at(const ints... i)       { return m_object.at(i...); }
+      template<class... ints
+             , util::Requesting_elem<order,size_type, ints...> = 0
+             >
+      value_type const& at(const ints... i) const 
+      { 
+         return m_object.at(i...); 
+      }
+
+      template<class... ints
+             , util::Requesting_elem<order,size_type, ints...> = 0
+             >
+      value_type&       at(const ints... i)       
+      { 
+         return m_object.at(i...); 
+      }
       
       // size()
-      size_type size() const { return m_object.size(); }
+      size_type size() const 
+      { 
+         return m_object.size(); 
+      }
       
       // extent()
       template<int N>
-      size_type extent()  const { return m_object.template extent<N>(); }
+      size_type extent()  const 
+      { 
+         return m_object.template extent<N>(); 
+      }
 };
 
 
@@ -225,8 +242,8 @@ struct char_expression_interface: A
 {  
    /* non-const version */
    template<class... cints, 
-            iEnable_if<utility::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
-            //utility::Requesting_slice<Order<A>(),cints...> = 0>
+            iEnable_if<util::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
+            //util::Requesting_slice<Order<A>(),cints...> = 0>
    mda_char_expression<Type<A>, cints...> c_expr(const cints... ci)
    { 
       typedef mda_char_expression<Type<A>, cints...> Charexpr_type;
@@ -235,8 +252,8 @@ struct char_expression_interface: A
    
    /* const version */
    template<class... cints, 
-            iEnable_if<utility::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
-            //utility::Requesting_slice<Order<A>(),cints...> = 0>
+            iEnable_if<util::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
+            //util::Requesting_slice<Order<A>(),cints...> = 0>
    mda_char_expression<const Type<A>, cints...> c_expr(const cints... ci) const
    { 
       typedef mda_char_expression<const Type<A>, cints...> Charexpr_type;
@@ -245,8 +262,8 @@ struct char_expression_interface: A
 
    /* non-const version */
    template<class... cints, 
-            iEnable_if<utility::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
-            //utility::Requesting_slice<Order<A>(),cints...> = 0>
+            iEnable_if<util::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
+            //util::Requesting_slice<Order<A>(),cints...> = 0>
    mda_char_expression<Type<A>, cints...> operator()(const cints... ci)
    { 
       typedef mda_char_expression<Type<A>, cints...> Charexpr_type;
@@ -255,8 +272,8 @@ struct char_expression_interface: A
    
    /* const version */
    template<class... cints, 
-            iEnable_if<utility::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
-            //utility::Requesting_slice<Order<A>(),cints...> = 0>
+            iEnable_if<util::detail::requesting_slice<Order<A>(),cints...>::value> = 0>
+            //util::Requesting_slice<Order<A>(),cints...> = 0>
    mda_char_expression<const Type<A>, cints...> operator()(const cints... ci) const
    { 
       typedef mda_char_expression<const Type<A>, cints...> Charexpr_type;
@@ -265,39 +282,6 @@ struct char_expression_interface: A
 
 };
 
-//template<class A, class trait>
-//struct ichar_expression:
-//   char_expression_interface<
-//   libmda::IMDAAccessComb<
-//   libmda::IMDAAccess<Ref_access(),
-//   libmda::IMDADim<
-//   libmda::IMDASelf<
-//   A, trait
-//   > > > > >
-//{  
-//   typedef char_expression_interface<
-//           libmda::IMDAAccessComb<
-//           libmda::IMDAAccess<Ref_access(),
-//           libmda::IMDADim<
-//           libmda::IMDASelf<
-//           A, trait
-//           > > > > > imda_interface;
-//   
-//   template<typename... cints, 
-//            utility::Requesting_slice<Order<A>(),cints...> = 0>
-//   mda_char_expression<Type<imda_interface>, cints...>
-//   operator()(const cints... ci) { return imda_interface::c_expr(ci...); }
-//   
-//   template<typename... cints, 
-//            utility::Requesting_slice<Order<A>(),cints...> = 0>
-//   mda_char_expression<const Type<imda_interface>, cints...>
-//   operator()(const cints... ci) const { return imda_interface::c_expr(ci...); }
-//   
-//   //template<class... cints, metaprog::iEnable_if<check_cindicies_<cints...>::value> = 0>
-//   //mda_char_expression<Type<imda_interface>, cints...>
-//   //operator()(const cints... ci) const
-//   //{ return imda_interface::c_expr(ci...); }
-//};
 
 /****************************************/
 // char permutation struct + helpers
@@ -321,14 +305,14 @@ struct is_permutation_help: is_permutation_help_impl<begin<T>, end<T>, T::Size()
 template<class T>
 struct is_permutation_
 {
-   static const bool value = metaprog::All_unique<T>() && is_permutation_help<T>::value;
+   static const bool value = meta::All_unique<T>() && is_permutation_help<T>::value;
 };
 
 template<class T> struct tuple_overlap
 {
    template<class U> struct apply
    {
-      static const bool value = (metaprog::Find_pos<T,U>() != T::Size());
+      static const bool value = (meta::Find_pos<T,U>() != T::Size());
    };
 };
 
@@ -336,15 +320,15 @@ template<class l_index_tuple, class r_index_tuple>
 struct permutation_
 {
    // assert that indicies are unique at this point (else there is an error!)
-   static_assert(metaprog::All_unique<l_index_tuple>(),"permutation_: left  indicies not unique");
-   static_assert(metaprog::All_unique<r_index_tuple>(),"permutation_: right indicies not unique");
+   static_assert(meta::All_unique<l_index_tuple>(),"permutation_: left  indicies not unique");
+   static_assert(meta::All_unique<r_index_tuple>(),"permutation_: right indicies not unique");
 
    /********************************/
    // addition/subtration functions
    //
    /********************************/
    // find how r_indicies are a permution of l_indicies (used for addition and subtraction!)
-   using permutation_tuple = metaprog::find_positions<l_index_tuple,r_index_tuple>;
+   using permutation_tuple = meta::find_positions<l_index_tuple,r_index_tuple>;
    // see if addition/subtraction is valid (r_index_tuple is a permutation of l_index_tuple)
    static const bool is_permutation = (l_index_tuple::size == r_index_tuple::size)
       && is_permutation_<permutation_tuple>::value;
@@ -356,8 +340,8 @@ struct permutation_
    /********************************/
    private:
    // find overlap between left and right indicies (which indicies to contract)
-   using partition_l = metaprog::partition<l_index_tuple,tuple_overlap<r_index_tuple> >;
-   using partition_r = metaprog::partition<r_index_tuple,tuple_overlap<l_index_tuple> >;
+   using partition_l = meta::partition<l_index_tuple,tuple_overlap<r_index_tuple> >;
+   using partition_r = meta::partition<r_index_tuple,tuple_overlap<l_index_tuple> >;
    
    public:
    // create tuple of indicies to contract
@@ -365,21 +349,21 @@ struct permutation_
 
    // create tuple of indicies for result of contraction 
    // (all indicies that do not overlap between left and right indicies)
-   using index_tuple = metaprog::catenate<typename partition_l::f, typename partition_r::f>;
+   using index_tuple = meta::catenate<typename partition_l::f, typename partition_r::f>;
 
    // create a tuple of result and contraction indicies
    // index_tuple first and then contract_tuple
-   using full_contraction_tuple = metaprog::catenate<index_tuple,contract_tuple>;
+   using full_contraction_tuple = meta::catenate<index_tuple,contract_tuple>;
 
    // find permutation of contraction indicies 
-   using contract_index_perm = metaprog::find_positions<l_index_tuple,contract_tuple>;
-   //using contract_index_perm = libmda::metaprog::find_positions<full_contraction_tuple,contract_tuple>;
+   using contract_index_perm = meta::find_positions<l_index_tuple,contract_tuple>;
+   //using contract_index_perm = libmda::meta::find_positions<full_contraction_tuple,contract_tuple>;
 
    // find permutation of left indicies in full index tuple
-   using l_index_perm = metaprog::find_positions<full_contraction_tuple,l_index_tuple>;
+   using l_index_perm = meta::find_positions<full_contraction_tuple,l_index_tuple>;
    
    // find permutation of right indicies in full index tuple
-   using r_index_perm = metaprog::find_positions<full_contraction_tuple,r_index_tuple>;
+   using r_index_perm = meta::find_positions<full_contraction_tuple,r_index_tuple>;
 
    // DEBUG: functions for printing out some types
    //static void print_types(contract_index_perm=contract_index_perm(),
@@ -432,7 +416,7 @@ class binary_char_expression:
       
       // at()
       template<typename... ints
-             , utility::Requesting_elem<order,size_type, ints...> = 0
+             , util::Requesting_elem<order,size_type, ints...> = 0
              >
       value_type at(const ints... i) const { return oper_type::apply(m_lhs,m_rhs,i...); }
       
@@ -446,8 +430,8 @@ class binary_char_expression:
 
 /* ----- forward permutation ----- */
 template<int pos, typename... ints>
-inline metaprog::Nth_type_of<pos,ints...> forward_permutation(const ints... i)
-{ return utility::get_argument_n<pos>::get(i...); }
+inline meta::Nth_type_of<pos,ints...> forward_permutation(const ints... i)
+{ return util::get_argument_n<pos>::get(i...); }
 /* ----- forward permutation end ----- */
 
 /****************************************/
@@ -478,7 +462,7 @@ struct NAME \
       template<typename Tuple> \
       struct apply_help; \
       template<typename ...Perm> \
-      struct apply_help<libmda::metaprog::tuple<Perm...> > \
+      struct apply_help<libmda::meta::tuple<Perm...> > \
       { \
          template<typename LH, typename RH, typename... ints> \
          static void apply(LH& a_lhs, const RH& a_rhs, const ints... i) \
@@ -518,7 +502,7 @@ struct op_add
    template<typename Tuple>
    struct apply_help;
    template<typename ...Perm>
-   struct apply_help<libmda::metaprog::tuple<Perm...> >
+   struct apply_help<libmda::meta::tuple<Perm...> >
    {
       template<typename LH, typename RH, typename... Indicies>
       static typename LH::value_type 
@@ -555,7 +539,7 @@ struct op_sub
    template<typename Tuple>
    struct apply_help;
    template<typename ...Perm>
-   struct apply_help<libmda::metaprog::tuple<Perm...> >
+   struct apply_help<libmda::meta::tuple<Perm...> >
    {
       template<typename LH, typename RH, typename... Indicies>
       static typename LH::value_type 
@@ -590,8 +574,8 @@ struct op_mult
    template<class tuple1, class tuple2>
    struct apply_help;
    template<typename... perm1, typename... perm2>
-   struct apply_help<libmda::metaprog::tuple<perm1...>,
-                     libmda::metaprog::tuple<perm2...>
+   struct apply_help<libmda::meta::tuple<perm1...>,
+                     libmda::meta::tuple<perm2...>
           >
    {
       template<typename LH, typename RH, typename... Indicies>
@@ -607,10 +591,10 @@ struct op_mult
    
    template<typename LH, typename RH, typename... Indicies>
    static typename LH::value_type 
-   apply(LH& a_lhs, const RH& a_rhs, const Indicies ...indicies)
+   apply(const LH& a_lhs, const RH& a_rhs, const Indicies ...indicies)
    { 
       typename LH::value_type contract_elem=0;
-      utility::for_loop_expand_dim<apply_help<typename permutation::l_index_perm,
+      util::for_loop_expand_dim<apply_help<typename permutation::l_index_perm,
                                      typename permutation::r_index_perm
                                   >,
                                   typename permutation::contract_index_perm
@@ -621,13 +605,13 @@ struct op_mult
    template<int N, typename LH, typename RH>
    static typename LH::size_type extent(const LH& a_lhs, const RH& a_rhs)
    {
-      typedef typename libmda::metaprog::at<index_tuple,N>::type char_index;
-      return (libmda::utility::get_argument_n<
-                                 (metaprog::pos<metaprog::find<r_index_tuple,char_index> >::value!=r_index_tuple::Size())
+      typedef typename libmda::meta::at<index_tuple,N>::type char_index;
+      return (libmda::util::get_argument_n<
+                                 (meta::pos<meta::find<r_index_tuple,char_index> >::value!=r_index_tuple::Size())
                                >::get(a_lhs,a_rhs)).template extent<
-                               If<(metaprog::pos<metaprog::find<r_index_tuple,char_index> >::value!=r_index_tuple::Size()),
-                                 typename libmda::metaprog::find<r_index_tuple,char_index>::pos,
-                                 typename libmda::metaprog::find<l_index_tuple,char_index>::pos
+                               If<(meta::pos<meta::find<r_index_tuple,char_index> >::value!=r_index_tuple::Size()),
+                                 typename libmda::meta::find<r_index_tuple,char_index>::pos,
+                                 typename libmda::meta::find<l_index_tuple,char_index>::pos
                                >::value //if_ end
                                >(); // dim end
    }
@@ -646,7 +630,7 @@ struct char_expr_traits<mda_char_expression<A,cIndicies...> >
    typedef typename traits_type::size_type         size_type;
    typedef typename traits_type::type              type;
    static const int order = traits_type::order;
-   typedef typename libmda::metaprog::tuple<cIndicies...> index_tuple;
+   typedef typename libmda::meta::tuple<cIndicies...> index_tuple;
 };
 
 template<typename L, typename R, template<class,class> class Op>

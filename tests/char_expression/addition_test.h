@@ -40,10 +40,10 @@ struct addition_test_square_mat: public virtual unit_test
 
        mat0(i,j) = mat1(i,j) + mat2(i,j);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),6.9), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),7.8), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),13.7), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),8.3), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),6.9), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),7.8), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),13.7), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),8.3), " mat0(1,1) is wrong ");
    }
 };
 
@@ -70,10 +70,10 @@ struct plusequal_test_square_mat: public virtual unit_test
 
        mat0(i,j) += mat1(i,j);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),2.6), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),5.8), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),18.2), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),5.5), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),2.6), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),5.8), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),18.2), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),5.5), " mat0(1,1) is wrong ");
    }
 };
 
@@ -100,10 +100,10 @@ struct minusequal_test_square_mat_trans: public virtual unit_test
 
        mat0(i,j) -= mat1(j,i);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),-55.4), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),-1.70), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),-31.1), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),94.59), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),-55.4), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),-1.70), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),-31.1), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),94.59), " mat0(1,1) is wrong ");
    }
 };
 
@@ -131,10 +131,10 @@ struct subtraction_test_square_mat: public virtual unit_test
 
        mat0(i,j) = mat1(i,j) - mat2(i,j);
       
-       UNIT_ASSERT(float_is_equal(mat0(0,0),-1.9), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),-4.4), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),6.0), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),2.6), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),-1.9), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),-4.4), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),6.0), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),2.6), " mat0(1,1) is wrong ");
    }
 };
 
@@ -162,10 +162,10 @@ struct addition_test_square_mat_trans: public virtual unit_test
 
        mat0(j,i) = mat1(i,j) + mat2(j,i);
          
-       UNIT_ASSERT(float_is_equal(mat0(0,0),5.5), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),15.4), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),12.7), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),7.2), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),5.5), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),15.4), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),12.7), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),7.2), " mat0(1,1) is wrong ");
    }
 };
 
@@ -193,10 +193,10 @@ struct subtraction_test_square_mat_trans: public virtual unit_test
 
        mat0(j,i) = mat1(j,i) - mat2(i,j);
          
-       UNIT_ASSERT(float_is_equal(mat0(0,0),-2.9), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),6.1), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),2.2), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),-5.0), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),-2.9), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),6.1), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),2.2), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),-5.0), " mat0(1,1) is wrong ");
    }
 };
 
@@ -228,12 +228,12 @@ struct addition_test_mat: public virtual unit_test
 
        mat0(i,j) = mat1(i,j) + mat2(i,j);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),11.3), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),11.5), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,2),11.7), " mat0(0,2) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),11.9), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),12.1), " mat0(1,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,2),12.3), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),11.3), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),11.5), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,2),11.7), " mat0(0,2) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),11.9), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),12.1), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,2),12.3), " mat0(1,1) is wrong ");
    }
 };
 
@@ -265,12 +265,12 @@ struct addition_test_mat_trans: public virtual unit_test
 
        mat0(j,i) = mat1(i,j) + mat2(i,j);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),11.3), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),11.9), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),11.5), " mat0(0,2) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),12.1), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(2,0),11.7), " mat0(1,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(2,1),12.3), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),11.3), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),11.9), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),11.5), " mat0(0,2) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),12.1), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(2,0),11.7), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(2,1),12.3), " mat0(1,1) is wrong ");
    }
 };
 
@@ -310,12 +310,12 @@ struct addition_test_mat_trans_2: public virtual unit_test
 
        mat0(j,i) = mat1(i,j) + mat2(i,j) - mat3(j,i);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),10.2), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),10.9), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),10.6), " mat0(0,2) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),11.3), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(2,0),11.0), " mat0(1,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(2,1),11.7), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),10.2), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),10.9), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),10.6), " mat0(0,2) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),11.3), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(2,0),11.0), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(2,1),11.7), " mat0(1,1) is wrong ");
    }
 };
 

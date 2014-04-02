@@ -40,10 +40,10 @@ struct contraction_test_square_mat: public virtual unit_test
 
        mat0(i,k) = mat1(i,j) * mat2(j,k);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),23.58), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),24.60), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),48.44), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),53.83), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),23.58), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),24.60), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),48.44), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),53.83), " mat0(1,1) is wrong ");
    }
 };
 
@@ -72,10 +72,10 @@ struct contraction_test_square_mat_trans: public virtual unit_test
 
        mat0(i,k) = mat1(i,j) * mat2(k,j);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),6.33), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),10.17), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),50.31), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),75.57), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),6.33), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),10.17), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),50.31), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),75.57), " mat0(1,1) is wrong ");
    }
 };
 
@@ -111,12 +111,12 @@ struct contraction_test_mat: public virtual unit_test
 
        mat0(i,k) = mat1(i,j) * mat2(j,k);
 
-       UNIT_ASSERT(float_is_equal(mat0(0,0),3520.5275), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),859.4745), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,2),843.682), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),2113.130), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),3243.6125), " mat0(1,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,2),3938.6685), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),3520.5275), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),859.4745), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,2),843.682), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),2113.130), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),3243.6125), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,2),3938.6685), " mat0(1,1) is wrong ");
    }
 };
 
@@ -144,9 +144,9 @@ struct contraction_test_mat_vec: public virtual unit_test
 
        vec0(i) = mat1(i,j) * vec2(j);
       
-       UNIT_ASSERT(float_is_equal(vec0(0),-9.30), " vec0(0) is wrong ");
-       UNIT_ASSERT(float_is_equal(vec0(1),-32.48), " vec0(1) is wrong ");
-       UNIT_ASSERT(float_is_equal(vec0(2),3.26), " vec0(2) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(vec0(0),-9.30), " vec0(0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(vec0(1),-32.48), " vec0(1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(vec0(2),3.26), " vec0(2) is wrong ");
    }
 };
 
@@ -187,10 +187,10 @@ struct contraction_addition_test_square_mat: public virtual unit_test
 
        mat0(i,k) = mat1(i,j) * mat2(j,k)  +  mat3(i,j) * mat4(j,k);
        
-       UNIT_ASSERT(float_is_equal(mat0(0,0),49.67), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),79.90), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),60.82), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),86.25), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),49.67), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),79.90), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),60.82), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),86.25), " mat0(1,1) is wrong ");
    }
 };
 
@@ -221,10 +221,10 @@ struct contraction_test_tens3d_mat_vec: public virtual unit_test
 
        mat0(i,j) = tens1(i,j,k) * vec2(k);
        
-       UNIT_ASSERT(float_is_equal(mat0(0,0),67.50), " mat0(0,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(0,1),67.98), " mat0(0,1) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,0),45.30), " mat0(1,0) is wrong ");
-       UNIT_ASSERT(float_is_equal(mat0(1,1),39.36), " mat0(1,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,0),67.50), " mat0(0,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(0,1),67.98), " mat0(0,1) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,0),45.30), " mat0(1,0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(mat0(1,1),39.36), " mat0(1,1) is wrong ");
    }
 };
 

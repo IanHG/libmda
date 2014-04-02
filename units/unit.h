@@ -10,7 +10,7 @@
 #ifndef LIBMDA_UNITS_UNIT_H
 #define LIBMDA_UNITS_UNIT_H
 
-#include"../metaprog/std_wrappers.h"
+#include"../meta/std_wrappers.h"
 #include"../basic_using.h"
 
 namespace libmda
@@ -122,7 +122,7 @@ using UnitVecPlus = typename detail::UnitVecPlus_<U1,U2,UnitVec_<> >::type;
 template<class U1, class U2>
 struct UnitPlus_
 {
-   static_assert(metaprog::Is_same<Unit_system<U1>,Unit_system<U2> >(),"not same system");
+   static_assert(meta::Is_same<Unit_system<U1>,Unit_system<U2> >(),"not same system");
    using type = Unit<Unit_system<U1>,UnitVecPlus<Unit_vec<U1>,Unit_vec<U2> > >;
 };
 
@@ -230,7 +230,10 @@ struct UnitInvert_
    using type = Unit<Unit_system<U>,UnitVecInvert<Unit_vec<U> > >;
 };
 } // namespace detail 
+
+//
 // inter unit interface
+//
 using detail::UnitVecInvert;
 template<class U>
 using UnitInvert = Type<detail::UnitInvert_<U> >;

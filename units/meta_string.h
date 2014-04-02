@@ -1,75 +1,111 @@
-#ifndef LIBMDA_META_STRING_H
-#define LIBMDA_META_STRING_H
+#ifndef LIBMDA_META_STRING_H_INCLUDED
+#define LIBMDA_META_STRING_H_INCLUDED
 
 #include<iostream>
 #include<string>
-#include"../metaprog/if.h"
-using libmda::metaprog::if_;
+#include"../meta/if.h"
+#include"../util/print_variadic.h"
 
 namespace libmda
 {
-namespace utility
+namespace util
 {
 
-template<char... s>
+//
+// meta string class
+//
+template<char... Cs>
 struct meta_string
 { 
-   static constexpr const char* to_char()
-   { return std::string{s...}.c_str(); }
+   //static constexpr const char* to_char()
+   //{ 
+   //   return std::string{Cs...}.c_str(); 
+   //}
 };
 
-template<char... s>
-std::ostream& operator<<(std::ostream& a_ostream, const meta_string<s...>& ms)
+//
+// print a meta string
+//
+template<char... Cs>
+std::ostream& operator<<(std::ostream& a_ostream, const meta_string<Cs...>& ms)
 { 
-   a_ostream << std::string{s...}.c_str(); 
+   print_variadic(a_ostream,"",Cs...);
    return a_ostream; 
 }
 
-/**
- * catenate meta string
- **/
+//
+// catenate meta string
+//
 template<class L, class R>
 struct catenate;
-template<char... s, char... ss>
-struct catenate<meta_string<s...>, meta_string<ss...> >
+
+template<char... Cs1, char... Cs2>
+struct catenate<meta_string<Cs1...>, meta_string<Cs2...> >
 {
-   typedef meta_string<s...,ss...> type;
+   using type = meta_string<Cs1...,Cs2...>;
 };
 
+template<class L, class R>
+using Catenate = typename catenate<L,R>::type;
+
+//
 // catenate with operator + as constexpr
-template<char...s,char... ss>
-meta_string<s...,ss...> 
-operator+(const meta_string<s...>&, const meta_string<ss...>&)
-{ return meta_string<s...,ss...>(); }
+//
+template<char... Cs1
+       , char... Cs2
+       >
+constexpr meta_string<Cs1..., Cs2...> operator+(const meta_string<Cs1...>&, const meta_string<Cs2...>&)
+{ 
+   return meta_string<Cs1...,Cs2...>(); 
+}
 
-template<char... s>
-constexpr meta_string<s...> operator"" _ms()
-{ return meta_string<s...>(); }
+//
+// meta string literal (not tested)
+//
+template<char... Cs>
+constexpr meta_string<Cs...> operator"" _ms()
+{ 
+   return meta_string<Cs...>(); 
+}
 
-/* make meta string from integer */
+//
+// convert integer to meta string
+//
+namespace detail
+{
+//
 // first some helpers
-template<bool, int e, char... s>
-struct int_to_string_
+//
+template<bool, int I, char... Cs>
+struct int_to_meta_string_impl
 {
-   typedef typename int_to_string_< e>=10 , e/10 , s..., '0'+e%10 >::type type;
+   using type = typename int_to_meta_string_impl< I>=10 , I/10 , '0'+I%10, Cs... >::type;
 };
 
-template<int e, char... s>
-struct int_to_string_<false,e,s...>
+template<int I, char... s>
+struct int_to_meta_string_impl<false,I,s...>
 {
-   typedef meta_string<s...> type;
+   using type = meta_string<s...>;
 };
 
-template<int e>
-struct int_to_string
+} // namespace detail
+
+template<int I>
+struct int_to_meta_string
 {
-   typedef typename if_< e>=0, // check for positive/negative
-      typename int_to_string_< e>=10 , e/10, '0'+e%10>::type,     // positive
-      typename int_to_string_< -e>=10,-e/10, '-', '0'-e%10>::type // negative append '-'
-      >::type type;
+   using type = If< (I>=0)
+                  , typename detail::int_to_meta_string_impl< I>=10, (I-I%10)/10, '0'+I%10>::type
+                  , Catenate<meta_string<'-'>,typename detail::int_to_meta_string_impl<-I>=10,-(I+I%10)/10, '0'-I%10>::type> 
+                  >;
 };
 
-} // namespace utility
+//
+// interface for converting integer to metastring
+//
+template<int I>
+using Int_to_meta_string = typename int_to_meta_string<I>::type;
+
+} // namespace util
 } // namespace libmda
 
-#endif /* LIBMDA_META_STRING_H */
+#endif /* LIBMDA_META_STRING_H_INCLUDED */

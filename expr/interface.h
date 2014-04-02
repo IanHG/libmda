@@ -3,15 +3,15 @@
 
 #include "char_expression.h"
 #include "expression.h"
-#include "../utility/dimensions_check.h"
-#include "../metaprog/std_wrappers.h"
+#include "../util/dimensions_check.h"
+#include "../meta/std_wrappers.h"
 #include "../basic_using.h"
-#include "../utility/Requesting.h"
+#include "../util/Requesting.h"
 
 namespace libmda
 {
 
-template<class A, class trait = traits<A>, class dims_check = utility::dimensions_nocheck>
+template<class A, class trait = traits<A>, class dims_check = util::dimensions_nocheck>
 struct expression_interface:
    public libmda::scalar_assign<
           libmda::IMDAElemAssignMult<dims_check,
@@ -60,15 +60,15 @@ struct expression_interface:
 
    /* non-const version */
    template<typename... cints, 
-            iEnable_if<utility::detail::requesting_slice<Order<trait>(),cints...>::value> = 0>
-            //utility::Requesting_slice<Order<trait>(),cints...> = 0>
+            iEnable_if<util::detail::requesting_slice<Order<trait>(),cints...>::value> = 0>
+            //util::Requesting_slice<Order<trait>(),cints...> = 0>
    libmda::char_expr::mda_char_expression<Type<imda_interface>, cints...>
    operator()(const cints... ci)       { return imda_interface::c_expr(ci...); }
    
    /* const version */
    template<typename... cints, 
-            iEnable_if<utility::detail::requesting_slice<Order<trait>(),cints...>::value> = 0>
-            //utility::Requesting_slice<Order<trait>(),cints...> = 0>
+            iEnable_if<util::detail::requesting_slice<Order<trait>(),cints...>::value> = 0>
+            //util::Requesting_slice<Order<trait>(),cints...> = 0>
    libmda::char_expr::mda_char_expression<const Type<imda_interface>, cints...>
    operator()(const cints... ci) const { return imda_interface::c_expr(ci...); }
 };

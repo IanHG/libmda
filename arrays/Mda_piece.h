@@ -8,8 +8,6 @@ namespace libmda
 {
 namespace arrays
 {
-namespace mda_impl
-{
 namespace detail
 {
 template<size_t N, size_t M> struct pow
@@ -48,12 +46,12 @@ class Mda_piece: public Mda_i<Mda_piece<N,T,U,M>,N,T,U>
       
       // operator()
       template<typename... ints, 
-               iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               //utility::Requesting_elem<order,size_type,ints...> = 0>
+               iEnable_if<util::detail::requesting_elem<order,size_type,ints...>::value> = 0>
+               //util::Requesting_elem<order,size_type,ints...> = 0>
       value_type&       operator()(ints... i)       { return at(i...); }
       template<typename... ints, 
-               iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-               //utility::Requesting_elem<order,size_type,ints...> = 0>
+               iEnable_if<util::detail::requesting_elem<order,size_type,ints...>::value> = 0>
+               //util::Requesting_elem<order,size_type,ints...> = 0>
       value_type const& operator()(ints... i) const { return at(i...); }
       
       // at()
@@ -76,8 +74,8 @@ class Mda_piece: public Mda_i<Mda_piece<N,T,U,M>,N,T,U>
       {
          public:
             template<typename... ints>
-                     //iEnable_if<utility::detail::requesting_elem<order,size_type,ints...>::value> = 0>
-                     //utility::Requesting_elem<order,size_type,ints...> = 0>
+                     //iEnable_if<util::detail::requesting_elem<order,size_type,ints...>::value> = 0>
+                     //util::Requesting_elem<order,size_type,ints...> = 0>
             size_type index(ints... i) const
             { return detail::piece_index_help<N-1,M>::apply(i...); }
       };
@@ -86,8 +84,7 @@ class Mda_piece: public Mda_i<Mda_piece<N,T,U,M>,N,T,U>
       value_type m_ptr[M*N];
 };
 
-} // namespace mda_impl
 } // namespace arrays
-} // namespace mda_impl
+} // namespace libmda
 
 #endif /* LIBMDA_MDA_PIECE_H */

@@ -17,9 +17,9 @@ using libmda::MDA;
 using libmda::tests::expression::matrix_test_case;
 using libmda::tests::expression::total_test_case;
 
-#include "../../utility/has_member.h"
-using libmda::utility::has_vec_at;
-using libmda::utility::has_assignable_vec_at;
+#include "../../util/has_member.h"
+using libmda::util::has_vec_at;
+using libmda::util::has_assignable_vec_at;
 
 /* declare d_matrix to use index_test_check, 
    which can throw a test_failed exception */
@@ -33,7 +33,10 @@ void matrix_assign(d_matrix&);
 
 template<>
 void matrix_assign<true>(d_matrix& mat)
-{ cout << " vec at assign " << endl; for(int i=0; i<mat.size(); ++i) mat.vec_at(i) = 1.0; }
+{ 
+   for(int i=0; i<mat.size(); ++i) 
+      mat.vec_at(i) = 1.0; 
+}
 
 template<>
 void matrix_assign<false>(d_matrix& mat)

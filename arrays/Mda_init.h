@@ -5,8 +5,6 @@ namespace libmda
 {
 namespace arrays
 {
-namespace mda_impl
-{
 
 namespace detail
 {
@@ -26,7 +24,6 @@ struct Mda_init<1,T,U>
 template<size_t N, typename T, typename U>
 using Mda_initializer = typename detail::Mda_init<N,T,U>::type;
 
-} // namespace mda_impl
 } // namespace arrays
 } // namespace libmda
 

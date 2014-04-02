@@ -3,7 +3,7 @@
 
 #include "../basic_using.h"
 #include "expression.h"
-#include "../utility/forward_pack.h"
+#include "../util/forward_pack.h"
 
 namespace libmda
 {
@@ -35,8 +35,8 @@ struct op_tensorprod
    template<typename... ints>
    static Value_type<L> apply(const L& a_lhs, const R& a_rhs, const ints... i)
    {
-      return utility::forward_subpack(detail::tensorprod_helper<L>(a_lhs),metaprog::index_range<0,Order<L>()>(),i...)*
-         utility::forward_subpack(detail::tensorprod_helper<R>(a_rhs),metaprog::index_range<Order<L>(),order>(),i...);
+      return util::forward_subpack(detail::tensorprod_helper<L>(a_lhs),meta::index_range<0,Order<L>()>(),i...)*
+         util::forward_subpack(detail::tensorprod_helper<R>(a_rhs),meta::index_range<Order<L>(),order>(),i...);
    }
 
    template<int N, iEnable_if< (N>=0 && N<L::order) > = 0>

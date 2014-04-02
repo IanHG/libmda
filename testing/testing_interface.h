@@ -4,7 +4,6 @@
 #include "unit_test.h"
 using libmda::testing::unit_test;
 using libmda::testing::test_failed;
-using libmda::numeric::float_is_equal;
 
 #include "test_case.h"
 using libmda::testing::test_case;

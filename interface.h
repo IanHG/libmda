@@ -26,17 +26,17 @@ namespace libmda
 {
    template<class A> struct scalar_assign;
    
-namespace utility // namespace utility
+namespace util // namespace util
 {
    struct dimensions_check;
    struct dimensions_nocheck;
-} // namespace utility
+} // namespace util
 
     template<class A, class trait>
     struct IMDAInterface:
        scalar_assign<
-       IMDAElemAssignMult<utility::dimensions_nocheck,
-       IMDAElemAssign    <utility::dimensions_nocheck,
+       IMDAElemAssignMult<util::dimensions_nocheck,
+       IMDAElemAssign    <util::dimensions_nocheck,
        IMDAAccessComb<
        IMDAAccess<Ref_access(),
        IMDADim<
@@ -46,8 +46,8 @@ namespace utility // namespace utility
        IMDABase
     {
        using scalar_assign<
-             IMDAElemAssignMult<utility::dimensions_nocheck,
-             IMDAElemAssign    <utility::dimensions_nocheck,
+             IMDAElemAssignMult<util::dimensions_nocheck,
+             IMDAElemAssign    <util::dimensions_nocheck,
              IMDAAccessComb<
              IMDAAccess<Ref_access(),
              IMDADim<
@@ -59,7 +59,7 @@ namespace utility // namespace utility
 } // namespace libmda
 
 #include "operators/expression_binary_operators.h"
-#include "utility/dimensions_check.h"
+#include "util/dimensions_check.h"
 
 namespace libmda
 {

@@ -1,10 +1,8 @@
-#ifndef LIBMDA_TESTING_PERFORMANCE_TEST_H
-#define LIBMDA_TESTING_PERFORMANCE_TEST_H
+#ifndef LIBMDA_TESTING_PERFORMANCE_TEST_H_INCLUDED
+#define LIBMDA_TESTING_PERFORMANCE_TEST_H_INCLUDED
 
 //#include<typeinfo>
 #include<iostream>
-using std::cout;
-using std::endl;
 
 #include "test_failed.h"
 #include "timer.h"
@@ -22,17 +20,17 @@ class performance_test:
    private:
       clock_timer m_timer;
 
-      void benchmark_output() const
+      void benchmark_output(std::ostream& a_stream = std::cout) const
       {
-         cout << " TEST: " << name() << endl;
-         cout << " did "   << repeats << " runs and "
-              << " used: " << m_timer.tot_clocks() << " clocks "
-              << " (in "   << m_timer.tot_clocks_per_sec() << "s)."
-              << endl;
+         a_stream << " TEST: " << name() << "\n"
+                  << " did "   << repeats << " runs and "
+                  << " used: " << m_timer.tot_clocks() << " clocks "
+                  << " (in "   << m_timer.tot_clocks_per_sec() << "s)."
+                  << std::endl;
       }
    public:
       template<typename... Args>
-      performance_test(const string a_name, const Args&... args): 
+      performance_test(const std::string a_name, const Args&... args): 
          unit_test(), test(a_name,args...), m_timer()
       { }
 
@@ -49,8 +47,8 @@ class performance_test:
          //   }
          //   catch(test_failed &e) // catch any test_failed
          //   {
-         //      cout << " there was an error in performance test: " << "\n" //i << "\n"
-         //           << " rethrowing to test_suite handler..." << endl;
+         //      std::cout << " there was an error in performance test: " << "\n" //i << "\n"
+         //           << " rethrowing to test_suite handler..." << std::endl;
          //      throw;
          //   }
          //}
@@ -63,4 +61,4 @@ class performance_test:
 } // namespace testing
 } // namespace libmda
 
-#endif /* LIBMDA_TESTING_PERFORMANCE_TEST_H */
+#endif // LIBMDA_TESTING_PERFORMANCE_TEST_H_INCLUDED
