@@ -1,0 +1,57 @@
+#ifndef CT_FOR_EACH_H
+#define CT_FOR_EACH_H
+
+#include<iostream>
+using std::cout;
+using std::endl;
+
+#include "begin_end_.h"
+
+namespace libmda
+{
+namespace metaprog
+{
+
+template<bool>
+class for_each_impl;
+
+template<>
+class for_each_impl<true>
+{
+   public:
+      template<typename element, typename lastElement, typename F>
+      static void execute_func(element* elem, lastElement* last_elem, F func) 
+      { };
+};
+
+template<>
+class for_each_impl<false>
+{
+   public:
+      template<typename element, typename lastElement, typename F>
+      static void execute_func(element* elem, lastElement* last_elem, F func)
+      {
+         //apply function to current elements...
+         F::apply(elem);
+
+         typedef typename element::next next;
+         // recursively apply to rest of elements
+         for_each_impl<std::is_same<typename element::next,lastElement>::value >
+            ::execute_func(static_cast<next*>(0), last_elem, func);
+      }
+};
+
+template<typename T, typename F>
+void for_each_(F func)
+{
+   begin<T> begin;
+   end<T>   end;
+   
+   for_each_impl<Is_same<begin, end>() >
+      ::execute_func(static_cast<begin*>(0), static_cast<end*>(0),func);
+};
+
+} // namespace metaprog
+} // namespace libmda
+
+#endif /* CT_FOR_EACH_H */
