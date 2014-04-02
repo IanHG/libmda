@@ -1,0 +1,115 @@
+clang++ -O3 -std=c++0x -o main main.cc 
+In file included from main.cc:2:
+./../../imda/imda_interface.h:38:26: error: no member named 'index_nocheck' in namespace 'libmda::util'
+   elem_assign    <util::index_nocheck,
+                   ~~~~~~^
+./../../imda/imda_interface.h:45:6: error: expected class name
+   > > > > > >
+     ^
+main.cc:40:8: error: no viable overloaded '*='
+   vec *= vec2;
+   ~~~ ^  ~~~~
+main.cc:41:14: error: invalid operands to binary expression ('ostream' (aka 'basic_ostream<char>') and 'custom_vector')
+   std::cout << vec << std::endl;
+   ~~~~~~~~~ ^  ~~~
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:244:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'const void *' for 1st argument; take the address of the argument with &
+      operator<<(const void* __p)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:107:7: note: candidate function not viable: no known conversion from 'custom_vector' to '__ostream_type &(*)(__ostream_type &)' for 1st argument
+      operator<<(__ostream_type& (*__pf)(__ostream_type&))
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:116:7: note: candidate function not viable: no known conversion from 'custom_vector' to '__ios_type &(*)(__ios_type &)' for 1st argument
+      operator<<(__ios_type& (*__pf)(__ios_type&))
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:126:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'std::ios_base &(*)(std::ios_base &)' for 1st argument
+      operator<<(ios_base& (*__pf) (ios_base&))
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:165:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'long' for 1st argument
+      operator<<(long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:169:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'unsigned long' for 1st argument
+      operator<<(unsigned long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:173:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'bool' for 1st argument
+      operator<<(bool __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:177:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'short' for 1st argument
+      operator<<(short __n);
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:180:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'unsigned short' for 1st argument
+      operator<<(unsigned short __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:188:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'int' for 1st argument
+      operator<<(int __n);
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:191:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'unsigned int' for 1st argument
+      operator<<(unsigned int __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:200:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'long long' for 1st argument
+      operator<<(long long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:204:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'unsigned long long' for 1st argument
+      operator<<(unsigned long long __n)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:219:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'double' for 1st argument
+      operator<<(double __f)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:223:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'float' for 1st argument
+      operator<<(float __f)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:231:7: note: candidate function not viable: no known conversion from 'custom_vector' to 'long double' for 1st argument
+      operator<<(long double __f)
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:269:7: note: candidate function not viable: no known conversion from 'custom_vector' to '__streambuf_type *' (aka 'basic_streambuf<char, std::char_traits<char> > *') for 1st argument
+      operator<<(__streambuf_type* __sb);
+      ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:475:5: note: candidate function [with _CharT = char, _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'char' for 2nd argument
+    operator<<(basic_ostream<_CharT, _Traits>& __out, char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:481:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'char' for 2nd argument
+    operator<<(basic_ostream<char, _Traits>& __out, char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:487:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'signed char' for 2nd argument
+    operator<<(basic_ostream<char, _Traits>& __out, signed char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:492:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'unsigned char' for 2nd argument
+    operator<<(basic_ostream<char, _Traits>& __out, unsigned char __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:529:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'const char *' for 2nd argument
+    operator<<(basic_ostream<char, _Traits>& __out, const char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:542:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'const signed char *' for 2nd argument
+    operator<<(basic_ostream<char, _Traits>& __out, const signed char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:547:5: note: candidate function [with _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'const unsigned char *' for 2nd argument
+    operator<<(basic_ostream<char, _Traits>& __out, const unsigned char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:601:5: note: candidate function [with _CharT = char, _Traits = std::char_traits<char>, _Tp = custom_vector] not viable: no known conversion from 'ostream' (aka 'basic_ostream<char>') to 'basic_ostream<char, std::char_traits<char> > &&' for 1st argument
+    operator<<(basic_ostream<_CharT, _Traits>&& __os, const _Tp& __x)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/bits/ostream.tcc:320:5: note: candidate function [with _CharT = char, _Traits = std::char_traits<char>] not viable: no known conversion from 'custom_vector' to 'const char *' for 2nd argument
+    operator<<(basic_ostream<_CharT, _Traits>& __out, const char* __s)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:470:5: note: candidate template ignored: deduced conflicting types for parameter '_CharT' ('char' vs. 'custom_vector')
+    operator<<(basic_ostream<_CharT, _Traits>& __out, _CharT __c)
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/bits/basic_string.h:2752:5: note: candidate template ignored: could not match 'basic_string<type-parameter-0-0, type-parameter-0-1, type-parameter-0-2>' against 'custom_vector'
+    operator<<(basic_ostream<_CharT, _Traits>& __os,
+    ^
+/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../../include/c++/4.8/ostream:512:5: note: candidate template ignored: could not match 'const _CharT *' against 'custom_vector'
+    operator<<(basic_ostream<_CharT, _Traits>& __out, const _CharT* __s)
+    ^
+./../../imda/imda_ostream_output.h:42:15: note: candidate template ignored: could not match 'access_combined<type-parameter-0-0>' against 'custom_vector'
+std::ostream& operator<<(std::ostream& a_ostream, const access_combined<A>& mda)
+              ^
+./../../imda/imda_ostream_output.h:63:15: note: candidate template ignored: could not match 'access_combined<type-parameter-0-0>' against 'custom_vector'
+std::ostream& operator<<(std::ostream& a_ostream, const access_combined<A>& mda)
+              ^
+./../../imda/imda_ostream_output.h:84:15: note: candidate template ignored: could not match 'access_combined<type-parameter-0-0>' against 'custom_vector'
+std::ostream& operator<<(std::ostream& a_ostream, const access_combined<A>& mda)
+              ^
+./../../imda/imda_ostream_output.h:110:15: note: candidate template ignored: could not match 'access_combined<type-parameter-0-0>' against 'custom_vector'
+std::ostream& operator<<(std::ostream& a_ostream, const access_combined<A>& mda)
+              ^
+4 errors generated.
+make: *** [clang] Error 1
