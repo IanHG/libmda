@@ -25,15 +25,15 @@ int main()
 {
    test_suite suite;
    
-   suite.add_test<vector_construction_test<d_vector> >("test",2);
-   suite.add_test<vector_copy_construction_test<d_vector> >("test");
-   suite.add_test<vector_implicit_copy_construction_test<d_vector> >("test");
-   suite.add_test<vector_copy_assignment_test<d_vector> >("test");
+   suite.add_test<vector_construction_test<d_vector> >("vector_construction_test",2);
+   suite.add_test<vector_copy_construction_test<d_vector> >("vector_copy_construction_test");
+   suite.add_test<vector_implicit_copy_construction_test<d_vector> >("vector_implecit_copy_construction_test");
+   suite.add_test<vector_copy_assignment_test<d_vector> >("vector_copy_assignment_test");
    
-   suite.add_test<matrix_construction_test<d_matrix> >("test",2,3);
-   suite.add_test<matrix_copy_construction_test<d_matrix> >("test");
-   suite.add_test<matrix_implicit_copy_construction_test<d_matrix> >("test");
-   suite.add_test<matrix_copy_assignment_test<d_matrix> >("test");
+   suite.add_test<matrix_construction_test<d_matrix> >("matrix_construction_test",2,3);
+   suite.add_test<matrix_copy_construction_test<d_matrix> >("matrix_copy_construction_test");
+   suite.add_test<matrix_implicit_copy_construction_test<d_matrix> >("matrix_implicit_copy_contruction_test");
+   suite.add_test<matrix_copy_assignment_test<d_matrix> >("matrix_copy_assignment_test");
    
    suite.do_tests();
    return 0;

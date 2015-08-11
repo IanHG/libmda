@@ -82,7 +82,8 @@ public:
    /* ----- libmda interface ----- */
     // implementation of at(...) function
     template<typename... ints, 
-             iEnable_if<meta::check_type_and_size_<D,int,ints...>::value> = 0>
+             iEnable_if<meta::check_type_and_size_<D,int,ints...>::value> = 0
+            >
              //iEnable_if<util::detail::requesting_elem<D,int,ints...>::value> = 0>
              //util::Requesting_elem<D,int, ints...> = 0>
     T& at(const ints... i) 

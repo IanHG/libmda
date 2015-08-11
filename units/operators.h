@@ -11,6 +11,17 @@ namespace units
 namespace operators
 {
 
+/**********************************/
+/* quantity_ operator+= quantity_ */
+/**********************************/
+template<class U_A, class T>
+quantity_<U_A,T>& operator+=(quantity_<U_A,T>& a_lhs, const quantity_<U_A,T>& a_rhs)
+{ 
+   a_lhs.val() += a_rhs.val();
+   return a_lhs;
+}
+
+
 /*********************************/
 /* quantity_ operator+ quantity_ */
 /*********************************/

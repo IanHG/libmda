@@ -19,7 +19,7 @@ struct matrix_test_case: virtual public test_case
    {
       add_test<addition_square_mat_test<matrix_type> >("addition_square_mat_test");
       add_test<subtraction_square_mat_test<matrix_type> >("subtraction_square_mat_test");
-      add_test<multiplication_square_mat_test<matrix_type> >();
+      add_test<multiplication_square_mat_test<matrix_type> >("multiplication of square matrix");
       add_test<division_square_mat_test<matrix_type> >();
       add_test<plusequal_mat_test<matrix_type> >();
       add_test<cos_sin_mat_test<matrix_type> >();
@@ -45,7 +45,8 @@ struct vector_test_case: virtual public test_case
 
 template<class matrix_type, class vector_type>
 struct total_test_case: matrix_test_case<matrix_type>, vector_test_case<vector_type>
-{ };
+{ 
+};
 
 } // namespace expression
 } // namespace tests

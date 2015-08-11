@@ -36,7 +36,7 @@ struct index_list_catenation_test: public virtual unit_test
       
       meta::catenate<decltype(t1),decltype(t2)> t3;
       
-      UNIT_ASSERT((Is_same<decltype(t3),meta::index_list<1,2,3,4> >()),"not same types");
+      UNIT_ASSERT((Is_same<decltype(t3),meta::index_list<1,2,3,4> >()),"catenate failed");
    }
 };
 

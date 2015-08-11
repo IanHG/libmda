@@ -1,0 +1,34 @@
+export LIBMDA_COMPILER_SETTING="g++ -O3 -std=c++11" && cd ../../lib && make
+make[1]: Entering directory `/home/banan/programming/libmda/lib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/banan/programming/libmda/lib'
+g++ -O3 -fexpensive-optimizations -Drestrict= -std=c++0x -o main main.cpp  ../../lib/libmda.a -lblas
+In file included from main.cpp:5:0:
+../../storage/mda.h:60:16: error: declaration of ‘long unsigned int N’
+       template<size_t N>
+                ^
+../../storage/mda.h:33:10: error:  shadows template parm ‘long unsigned int N’
+ template<size_t N, class T, class Alloc = std::allocator<T> >
+          ^
+In file included from ../../storage/../imda/imda_interface.h:8:0,
+                 from ../../storage/mda.h:7,
+                 from main.cpp:5:
+../../storage/../imda/imda_ostream_output.h: In instantiation of ‘std::ostream& libmda::imda::operator<<(std::ostream&, const libmda::imda::access_combined<A>&) [with A = libmda::imda::access<true, libmda::imda::dimension<libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > > > >; typename std::enable_if<(typename std::remove_const<typename std::remove_reference< <template-parameter-1-1> >::type>::type:: order == 2), int>::type <anonymous> = 0; std::ostream = std::basic_ostream<char>]’:
+main.cpp:43:17:   required from here
+../../storage/../imda/imda_ostream_output.h:82:27: error: passing ‘const libmda::imda::access_combined<libmda::imda::access<true, libmda::imda::dimension<libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > > > > >’ as ‘this’ argument of ‘decltype (declval<B>().self().at(libmda::imda::access<true, A>::at::is ...)) libmda::imda::access<true, A>::at(Is ...) [with Is = {long unsigned int, long unsigned int}; B = libmda::imda::dimension<libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > > >; A = libmda::imda::dimension<libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > > >; decltype (declval<B>().self().at(libmda::imda::access<true, A>::at::is ...)) = double&]’ discards qualifiers [-fpermissive]
+          a_ostream << " " << mda.at(i,j);
+                           ^
+In file included from main.cpp:5:0:
+../../storage/mda.h: In instantiation of ‘size_t libmda::storage::mda<N, T, Alloc>::extent() const [with long unsigned int N = 1ul; long unsigned int N = 2ul; T = double; Alloc = std::allocator<double>; size_t = long unsigned int]’:
+../../storage/../imda/imda_basic.h:76:46:   required from ‘decltype (declval<B>().self().extent<N>()) libmda::imda::dimension<A>::extent() const [with int N = 1; B = libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > >; typename libmda::util::detail::enforce_if<((N < typename std::remove_const<typename std::remove_reference< <template-parameter-1-1> >::type>::type:: order) && (N >= 0)), int>::type <anonymous> = 0; A = libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > >; decltype (declval<B>().self().extent<N>()) = long unsigned int]’
+../../storage/../imda/imda_ostream_output.h:78:14:   required from ‘std::ostream& libmda::imda::operator<<(std::ostream&, const libmda::imda::access_combined<A>&) [with A = libmda::imda::access<true, libmda::imda::dimension<libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > > > >; typename std::enable_if<(typename std::remove_const<typename std::remove_reference< <template-parameter-1-1> >::type>::type:: order == 2), int>::type <anonymous> = 0; std::ostream = std::basic_ostream<char>]’
+main.cpp:43:17:   required from here
+../../storage/mda.h:63:39: error: cannot call member function ‘size_t libmda::storage::mda_slice<N>::extent(size_t) const [with long unsigned int N = 1ul; size_t = long unsigned int]’ without object
+          return mda_slice<N>::extent(N);
+                                       ^
+../../storage/mda.h: In instantiation of ‘size_t libmda::storage::mda<N, T, Alloc>::extent() const [with long unsigned int N = 0ul; long unsigned int N = 2ul; T = double; Alloc = std::allocator<double>; size_t = long unsigned int]’:
+../../storage/../imda/imda_basic.h:76:46:   required from ‘decltype (declval<B>().self().extent<N>()) libmda::imda::dimension<A>::extent() const [with int N = 0; B = libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > >; typename libmda::util::detail::enforce_if<((N < typename std::remove_const<typename std::remove_reference< <template-parameter-1-1> >::type>::type:: order) && (N >= 0)), int>::type <anonymous> = 0; A = libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > >; decltype (declval<B>().self().extent<N>()) = long unsigned int]’
+../../storage/../imda/imda_ostream_output.h:77:14:   required from ‘std::ostream& libmda::imda::operator<<(std::ostream&, const libmda::imda::access_combined<A>&) [with A = libmda::imda::access<true, libmda::imda::dimension<libmda::imda::selfish<libmda::storage::mda<2ul, double>, libmda::storage::mda_trait<libmda::storage::mda<2ul, double> > > > >; typename std::enable_if<(typename std::remove_const<typename std::remove_reference< <template-parameter-1-1> >::type>::type:: order == 2), int>::type <anonymous> = 0; std::ostream = std::basic_ostream<char>]’
+main.cpp:43:17:   required from here
+../../storage/mda.h:63:39: error: cannot call member function ‘size_t libmda::storage::mda_slice<N>::extent(size_t) const [with long unsigned int N = 0ul; size_t = long unsigned int]’ without object
+make: *** [gcc] Error 1

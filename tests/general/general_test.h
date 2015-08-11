@@ -2,8 +2,7 @@
 #define LIBMDA_TESTS_GENERAL_TEST_H
 
 #include<iostream>
-using std::cout;
-using std::endl;
+
 #include "../../interface.h"
 #include "../../testing/testing_interface.h"
 

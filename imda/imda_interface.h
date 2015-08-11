@@ -4,6 +4,7 @@
 #include"imda_basic.h"
 #include"imda_access.h"
 #include"imda_assign.h"
+#include"imda_assign_scalar.h"
 #include"imda_ostream_output.h"
 #include"../util/index_check.h"
 //#include"../util/enforce.h"
@@ -50,6 +51,48 @@ struct iextended:
    A, trait, ref_access
    > > > > > >
 {
+   template<class T
+          , class C = A
+          >
+   auto operator=(const T& t)
+      //-> decltype(std::declval<C>().self().assign(std::forward<T>(t)))
+      -> decltype(std::declval<C>().self().assign(t))
+   {
+      //return this->self().assign(std::forward<T>(t));
+      return this->self().assign(t);
+   }
+};
+
+//
+// mixin providing basic functionailities, assignment, AND scalar assignment
+//
+//
+template<class A
+       , class trait
+       , bool ref_access = Ref_access()
+       >
+struct iextended_scalar:
+   elem_assign_scalar    <
+   elem_assign_add_scalar<
+   elem_assign_sub_scalar<
+   elem_assign_mul_scalar<
+   elem_assign_div_scalar<
+   iextended<
+   A, trait, ref_access
+   > > > > > >
+{
+   using iextended<A, trait, ref_access>::operator=;
+
+   template<class T
+          , class C = A
+          >
+   auto operator=(const T& t)
+      //-> decltype(std::declval<C>().self().assign_scalar(std::forward<T>(t)))
+      -> decltype(std::declval<C>().self().assign_scalar(t))
+   {
+      //return this->self().assign_scalar(std::forward<T>(t));
+      return this->self().assign_scalar(t);
+   }
 };
 
 } // namespace imda

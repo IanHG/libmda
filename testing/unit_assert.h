@@ -2,7 +2,7 @@
 #define LIBMDA_TESTING_UNIT_ASSERT_H_INCLUDED
 
 #include<string>
-#include "float_is_equal.h"
+#include "../numeric/float_eq.h"
 
 namespace libmda
 {
@@ -65,7 +65,7 @@ template<class A, class E>
 inline void unit_assert_equal(std::string name, detail::unit_assert_data<A,E>&& data, detail::file_info&& finfo)
 {
    if(data._actual != data._expected)
-      throw test_failed(name,__FILE__,__LINE__,data._message,data._expected,data._actual);
+      throw test_failed(name,finfo._file.c_str(),finfo._line,data._message,data._expected,data._actual);
 }
 
 //
@@ -74,8 +74,8 @@ inline void unit_assert_equal(std::string name, detail::unit_assert_data<A,E>&& 
 template<class A, class E>
 inline void unit_assert_fequal(std::string name, detail::unit_assert_data<A,E>&& data, detail::file_info&& finfo)
 {
-   if(numeric::float_eq(data._actual,data._expected))
-      throw test_failed(name,__FILE__,__LINE__,data._message,data._expected,data._actual);
+   if(!numeric::float_eq(data._actual,data._expected))
+      throw test_failed(name,finfo._file.c_str(),finfo._line,data._message,data._expected,data._actual);
 }
 
 //

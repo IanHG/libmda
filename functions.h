@@ -42,10 +42,7 @@ Value_type<A> mda_norm(const IMDAAccessComb<A>& mda)
    return ::sqrt(mda_dot(mda,mda));
 }
 
-double mda_norm(const double arg)
-{
-   return ::sqrt(arg*arg);
-}
+double mda_norm(const double arg);
 
 //
 // zero

@@ -86,8 +86,9 @@ class sequence
       //   std::cout << " move ctor " << std::endl;
       //   for(register size_t i = 0; i<N; ++i) m_sequence[i] = a_sequence[i]; 
       //}
-      template<typename... U, 
-               iEnable_if<(sizeof...(U) == N) && All(Convertible<U,T>()...)> = 0 >
+      template<typename... U 
+             , iEnable_if<(sizeof...(U) == N) && All(Convertible<U,T>()...)> = 0 
+             >
       sequence(U&&... u): m_sequence{ static_cast<T>(std::forward<U>(u))... } 
       {
          //std::cout << " variadic ctor " << std::endl;
@@ -97,7 +98,7 @@ class sequence
       { 
          //For<0,N>([this,&a_sequence](size_t i){(*this)[i]=a_sequence[i];}); // this is slow...
          //std::cout << " copy ctor " << std::endl;
-         for(register size_t i = 0; i<N; ++i) 
+         for(size_t i = 0; i<N; ++i) 
             m_sequence[i] = a_sequence[i]; 
       }
       //~sequence() { }; // ian: commented out to allow for more compiler optimization..
@@ -111,7 +112,7 @@ class sequence
        ************************/
       sequence<N,T>& operator=(const sequence<N,T>& a_sequence)
       {
-         for(register size_t i = 0; i<N; ++i) 
+         for(size_t i = 0; i<N; ++i) 
             m_sequence[i] = a_sequence[i]; 
          return (*this);
       }
@@ -153,7 +154,7 @@ class sequence
       void output(std::ostream& a_ostream = std::cout) const 
       { 
          a_ostream << "sequence (" << m_sequence[0]; // output starting brace and first element without space
-         for(register size_t i = 1; i<N; ++i) 
+         for(size_t i = 1; i<N; ++i) 
             a_ostream << "," << m_sequence[i]; 
          a_ostream << ")"; // output closing brace
       }
@@ -165,7 +166,7 @@ class sequence
 template<size_t N, typename T>
 bool operator==(const sequence<N,T>& a_sequence1, const sequence<N,T>& a_sequence2)
 {
-   for(register size_t i=0; i<N; ++i)     // loop over dimensions
+   for(size_t i=0; i<N; ++i)     // loop over dimensions
       if(a_sequence1[i] != a_sequence2[i]) // check if elements are equal
          return false;                 // if some elements are not equal we return false
    return true;                        // if all elements are equal we return true

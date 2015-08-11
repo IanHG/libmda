@@ -35,7 +35,7 @@ struct multi_slice_index_impl<0>
 };
 
 template<class S, class... Is>
-S multi_slice_index(const S* l, const S* s, Is... is)
+inline S multi_slice_index(const S* l, const S* s, Is... is)
 {
    return multi_slice_index_impl<sizeof...(Is)-1>()(l,s,size_t(1),std::forward_as_tuple(is...));  
 };

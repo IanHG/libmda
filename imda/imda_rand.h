@@ -1,14 +1,13 @@
 #ifndef LIBMDA_IMDA_RAND_H_INCLUDED
 #define LIBMDA_IMDA_RAND_H_INCLUDED
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 // fix to use new types at some point
 #include "../IMDA.h"
 
 #include "imda_access.h"
+#include "../util/rand_seed.h"
 
 namespace libmda
 {
@@ -25,21 +24,11 @@ struct op_rand
    template<class V, class... Is>
    static void apply(V& v, Is... is)
    {
-      v.at(is...) = (Value_type<V>)rand() / RAND_MAX;
+      v.at(is...) = util::rand_float< Value_type<V> >();
       //v.at(is...) = 1.0;
    }
 };
 
-struct rand_seed
-{
-   rand_seed()
-   {
-      srand(time(NULL));
-      //srand(400);
-   }
-};
-
-void seed();
 
 } /* namespace detail */
 
@@ -53,7 +42,7 @@ void imda_rand(IMDAAccessComb<A>& mda)
 {
    // seed rand
    // NB MAKE OWN RNG AT SOME POINT !
-   detail::seed();
+   util::seed();
    util::for_loop_expand<detail::op_rand>::apply(mda);
 }
 
@@ -62,7 +51,7 @@ void imda_rand(access_combined<A>& mda)
 {
    // seed rand
    // NB MAKE OWN RNG AT SOME POINT !
-   detail::seed();
+   util::seed();
    util::for_loop_expand<detail::op_rand>::apply(mda);
 }
 

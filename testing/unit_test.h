@@ -4,7 +4,6 @@
 #include<string>
 
 #include"test_failed.h"
-#include"float_is_equal.h"
 #include"unit_assert.h"
 
 namespace libmda

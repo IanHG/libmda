@@ -1,5 +1,8 @@
 #include<typeinfo>
 #include<iostream>
+
+#include "units_test.h"
+
 #include "../../units/interface.h"
 #include "../../units/au_unit.h"
 using namespace libmda::units::si;
@@ -38,6 +41,11 @@ int main()
    //quantity<m<1>,s<-2> > acc = (velocity2-velocity1)/delta_s2;
    //
    //std::cout << acc << std::endl;
+   //
+
+   libmda::testing::test_suite suite;
+   suite.add_test<libmda::units_test::addition_assignment_test<double> >();
+   suite.do_tests();
    
    return 0;
 }

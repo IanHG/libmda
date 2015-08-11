@@ -16,25 +16,63 @@ class test_suite: public unit_test_holder
 {
    private:
       typedef unsigned int count_type;
+      std::string m_suite_name;
       clock_timer m_timer;
       count_type m_assertions;
       count_type m_failed;
       count_type m_num_test;
+      std::vector<std::string> m_failed_tests;
       
       void end_output(std::ostream& a_ostream)
       {
-         a_ostream << "Finished tests in " << m_timer.tot_clocks_per_sec() << "s, "
+         // output header
+         a_ostream << "======================================================================\n"
+                   << "   NAME: " << m_suite_name << "\n"
+                   << "----------------------------------------------------------------------\n"
+                   << "   TESTS TO BE RUN: " << unit_test_holder::test_size() << "\n";
+
+         // output tests that should be run
+         for(int i = 0; i < unit_test_holder::test_size(); ++i)
+            a_ostream << "      " << this->get_test(i)->name() << "\n";
+         
+         // output some stats
+         a_ostream << "----------------------------------------------------------------------\n"
+                   << "   STATISTICS:\n"
+                   << "      Finished tests in " << m_timer.tot_clocks_per_sec() << "s, "
                    << m_num_test/m_timer.tot_clocks_per_sec() << " tests/s, "
-                   << m_assertions/m_timer.tot_clocks_per_sec() << " assertions/s \n"; 
-         a_ostream << m_num_test << " tests, "
+                   << m_assertions/m_timer.tot_clocks_per_sec() << " assertions/s \n"
+                   << "      " << m_num_test << " tests, "
                    << m_assertions << " assertions, "
-                   << m_failed << " failed \n";
+                   << m_failed << " failed\n";
+         
+         // output failed tests
+         if(m_failed_tests.size())
+         {
+            a_ostream << "----------------------------------------------------------------------\n"
+                      << "   FAILED TESTS:\n";
+            for(int i = 0; i < m_failed_tests.size(); ++i)
+            {
+               a_ostream << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+                         << m_failed_tests[i] << "\n";
+            }
+         }
+         
+         // output bottom
+         a_ostream << "----------------------------------------------------------------------\n"
+                   << (m_failed ? "   UNIT TEST FAILED!\n" : "   SUCCESS\n")
+                   << "======================================================================\n" << std::flush;
       }
    public:
-      test_suite(): unit_test_holder(), m_timer(), 
-                    m_assertions(0), m_failed(0), m_num_test(0)
+      test_suite(std::string a_suite_name = "default_suite")
+         : 
+            unit_test_holder()
+         ,  m_suite_name(a_suite_name)
+         ,  m_timer()
+         ,  m_assertions(0)
+         ,  m_failed(0)
+         ,  m_num_test(0)
       { }
-      ~test_suite() { }
+      ~test_suite() = default;
 
       void do_tests(std::ostream& a_ostream = std::cout)
       { 
@@ -48,9 +86,15 @@ class test_suite: public unit_test_holder
             }
             catch(test_failed &e)
             {
-               a_ostream << " FAILED TEST: " << get_test(i)->name() << "\n"
-                         << e.what() << std::endl;
+               //a_ostream << " FAILED TEST: " << get_test(i)->name() << "\n"
+               //          << e.what() << std::endl;
+               m_failed_tests.emplace_back(e.what());
                ++m_failed;
+            }
+            catch(...)
+            {  
+               a_ostream << " TEST SUITE CAUGHT SOMETHING " << std::endl;  
+               throw;
             }
             m_assertions+=get_test(i)->num_assertions();
             m_num_test+=get_test(i)->num_test();

@@ -16,11 +16,13 @@ struct mixin_if;
 
 template<class A>
 struct mixin_if<true, A >: A
-{ };
+{ 
+};
 
 template<class A>
 struct mixin_if<false, A >: A::base_type
-{ };
+{ 
+};
 
 } // namespace util
 } // namespace libmda

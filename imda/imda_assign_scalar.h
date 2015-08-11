@@ -45,10 +45,11 @@ struct elem_assign_scalar: A
    template<class B
           , class C = A
           >
-   auto operator=(const B& v)
+   //auto operator=(B&& v)
+   auto assign_scalar(B&& v)
       -> decltype(std::declval<C>().self())
    {
-      util::for_loop_expand<op_equal_scal>::apply((*this),v);
+      util::for_loop_expand<op_equal_scal>::apply((*this),std::forward<B>(v));
       //util::for_each_elem(equal_functor(),(*this),v);
       return this->self();
    }

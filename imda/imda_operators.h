@@ -1,7 +1,7 @@
 #ifndef LIBMDA_IMDA_OPERATORS_H_INCLUDED
 #define LIBMDA_IMDA_OPERATORS_H_INCLUDED
 
-#include "imda_access.h"
+//#include "imda_access.h"
 #include "../util/for_loop_expand.h"
 
 namespace libmda
@@ -79,8 +79,6 @@ LIBMDA_CREATE_SCALEEQUALFUNCTOR(scale_sub_equal_functor,-=)
 LIBMDA_CREATE_SCALEEQUALFUNCTOR(scale_mul_equal_functor,*=)
 LIBMDA_CREATE_SCALEEQUALFUNCTOR(scale_div_equal_functor,/=)
 #undef LIBMDA_CREATE_SCALEEQUALFUNCTOR
-
-
 
 } // namespace imda
 } // namespace libmda

@@ -2,9 +2,13 @@
 #define LIBMDA_METAPROG_STD_WRAPPER_H
 
 #include <type_traits>
+#include <cstdlib>
 
 namespace libmda
 {
+
+using std::size_t;
+
 namespace meta
 {
 namespace stdwrap

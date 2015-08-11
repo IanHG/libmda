@@ -3,6 +3,8 @@
 
 #include<assert.h>
 
+#include "stacktrace.h"
+
 namespace libmda
 {
 namespace util
@@ -33,6 +35,26 @@ struct index_check_return_addr
       {
          std::cout << " index1>index2 \n"
                    << " presumeably called from here: " << __builtin_return_address(1) << std::endl;
+         exit(40);
+      }
+   }
+};
+
+struct index_check_stack_trace
+{
+   template<typename T, typename U>
+   static void apply(const T index1, const U index2)
+   { 
+      if(!(index1>=0))
+      {
+         std::cout << " index1<=0 \n";
+         print_stacktrace(std::cout);
+         exit(40);
+      }
+      if(!(index1<index2))
+      {
+         std::cout << " index1>index2 \n";
+         print_stacktrace(std::cout);
          exit(40);
       }
    }

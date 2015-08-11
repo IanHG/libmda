@@ -1,6 +1,8 @@
 #ifndef LIBMDA_MULTIPLE_RETURN_H_INCLUDED
 #define LIBMDA_MULTIPLE_RETURN_H_INCLUDED
 
+#include <utility>
+
 namespace libmda
 {
 namespace util
@@ -30,11 +32,11 @@ struct ignore_assignment
 {
    template<class T>
    ignore_assignment& operator=(T&&) { return *this; }
-} _;
+};
 
 } // namespace detail
 
-using detail::_;
+extern detail::ignore_assignment _;
 using detail::return_type;
 using detail::ret;
 
