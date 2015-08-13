@@ -58,10 +58,11 @@ class binary_expression:
    public expression<binary_expression<L,R,Op>, traits<binary_expression<L,R,Op> > >
 {
    public:
-      using traits_type = traits<binary_expression<L,R,Op> >;
-      using value_type  = Value_type<traits_type>;
+      using oper_type = Op<L,R>;
+      using traits_type = traits<binary_expression<L,R,Op> >;  // remove traits type
+      using value_type  = Value_type<oper_type>;
       using size_type   = Size_type<traits_type>;
-      static const int order = Order<Op<L,R> >();
+      static const int order = Order<oper_type>();
       
       //using base_type = expression<binary_expression<L,R,Op>, traits<binary_expression<L,R,Op> > >;
       using This = binary_expression<L,R,Op>;
@@ -131,10 +132,11 @@ class unary_expression:
    public expression<unary_expression<A,Op>, traits<unary_expression<A,Op> > >
 {
    public:
+      using oper_type = Op<A>;
       using traits_type = traits<unary_expression<A,Op> >;
-      using value_type  = Value_type<traits_type>;
+      using value_type  = Value_type<oper_type>;
       using size_type   = Size_type<traits_type>;
-      static const int order = Order<Op<A> >();
+      static const int order = Order<oper_type>();
       
       using This = unary_expression<A,Op>;
 
@@ -224,9 +226,10 @@ struct NAME \
    static_assert(L::order == R::order, "ORDER NOT THE SAME!"); \
    \
    static const size_t order = L::order; \
+   using value_type = decltype(std::declval<typename L::value_type>()*std::declval<typename R::value_type>()); \
    \
    template<typename... ints> \
-   static Value_type<L> apply(const L& a_lhs, const R& a_rhs, const ints... i) \
+   static value_type apply(const L& a_lhs, const R& a_rhs, const ints... i) \
    { \
       return a_lhs.at(i...) OP a_rhs.at(i...); \
    } \
@@ -234,7 +237,7 @@ struct NAME \
    template<class U = L \
           , meta::iEnable_if<util::has_vec_at<U>::value && util::has_vec_at<R>::value> = 0 \
           > \
-   static Value_type<L> \
+   static value_type \
    apply_vec(const L& a_lhs, const R& a_rhs, const Size_type<L> i) \
    { \
       return a_lhs.vec_at(i) OP a_rhs.vec_at(i); \
@@ -266,9 +269,10 @@ template<class A> \
 struct NAME \
 { \
    static const int order = A::order; \
+   using value_type = decltype(OP std::declval<Value_type<A> >()); \
    \
    template<typename... ints> \
-   static Value_type<A> apply(const A& a_lhs, const ints... i) \
+   static value_type apply(const A& a_lhs, const ints... i) \
    { \
       return OP a_lhs.at(i...); \
    } \
@@ -297,9 +301,10 @@ template<class A> \
 struct NAME \
 { \
    static const int order = A::order; \
+   using value_type = decltype(FUNC(std::declval<Value_type<A> >())); \
    \
    template<typename... ints> \
-   static Value_type<A> apply(const A& a_lhs, const ints... i) \
+   static value_type apply(const A& a_lhs, const ints... i) \
    { return FUNC(a_lhs.at(i...)); } \
    \
    template<int N> \
@@ -325,9 +330,10 @@ template<class L> \
 struct NAME<L, Value_type<L> > \
 { \
    static const int order = L::order; \
+   using value_type = Value_type<L>; \
    \
    template<typename... ints> \
-   static Value_type<L> apply(const L& a_lhs, const Value_type<L>& a_rhs, ints... i) \
+   static value_type apply(const L& a_lhs, const Value_type<L>& a_rhs, ints... i) \
    { return a_lhs.at(i...) OP a_rhs; } \
    \
    template<int N> \
@@ -342,9 +348,10 @@ template<class R> \
 struct NAME<Value_type<R>, R> \
 { \
    static const int order = R::order; \
+   using value_type = Value_type<R>; \
    \
    template<typename... ints> \
-   static Value_type<R> apply(const Value_type<R>& a_lhs, const R& a_rhs, ints... i) \
+   static value_type apply(const Value_type<R>& a_lhs, const R& a_rhs, ints... i) \
    { return a_lhs OP a_rhs.at(i...); } \
    \
    template<int N> \

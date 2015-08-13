@@ -433,6 +433,27 @@ struct vec_char_expr_expr_test: public virtual unit_test
    }
 };
 
+template<class vector_type
+       , class complex_vector_type
+       , util::Require_order<vector_type,1> = 0
+       , util::Require_order<complex_vector_type,1> = 0
+       >
+struct vec_complex_float_test: public virtual unit_test
+{
+   void do_test() throw(test_failed)
+   {
+       complex_vector_type vec0(2); vector_type vec1(2); complex_vector_type vec2(2);
+
+       vec1(0) =  2.1; vec1(1) = 3.3;
+       vec2(0) = {-4.4, 3.1}; vec2(1) = {6.1,-2.0};
+   
+       vec0 = 1.1*vec1 + vec2;
+       
+       UNIT_ASSERT(numeric::float_eq(vec0(0),{-2.09, 3.10}), " vec0(0) is wrong ");
+       UNIT_ASSERT(numeric::float_eq(vec0(1),{ 9.73,-2.00}), " vec0(1) is wrong ");
+   }
+};
+
 } // namespace char_expression
 } // namespace tests
 } // namespace libmda

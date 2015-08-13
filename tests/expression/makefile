@@ -27,7 +27,7 @@ intel_debug: $(OBJ)
 
 clang: $(OBJ)
 	export LIBMDA_COMPILER_SETTING="clang++ $(CXXOPTIMFLAGS) -std=c++11" && cd ../../lib && make
-	clang++ $(CXXOPTIMFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
+	clang++-3.5 $(CXXOPTIMFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
 	./main
 
 clang_debug: $(OBJ)

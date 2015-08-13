@@ -1,6 +1,7 @@
 #include<iostream>
 using std::cout;
 using std::endl;
+#include<complex>
 #include "../../testing/test_suite.h"
 using libmda::testing::test_suite;
 #include "expression_test.h"
@@ -25,6 +26,8 @@ using libmda::util::has_assignable_vec_at;
    which can throw a test_failed exception */
 typedef SDArray2D<double,std::allocator<double>,index_test_check> d_matrix;
 typedef SDArray1D<double,std::allocator<double>,index_test_check> d_vector;
+
+typedef SDArray1D<std::complex<double> ,std::allocator<std::complex<double> >,index_test_check> c_vector;
 
 typedef MDA<double,2> mda_matrix;
 
@@ -54,7 +57,7 @@ int main()
    //suite.add_test<matrix_test_case<mda_matrix> >();
    
    suite.add_test<total_test_case<d_matrix,d_vector> >();
-   //suite.add_test<vec_char_expr_expr_test<d_vector> >();
+   suite.add_test<vec_complex_float_test<d_vector, c_vector> >();
    
    //d_matrix mat(2,2);
    //matrix_assign<has_assignable_vec_at<d_matrix>::value>(mat);
