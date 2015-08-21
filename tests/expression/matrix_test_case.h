@@ -19,7 +19,6 @@ struct matrix_test_case_basic: virtual public test_case
       add_test<addition_square_mat_test<matrix_type> >("addition_square_mat_test");
       add_test<subtraction_square_mat_test<matrix_type> >("subtraction_square_mat_test");
       add_test<plusequal_mat_test<matrix_type> >("plusequal_mat_test");
-      add_test<cos_sin_mat_test<matrix_type> >("cos_sin_mat_test");
       add_test<mat_equal_scalar_test<matrix_type> >("mat_equal_scalar_test");
       add_test<mat_minusequal_scalar_test<matrix_type> >("mat_minusequal_scalar_test");
       add_test<scalar_mat_test<matrix_type> >("scalar_mat_test");
@@ -36,6 +35,8 @@ struct matrix_test_case_advanced: virtual public test_case
    {
       add_test<multiplication_square_mat_test<matrix_type> >("multiplication_square_mat_test");
       add_test<division_square_mat_test<matrix_type> >("division_square_mat_test");
+      
+      add_test<cos_sin_mat_test<matrix_type> >("cos_sin_mat_test"); // uses multiplication
    }
 };
 
