@@ -22,6 +22,12 @@ std::string typeof(const T& t)
    return demangle(typeid(t).name());
 }
 
+template<class T>
+std::string typeof()
+{
+   return demangle(typeid(T).name());
+}
+
 } /* namespace util */
 } /* namespace libmda */
 
