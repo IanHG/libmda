@@ -1,5 +1,5 @@
-#ifndef LIBMDA_TESTS_NUMERIC_H_INCLUDED
-#define LIBMDA_TESTS_NUMERIC_H_INCLUDED
+#ifndef LIBMDA_TESTS_UTIL_H_INCLUDED
+#define LIBMDA_TESTS_UTIL_H_INCLUDED
 
 // std headers
 #include<typeinfo> // for typeid
@@ -15,7 +15,9 @@
 
 namespace libmda
 {
-namespace util_test
+namespace tests
+{
+namespace util
 {
 
 template<class T = double>
@@ -26,13 +28,13 @@ struct pow_test: public virtual unit_test
    {
       T a = 2.0;
 
-      UNIT_ASSERT_FEQUAL_PREC(util::pow<3>(a),T(8.0),     4,"Pow failed for type: "+util::typeof(a));
-      UNIT_ASSERT_FEQUAL_PREC(util::pow<3>(T(2.0)),T(8.0),4,"Pow failed for type: "+util::typeof(a));
+      UNIT_ASSERT_FEQUAL_PREC(libmda::util::pow<3>(a),T(8.0),     4,"Pow failed for type: "+libmda::util::typeof(a));
+      UNIT_ASSERT_FEQUAL_PREC(libmda::util::pow<3>(T(2.0)),T(8.0),4,"Pow failed for type: "+libmda::util::typeof(a));
    }
 };
 
-
-} /* namespace util_test */
+} /* namespace util */
+} /* namespace tests */
 } /* namespace libmda */
 
-#endif /* LIBMDA_TESTS_NUMERIC_H_INCLUDED */
+#endif /* LIBMDA_TESTS_UTIL_H_INCLUDED */
