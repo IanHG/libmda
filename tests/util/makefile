@@ -1,4 +1,4 @@
-OBJ=main.cpp
+OBJ=main_new.cpp
 FUNC=
 CXX=g++
 CXXOPTIMFLAGS=-O3
@@ -13,7 +13,7 @@ gcc: $(OBJ) $(FUNC)
 gcc_debug: $(OBJ) $(FUNC)
 	export LIBMDA_COMPILER_SETTING="$(CXX) $(CXXDEBUGFLAGS) -std=c++11" && cd ../../lib && make
 	$(CXX) $(CXXDEBUGFLAGS) -std=c++0x -o main $(OBJ) $(FUNC) $(LIB)
-	valgrind --tool=memcheck --leak-check=yes ./main
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./main
 
 intel: $(OBJ)
 	export LIBMDA_COMPILER_SETTING="icpc -O3 -ip -ipo -fast -std=c++11" && cd ../../lib && make
@@ -27,13 +27,13 @@ intel_debug: $(OBJ)
 
 clang: $(OBJ)
 	export LIBMDA_COMPILER_SETTING="clang++ $(CXXOPTIMFLAGS) -std=c++11" && cd ../../lib && make
-	clang++ $(CXXOPTIMFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
+	clang++-3.5 $(CXXOPTIMFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
 	./main
 
 clang_debug: $(OBJ)
 	export LIBMDA_COMPILER_SETTING="clang++ $(CXXDEBUGFLAGS) -std=c++11" && cd ../../lib && make
-	clang++ $(CXXDEBUGFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
-	valgrind --tool=memcheck --leak-check=yes ./main
+	clang++-3.5 $(CXXDEBUGFLAGS) -std=c++0x -o main $(OBJ) $(LIB)
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all ./main
 
 clean:
 	rm -f *core main
