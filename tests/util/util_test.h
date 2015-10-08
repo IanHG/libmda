@@ -20,6 +20,9 @@ namespace tests
 namespace util
 {
 
+/**
+ *
+ **/
 template<class T = double>
 struct pow_test: public virtual unit_test
 {
