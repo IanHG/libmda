@@ -39,7 +39,6 @@ class expected
          : m_value(t)
          , m_has_value(true)
       {
-         std::cout << " copy value ctor " << m_value << std::endl;
       }
 
       /**
@@ -49,7 +48,6 @@ class expected
          : m_value(std::move(t))
          , m_has_value(true)
       {
-         std::cout << " move value ctor " << m_value << std::endl;
       }
 
       /**

@@ -12,6 +12,7 @@
 #include "../../testing/testing_interface.h"
 #include "../../util/type_info.h"
 #include "../../util/pow.h"
+#include "../../util/copy_unique_ptr.h"
 
 namespace libmda
 {
@@ -35,6 +36,24 @@ struct pow_test: public virtual unit_test
       UNIT_ASSERT_FEQUAL_PREC(libmda::util::pow<3>(T(2.0)),T(8.0),4,"Pow failed for type: "+libmda::util::typeof(a));
    }
 };
+
+/**
+ *
+ **/
+template<class T = double>
+struct copy_unique_ptr_test: public virtual unit_test
+{
+   static_assert(std::is_floating_point<T>::value, "only works with floating point types");
+   void do_test() throw(test_failed)
+   {
+      std::unique_ptr<T> ptr1(new T(3.14159));
+      auto ptr2 = libmda::util::copy_unique_ptr(ptr1);
+
+      UNIT_ASSERT_NOT_EQUAL(ptr1.get(), ptr2.get(), "same ptr");
+      UNIT_ASSERT_EQUAL(*ptr1, *ptr2, "not same value :C");
+   }
+};
+
 
 } /* namespace util */
 } /* namespace tests */
