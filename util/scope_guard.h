@@ -93,6 +93,16 @@ scope_guard<F> make_scope_guard(F&& f)
    return scope_guard<F>(std::forward<F>(f));
 }
 
+// define some MACROs used later
+#define CONCAT_IMPL( x, y ) x##y
+#define MACRO_CONCAT( x, y ) CONCAT_IMPL( x, y )
+
+/**
+ * @def on_exit_do
+ *    make function call on scope exit.
+ **/
+#define scope_exit_do(a) auto MACRO_CONCAT(LIBMDA_SCOPE_GUARD_, __COUNTER__) = libmda::util::make_scope_guard(a)
+
 } /* namespace util */
 } /* namespace libmda */
 

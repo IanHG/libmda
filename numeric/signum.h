@@ -5,7 +5,6 @@
 // Disclaimer: taken from Stack Overflow http://stackoverflow.com/a/4609795/2964487
 //             all credit goes to user79758
 //
-//
 
 #include <type_traits>
 

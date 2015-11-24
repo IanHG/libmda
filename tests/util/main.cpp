@@ -55,6 +55,7 @@ int main()
    ///////////////////////////////////////////////////////////////////////
    suite.add_test<libmda::tests::util::scope_guard_run_test>("scope guard run");
    suite.add_test<libmda::tests::util::scope_guard_dismiss_test>("scope guard dismiss");
+   suite.add_test<libmda::tests::util::scope_guard_macro_test>("scope guard macro");
    
    ///////////////////////////////////////////////////////////////////////
    // expected test
