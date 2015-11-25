@@ -69,6 +69,16 @@ inline void unit_assert_equal(std::string name, detail::unit_assert_data<A,E>&& 
 }
 
 //
+// wrapper function for asserting not equal
+//
+template<class A, class E>
+inline void unit_assert_not_equal(std::string name, detail::unit_assert_data<A,E>&& data, detail::file_info&& finfo)
+{
+   if(data._actual == data._expected)
+      throw test_failed(name,finfo._file.c_str(),finfo._line,data._message,data._expected,data._actual);
+}
+
+//
 // wrapper function for asserting float equal
 //
 template<class A, class E>
@@ -110,6 +120,13 @@ inline void unit_assert_fequal(std::string name, detail::unit_assert_data<A,E>&&
 #define UNIT_ASSERT_EQUAL_OLD(a,b,c) \
    unit_test::incr_num_assertions(); \
    if(!((b)==(a))) throw test_failed(this->name(),__FILE__,__LINE__,(c),(b),(a))
+
+//
+// do assertion and increase assertion counter
+//
+#define UNIT_ASSERT_NOT_EQUAL(a,b,c) \
+   unit_test::incr_num_assertions(); \
+   libmda::testing::unit_assert_not_equal(this->name(),libmda::testing::make_unit_assert_data((a),(b),(c)),libmda::testing::make_file_info(__FILE__,__LINE__));
 
 //
 // do assertion and increase assertion counter
