@@ -132,6 +132,7 @@ struct float_numeq_zero_test: public virtual unit_test
    void do_test() throw(test_failed)
    {
       T a = std::numeric_limits<T>::epsilon();
+      UNIT_ASSERT( numeric::float_numeq_zero(a,1.0,2),"numeric zero test failed for type: "+util::typeof(a));
       UNIT_ASSERT( numeric::float_numeq_zero(a,1.0,1),"numeric zero test failed for type: "+util::typeof(a));
       UNIT_ASSERT(!numeric::float_numeq_zero(a,1.0,0),"numeric zero test failed for type: "+util::typeof(a));
    

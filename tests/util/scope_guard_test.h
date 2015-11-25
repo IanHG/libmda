@@ -59,7 +59,7 @@ struct scope_guard_macro_test: public virtual unit_test
    {
       int i = 0;
       {
-         scope_exit_do([&i](){ i = 2; });
+         scope_on_exit{ i = 2; };
       }
       UNIT_ASSERT_EQUAL(i, 2, " libmda::util::scope_guard run failed ");
    }

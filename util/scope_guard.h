@@ -1,6 +1,11 @@
 #ifndef LIBMDA_UTIL_SCOPE_GUARD_H_INCLUDED
 #define LIBMDA_UTIL_SCOPE_GUARD_H_INCLUDED
 
+/**
+* Disclaimer: More or less based on Andrei Alexandrescus ScopeGuard
+*             https://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Andrei-Alexandrescu-Systematic-Error-Handling-in-C
+**/
+
 namespace libmda
 {
 namespace util
@@ -97,11 +102,34 @@ scope_guard<F> make_scope_guard(F&& f)
 #define CONCAT_IMPL( x, y ) x##y
 #define MACRO_CONCAT( x, y ) CONCAT_IMPL( x, y )
 
+#ifdef __COUNTER__
+#define ANONYMOUS_VARIABLE(str) \
+   MACRO_CONCAT(str, __COUNTER__)
+#else /* __COUNTER__ */
+#define ANONYMOUS_VARIABLE(str) \
+   MACRO_CONCAT(str, __LINE__)
+#endif /* __COUNTER__ */
+
+namespace detail
+{
+
+struct scope_on_exit_
+{
+};
+
+template<class F>
+scope_guard<F> operator+(const scope_on_exit_&, F&& f)
+{
+   return scope_guard<F>(std::forward<F>(f));
+}
+
+} /* namespace detail */
+
 /**
  * @def on_exit_do
  *    make function call on scope exit.
  **/
-#define scope_exit_do(a) auto MACRO_CONCAT(LIBMDA_SCOPE_GUARD_, __COUNTER__) = libmda::util::make_scope_guard(a)
+#define scope_on_exit auto ANONYMOUS_VARIABLE(LIBMDA_SCOPE_GUARD) = ::libmda::util::detail::scope_on_exit_() + [&]()
 
 } /* namespace util */
 } /* namespace libmda */
