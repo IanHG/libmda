@@ -94,6 +94,8 @@ class any_type_explicit
 class any_type
 {
    public:
+      using type_index = std::type_index;
+
       /**
        *
        **/
@@ -188,7 +190,7 @@ class any_type
              >
       any_type& operator=(T&& t)
       {
-         if(m_type == std::type_index(typeid(T)))
+         if(m_type == type_index(typeid(T)))
          {
             static_cast<detail::any_type_explicit<T_decayed>*>(m_data)->get() = std::forward<T>(t);
          }
@@ -197,7 +199,7 @@ class any_type
             if(m_data)
                delete m_data;
             m_data = new detail::any_type_explicit<T_decayed>(std::forward<T>(t));
-            m_type = std::type_index(typeid(T_decayed));
+            m_type = type_index(typeid(T_decayed));
          }
       }
 
@@ -225,7 +227,7 @@ class any_type
       /**
        *
        **/
-      const std::type_index& type() const
+      const type_index& type() const
       {
          return m_type;
       }
@@ -245,7 +247,7 @@ class any_type
       template<class T>
       void assert_type_index() const
       {
-         if(std::type_index(typeid(T)) != m_type)
+         if(type_index(typeid(T)) != m_type)
             throw std::runtime_error("bad cast: trying get type '" + std::string(typeid(T).name()) + "' from 'any_type<" + m_type.name() + ">'");
       }
       
@@ -256,8 +258,36 @@ class any_type
       /**
        *
        **/
-      std::type_index m_type;
+      type_index m_type;
 };
+
+// relational operators
+inline bool operator<(const any_type& a1, const any_type& a2)
+{
+   return a1.type() < a2.type();
+}
+
+// output operator
+inline std::ostream& operator<<(std::ostream& os, const any_type& a)
+{
+   if(a.type() == any_type::type_index(typeid(double)))
+   {
+      os << " any_type: type = double, value = " << a.get<double>();
+   }
+   else if(a.type() == any_type::type_index(typeid(int)))
+   {
+      os << " any_type: type = int, value = " << a.get<int>();
+   }
+   else if(a.type() == any_type::type_index(typeid(std::string)))
+   {
+      os << " any_type: type = std::string, value = " << a.get<std::string>();
+   }
+   else
+   {
+      os << " any_type: operator<< not implemented for type = " << a.type_name();
+   }
+   return os;
+}
 
 } /* namespace util */
 } /* namespace libmda */
