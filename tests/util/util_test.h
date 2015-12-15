@@ -28,7 +28,7 @@ template<class T = double>
 struct pow_test: public virtual unit_test
 {
    static_assert(std::is_floating_point<T>::value, "only works with floating point types");
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       T a = 2.0;
 
@@ -44,7 +44,7 @@ template<class T = double>
 struct copy_unique_ptr_test: public virtual unit_test
 {
    static_assert(std::is_floating_point<T>::value, "only works with floating point types");
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       std::unique_ptr<T> ptr1(new T(3.14159));
       auto ptr2 = libmda::util::copy_unique_ptr(ptr1);

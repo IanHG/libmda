@@ -20,7 +20,7 @@ template<class matrix_type
        >
 struct addition_square_mat_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -50,7 +50,7 @@ template<class matrix_type
        >
 struct subtraction_square_mat_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -80,7 +80,7 @@ template<class matrix_type
        >
 struct multiplication_square_mat_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -110,7 +110,7 @@ template<class matrix_type
        >
 struct division_square_mat_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -140,7 +140,7 @@ template<class matrix_type
        >
 struct plusequal_mat_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
        matrix_type mat1(2,3);
@@ -175,7 +175,7 @@ template<class matrix_type
        >
 struct cos_sin_mat_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
        matrix_type mat1(2,3);
@@ -203,7 +203,7 @@ template<class matrix_type
        >
 struct mat_equal_scalar_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
 
@@ -224,7 +224,7 @@ template<class matrix_type
        >
 struct mat_minusequal_scalar_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
 
@@ -252,7 +252,7 @@ template<class matrix_type
        >
 struct scalar_mat_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
        matrix_type mat1(2,3);
@@ -281,7 +281,7 @@ template<class matrix_type
        >
 struct mat_scalar_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
        matrix_type mat1(2,3);
@@ -310,7 +310,7 @@ template<class matrix_type
        >
 struct scalar_mat_expr_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -340,7 +340,7 @@ template<class matrix_type
        >
 struct mat_unary_minus_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -362,7 +362,7 @@ template<class vector_type
        >
 struct vec_unary_minus_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       vector_type vec0(2);
       vector_type vec1(2);
@@ -381,7 +381,7 @@ template<class vector_type
        >
 struct vec_scalar_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec0(2); vector_type vec1(2);
 
@@ -399,7 +399,7 @@ template<class vector_type
        >
 struct vec_scalar_test2: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec0(2); vector_type vec1(2); vector_type vec2(2);
 
@@ -418,7 +418,7 @@ template<class vector_type
        >
 struct vec_char_expr_expr_test: public virtual unit_test
 {  
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       vector_type vec1(2), vec2(2), vec3(2);
 
@@ -440,7 +440,7 @@ template<class vector_type
        >
 struct vec_complex_float_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        complex_vector_type vec0(2); vector_type vec1(2); complex_vector_type vec2(2);
 

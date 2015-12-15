@@ -19,7 +19,7 @@ namespace char_expression
 template<class matrix_type>
 struct addition_test_square_mat: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -50,7 +50,7 @@ struct addition_test_square_mat: public virtual unit_test
 template<class matrix_type>
 struct plusequal_test_square_mat: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -80,7 +80,7 @@ struct plusequal_test_square_mat: public virtual unit_test
 template<class matrix_type>
 struct minusequal_test_square_mat_trans: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -110,7 +110,7 @@ struct minusequal_test_square_mat_trans: public virtual unit_test
 template<class matrix_type>
 struct subtraction_test_square_mat: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -141,7 +141,7 @@ struct subtraction_test_square_mat: public virtual unit_test
 template<class matrix_type>
 struct addition_test_square_mat_trans: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -172,7 +172,7 @@ struct addition_test_square_mat_trans: public virtual unit_test
 template<class matrix_type>
 struct subtraction_test_square_mat_trans: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -203,7 +203,7 @@ struct subtraction_test_square_mat_trans: public virtual unit_test
 template<class matrix_type>
 struct addition_test_mat: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
        matrix_type mat1(2,3);
@@ -240,7 +240,7 @@ struct addition_test_mat: public virtual unit_test
 template<class matrix_type>
 struct addition_test_mat_trans: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(3,2);
        matrix_type mat1(2,3);
@@ -277,7 +277,7 @@ struct addition_test_mat_trans: public virtual unit_test
 template<class matrix_type>
 struct addition_test_mat_trans_2: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(3,2);
        matrix_type mat1(2,3);

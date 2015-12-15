@@ -15,7 +15,7 @@ namespace meta_test
 //
 struct tuple_empty_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::tuple<double,int> t1;
       meta::empty<decltype(t1)> t2;
@@ -29,7 +29,7 @@ struct tuple_empty_test: public virtual unit_test
 //
 struct tuple_catenation_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::tuple<double,int> t1;
       meta::tuple<double,int> t2;
@@ -45,7 +45,7 @@ struct tuple_catenation_test: public virtual unit_test
 //
 struct tuple_at_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::tuple<double,int> t1;
       
@@ -59,7 +59,7 @@ struct tuple_at_test: public virtual unit_test
 //
 struct tuple_size_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::tuple<double,int,int> t1;
       
@@ -73,7 +73,7 @@ struct tuple_size_test: public virtual unit_test
 //
 struct tuple_find_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::tuple<double,int> t;
       

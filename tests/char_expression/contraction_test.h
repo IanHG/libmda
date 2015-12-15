@@ -18,7 +18,7 @@ namespace char_expression
 template<class matrix_type>
 struct contraction_test_square_mat: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -50,7 +50,7 @@ struct contraction_test_square_mat: public virtual unit_test
 template<class matrix_type>
 struct contraction_test_square_mat_trans: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -82,7 +82,7 @@ struct contraction_test_square_mat_trans: public virtual unit_test
 template<class matrix_type>
 struct contraction_test_mat: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,3);
        matrix_type mat1(2,3);
@@ -123,7 +123,7 @@ struct contraction_test_mat: public virtual unit_test
 template<class matrix_type, class vector_type>
 struct contraction_test_mat_vec: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec0(3);
        matrix_type mat1(3,2);
@@ -153,7 +153,7 @@ struct contraction_test_mat_vec: public virtual unit_test
 template<class matrix_type>
 struct contraction_addition_test_square_mat: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        matrix_type mat1(2,2);
@@ -197,7 +197,7 @@ struct contraction_addition_test_square_mat: public virtual unit_test
 template<class tensor_type, class matrix_type, class vector_type>
 struct contraction_test_tens3d_mat_vec: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        matrix_type mat0(2,2);
        tensor_type tens1(2,2,2);

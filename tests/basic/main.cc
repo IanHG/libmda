@@ -20,7 +20,7 @@ struct the_test: public virtual unit_test
       { 
       };
 
-      void do_test() throw(test_failed)
+      void do_test()
       { 
          cout << " im testing with template " << N
               << " and number " << m_number << endl; 
@@ -29,7 +29,7 @@ struct the_test: public virtual unit_test
 
 struct mult_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test()
    {
       cout << " multi test " << endl;
       double a = 2;

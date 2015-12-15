@@ -21,7 +21,7 @@ struct vector_construction_test: public virtual unit_test
 
    vector_construction_test(size_type a_size = size_type(0)): m_size(a_size) { };
    
-   void do_test() throw(test_failed)
+   void do_test() 
    { 
       vector_type vec(m_size);
       UNIT_ASSERT_EQUAL(vec.size(),m_size,"vec size not correct after construction");
@@ -34,7 +34,7 @@ struct vector_copy_construction_test: public virtual unit_test
    typedef typename vector_type::size_type  size_type;
    typedef typename vector_type::value_type value_type;
    
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       size_type size = 3;
       vector_type vec0(size);
@@ -50,7 +50,7 @@ struct vector_implicit_copy_construction_test: public virtual unit_test
 {
    typedef typename vector_type::size_type  size_type;
    typedef typename vector_type::value_type value_type;
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       size_type size = 3;
       vector_type vec0(size);
@@ -66,7 +66,7 @@ struct vector_copy_assignment_test: public virtual unit_test
 {
    typedef typename vector_type::size_type  size_type;
    typedef typename vector_type::value_type value_type;
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       size_type size = 3;
       vector_type vec0(size);
@@ -89,7 +89,7 @@ struct matrix_construction_test: public virtual unit_test
                             size_type a_cols = size_type(0)): 
       m_rows(a_rows), m_cols(a_cols) { };
    
-   void do_test() throw(test_failed)
+   void do_test() 
    { 
       matrix_type mat(m_rows,m_cols);
       UNIT_ASSERT_EQUAL(mat.template extent<0>(),m_rows,"mat rows not correct after construction");
@@ -103,7 +103,7 @@ struct matrix_copy_construction_test: public virtual unit_test
    typedef typename matrix_type::size_type  size_type;
    typedef typename matrix_type::value_type value_type;
    
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       size_type size = 3;
       matrix_type mat0(size,size);
@@ -121,7 +121,7 @@ struct matrix_implicit_copy_construction_test: public virtual unit_test
 {
    typedef typename matrix_type::size_type  size_type;
    typedef typename matrix_type::value_type value_type;
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       size_type size = 3;
       matrix_type mat0(size,size);
@@ -139,7 +139,7 @@ struct matrix_copy_assignment_test: public virtual unit_test
 {
    typedef typename matrix_type::size_type  size_type;
    typedef typename matrix_type::value_type value_type;
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       size_type size = 3;
       matrix_type mat0(size,size);

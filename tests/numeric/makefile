@@ -1,4 +1,4 @@
-OBJ=main.cc 
+OBJ=main.cpp
 FUNC=
 CXX=g++
 CXXOPTIMFLAGS=-O3

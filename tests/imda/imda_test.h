@@ -33,7 +33,7 @@ struct float_vector_test_base: public virtual unit_test
 template<class vector_type>
 struct vector_assign_test: float_vector_test_base<vector_type>
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec(3);
 
@@ -54,7 +54,7 @@ struct vector_assign_test: float_vector_test_base<vector_type>
 template<class vector_type>
 struct vector_assign_scalar_test: float_vector_test_base<vector_type>
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec(3);
 
@@ -73,7 +73,7 @@ struct vector_assign_scalar_test: float_vector_test_base<vector_type>
 template<class vector_type>
 struct vector_add_assign_scalar_test: float_vector_test_base<vector_type>
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec(3);
 
@@ -93,7 +93,7 @@ struct vector_add_assign_scalar_test: float_vector_test_base<vector_type>
 template<class vector_type>
 struct vector_sub_assign_scalar_test: float_vector_test_base<vector_type>
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec(3);
 
@@ -113,7 +113,7 @@ struct vector_sub_assign_scalar_test: float_vector_test_base<vector_type>
 template<class vector_type>
 struct vector_mul_assign_scalar_test: float_vector_test_base<vector_type>
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec(3);
 
@@ -133,7 +133,7 @@ struct vector_mul_assign_scalar_test: float_vector_test_base<vector_type>
 template<class vector_type>
 struct vector_div_assign_scalar_test: float_vector_test_base<vector_type>
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        vector_type vec(3);
 

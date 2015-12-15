@@ -34,7 +34,7 @@ class unit_test
       //
       // overloadable function for doing the actual test
       //
-      virtual void do_test() throw(test_failed) = 0;
+      virtual void do_test() = 0;
       
       //
       // overloadable function for optional setup test method

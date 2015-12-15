@@ -24,7 +24,7 @@ namespace util
  **/
 struct scope_guard_run_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       int i = 0;
       {
@@ -39,7 +39,7 @@ struct scope_guard_run_test: public virtual unit_test
  **/
 struct scope_guard_dismiss_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       int i = 0;
       {
@@ -55,7 +55,7 @@ struct scope_guard_dismiss_test: public virtual unit_test
  **/
 struct scope_guard_macro_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       int i = 0;
       {

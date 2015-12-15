@@ -26,7 +26,7 @@ template<class T = double>
 struct from_string_float_test: public virtual unit_test
 {
    static_assert(std::is_floating_point<T>::value, "only works with floating point types");
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       auto a = libmda::util::from_string<T>("3.14159");
 
@@ -41,7 +41,7 @@ template<class T = int>
 struct from_string_int_test: public virtual unit_test
 {
    static_assert(std::is_integral<T>::value, "only works with integral types");
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       auto a = libmda::util::from_string<T>("314159");
 
@@ -56,7 +56,7 @@ template<class T = int>
 struct from_string_signed_int_test: public virtual unit_test
 {
    static_assert(std::is_signed<T>::value, "only works with signed integral types");
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       auto a = libmda::util::from_string<T>("-314159");
 

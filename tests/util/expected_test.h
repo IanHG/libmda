@@ -24,7 +24,7 @@ namespace util
  **/
 struct expected_no_except_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       bool except_raised = false;
       libmda::util::expected<int> i = 0;
@@ -45,7 +45,7 @@ struct expected_no_except_test: public virtual unit_test
  **/
 struct expected_except_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       bool except_raised = false;
       libmda::util::expected<int> i = libmda::util::expected<int>::from_exception(0);

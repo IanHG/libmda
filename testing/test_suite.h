@@ -86,16 +86,20 @@ class test_suite: public unit_test_holder
             }
             catch(test_failed &e)
             {
-               //a_ostream << " FAILED TEST: " << get_test(i)->name() << "\n"
-               //          << e.what() << std::endl;
-               m_failed_tests.emplace_back(e.what());
+               m_failed_tests.emplace_back(get_test(i)->name() + "\n" + e.what());
+               ++m_failed;
+            }
+            catch(std::exception& e)
+            {
+               m_failed_tests.emplace_back(get_test(i)->name() + "\nstd::exception: " + e.what());
                ++m_failed;
             }
             catch(...)
-            {  
-               a_ostream << " TEST SUITE CAUGHT SOMETHING " << std::endl;  
-               throw;
+            {
+               m_failed_tests.emplace_back(get_test(i)->name() + "\n TEST SUITE CAUGHT SOMETHING ");
+               ++m_failed;
             }
+
             m_assertions+=get_test(i)->num_assertions();
             m_num_test+=get_test(i)->num_test();
             m_failed+=get_test(i)->num_failed(); // for test case (unit test will return 0 no matter)

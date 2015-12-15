@@ -26,7 +26,7 @@ namespace util
  **/
 struct any_type_nulltype_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       libmda::util::any_type any;
       UNIT_ASSERT_EQUAL( std::string(any.type_name())
@@ -42,7 +42,7 @@ struct any_type_nulltype_test: public virtual unit_test
 template<class T>
 struct any_type_type_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       libmda::util::any_type any(static_cast<T>(0));
       UNIT_ASSERT_EQUAL( std::string(any.type_name())
@@ -55,9 +55,25 @@ struct any_type_type_test: public virtual unit_test
 /**
  *
  **/
+template<class T>
+struct any_type_type_brace_test: public virtual unit_test
+{
+   void do_test() 
+   {
+      libmda::util::any_type any{static_cast<T>(0)};
+      UNIT_ASSERT_EQUAL( std::string(any.type_name())
+                       , std::string(std::type_index(typeid(T)).name())
+                       , "construction using brace failed from type: " + libmda::util::typeof<T>()
+                       );
+   }
+};
+
+/**
+ *
+ **/
 struct any_type_get_noexception_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       libmda::util::any_type any_double(static_cast<double>(3.14159));
       try
@@ -76,7 +92,7 @@ struct any_type_get_noexception_test: public virtual unit_test
  **/
 struct any_type_get_exception_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       libmda::util::any_type any_double(static_cast<double>(3.14159));
       try

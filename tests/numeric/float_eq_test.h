@@ -20,7 +20,7 @@ namespace numeric_test
 template<class T>
 struct float_eq_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        T a = 1.0; T b = 2.0;
        T c = 3.0; T d = 4.0;
@@ -63,7 +63,7 @@ struct float_eq_test: public virtual unit_test
 template<class T>
 struct float_neq_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
        T a = 1.0; T b = 2.0;
        T c = 3.0; T d = 4.0;
@@ -106,7 +106,7 @@ struct float_neq_test: public virtual unit_test
 template<class T>
 struct float_sign_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       T a = 2.0;
       UNIT_ASSERT( numeric::float_pos(a),"sign test failed for type: "+util::typeof(a));
@@ -129,7 +129,7 @@ struct float_sign_test: public virtual unit_test
 template<class T>
 struct float_numeq_zero_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       T a = std::numeric_limits<T>::epsilon();
       UNIT_ASSERT( numeric::float_numeq_zero(a,1.0,2),"numeric zero test failed for type: "+util::typeof(a));
@@ -156,7 +156,7 @@ struct float_numeq_zero_test: public virtual unit_test
 template<class T>
 struct float_numgeq_zero_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       T a = std::numeric_limits<T>::epsilon();
       UNIT_ASSERT( numeric::float_numgeq_zero(a,T(1.0),1),"numeric geq zero test failed for type: "+util::typeof(a));
@@ -180,7 +180,7 @@ struct float_numgeq_zero_test: public virtual unit_test
 template<class T>
 struct float_numleq_zero_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       T a = std::numeric_limits<T>::epsilon();
       UNIT_ASSERT( numeric::float_numleq_zero(a,T(1.0),1),"numeric leq zero test failed for type: "+util::typeof(a));

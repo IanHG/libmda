@@ -20,7 +20,7 @@ namespace rte_test
 
 struct actual_rte_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       auto func = make_rte_function(make_sum_expression(rte::make_literal_expression<long int>(2)
                                                       , rte::make_literal_expression<int>(1)

@@ -15,7 +15,7 @@ namespace meta_test
 //
 struct index_list_empty_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::index_list<1,2> t1;
       meta::empty<decltype(t1)> t2;
@@ -29,7 +29,7 @@ struct index_list_empty_test: public virtual unit_test
 //
 struct index_list_catenation_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::index_list<1,2> t1;
       meta::index_list<3,4> t2;
@@ -45,7 +45,7 @@ struct index_list_catenation_test: public virtual unit_test
 ////
 //struct index_list_at_test: public virtual unit_test
 //{
-//   void do_test() throw(test_failed)
+//   void do_test() 
 //   {
 //      meta::index_list<double,int> t1;
 //      
@@ -59,7 +59,7 @@ struct index_list_catenation_test: public virtual unit_test
 //
 struct index_list_size_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       meta::index_list<1,2,3> t1;
       

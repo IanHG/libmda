@@ -71,6 +71,10 @@ int main()
    suite.add_test<libmda::tests::util::any_type_type_test<double> >("any_type type double");
    suite.add_test<libmda::tests::util::any_type_type_test<int> >("any_type type int");
    suite.add_test<libmda::tests::util::any_type_type_test<long int> >("any_type type long int");
+   suite.add_test<libmda::tests::util::any_type_type_brace_test<float> >("any_type type brace float");
+   suite.add_test<libmda::tests::util::any_type_type_brace_test<double> >("any_type type brace double");
+   suite.add_test<libmda::tests::util::any_type_type_brace_test<int> >("any_type type brace int");
+   suite.add_test<libmda::tests::util::any_type_type_brace_test<long int> >("any_type type brace long int");
    suite.add_test<libmda::tests::util::any_type_get_noexception_test>("any_type get noexception");
    suite.add_test<libmda::tests::util::any_type_get_exception_test>("any_type get exception");
 

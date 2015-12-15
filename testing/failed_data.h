@@ -5,10 +5,29 @@
 #include<iostream>
 #include<sstream>
 
+#include<vector>
+
 namespace libmda
 {
 namespace testing
 {
+
+template<class T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec)
+{
+   os << "(";
+   if(!vec.empty())
+   {
+      for(int i = 0; i < vec.size() - 1; ++i)
+      {
+         os << vec[i] << ", ";
+      }
+      os << vec[vec.size() - 1];
+   }
+   os << ")";
+   return os;
+}
+
 
 //
 //

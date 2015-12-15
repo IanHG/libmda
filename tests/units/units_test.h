@@ -20,7 +20,7 @@ namespace units_test
 template<class T = double>
 struct addition_assignment_test: public virtual unit_test
 {
-   void do_test() throw(test_failed)
+   void do_test() 
    {
       units::quantity< units::si::kg<1> > mass1(2.0);
       units::quantity< units::si::kg<1> > mass2(3.0);

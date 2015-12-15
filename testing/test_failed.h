@@ -4,13 +4,42 @@
 #include<string>
 #include<iostream>
 #include<sstream>
+#include<type_traits>
+#include<iomanip>
 
 #include "failed_data.h"
+#include "../numeric/float_eq.h"
 
 namespace libmda
 {
 namespace testing
 {
+namespace detail
+{
+
+template<bool>
+struct output_float_dist
+{
+   template<class T>
+   static void apply(std::stringstream& s, const T& got, const T& expected)
+   {
+      // do nothing
+   }
+};
+
+// specialization for floating point
+template<>
+struct output_float_dist<true>
+{
+   template<class T>
+   static void apply(std::stringstream& s, const T& got, const T& expected)
+   {
+      s << " dist: " << libmda::numeric::float_ulps(expected, got);
+   }
+};
+
+} /* namespace detail */
+                              
 
 //
 //
@@ -34,10 +63,12 @@ struct test_failed
          m_message.append(m_name);
          m_message.append(": ");
          std::stringstream s;
+         s << std::boolalpha << std::scientific << std::setprecision(16); 
          s << " expected ";
          m_pdata->expected(s);
          s << " got ";
          m_pdata->got(s);
+         detail::output_float_dist<std::is_floating_point<typename std::decay<T>::type>::value>::apply(s, a_got, a_expected);
          m_message.append(" in file ");
          m_message.append(m_file);
          m_message.append(" on line ");
