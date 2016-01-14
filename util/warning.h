@@ -1,6 +1,8 @@
 #ifndef LIBMDA_WARNING_H_INCLUDED
 #define LIBMDA_WARNING_H_INCLUDED
 
+#include <cstdlib>
+
 namespace libmda
 {
 namespace util
@@ -12,7 +14,7 @@ namespace detail
 // struct that will overflow and print integer s at compile-time
 //
 ////
-template<size_t s>
+template<std::size_t s>
 struct overflow
 {
    operator char() { return (s + 256); }
