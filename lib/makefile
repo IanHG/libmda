@@ -4,7 +4,6 @@ libmda.a: ../util/print_variadic.cpp ../util/type_info.cpp ../util/rand_seed.cpp
 	$(LIBMDA_COMPILER_SETTING) -std=c++11 -c ../util/print_variadic.cpp
 	$(LIBMDA_COMPILER_SETTING) -std=c++11 -c ../util/type_info.cpp
 	$(LIBMDA_COMPILER_SETTING) -std=c++11 -c ../util/multiple_return.cpp
-	$(LIBMDA_COMPILER_SETTING) -std=c++11 -c ../util/rand_seed.cpp
 	$(LIBMDA_COMPILER_SETTING) -std=c++11 -c ../util/random_bool.cpp
 	$(LIBMDA_COMPILER_SETTING) -std=c++11 -c ../util/output_call_addr.cpp
 	$(LIBMDA_COMPILER_SETTING) -std=c++11 -c ../testing/failed_data.cpp

@@ -21,7 +21,6 @@ template<class T
        >
 T random_sign()
 {
-   seed();
    return rand_float<T>() >= 0.5 ? T(1.0) : T(-1.0);
 }
 
