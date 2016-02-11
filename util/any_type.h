@@ -28,6 +28,11 @@ class any_type_base
        **/
       virtual any_type_base* clone() const = 0;
 
+      /**
+       *
+       **/
+      virtual ~any_type_base() = default;
+
    private:
 };
 
@@ -255,6 +260,7 @@ class any_type
        *
        **/
       detail::any_type_base* m_data;
+
       /**
        *
        **/
