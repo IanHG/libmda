@@ -46,11 +46,11 @@ struct failed_data_base
 //
 //
 //
-template<typename T>
+template<typename T, typename U>
 struct failed_data: public failed_data_base
 {
    public:
-      failed_data(const T& a_expected, const T& a_got):
+      failed_data(const T& a_expected, const U& a_got):
          m_expected(a_expected), m_got(a_got) 
       { 
       }
@@ -67,16 +67,16 @@ struct failed_data: public failed_data_base
    
    private:
       const T m_expected;
-      const T m_got;
+      const U m_got;
 };
 
 //
 //
 //
-template<typename T>
-failed_data<T>* failed_data_factory(const T& a_expected, const T& a_got)
+template<typename T, typename U>
+failed_data<T, U>* failed_data_factory(const T& a_expected, const U& a_got)
 { 
-   return new failed_data<T>(a_expected,a_got); 
+   return new failed_data<T, U>(a_expected,a_got); 
 }
 
 //

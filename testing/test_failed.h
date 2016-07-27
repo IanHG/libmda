@@ -25,6 +25,11 @@ struct output_float_dist
    {
       // do nothing
    }
+   template<class T, class U>
+   static void apply(std::stringstream& s, const T& got, const U& expected)
+   {
+      // do nothing
+   }
 };
 
 // specialization for floating point
@@ -48,13 +53,13 @@ struct test_failed
 {
 
    public:
-      template<typename T>
+      template<typename T, typename U>
       test_failed(const std::string a_name,
                   const char* a_file, 
                   const unsigned int a_line, 
                   const std::string a_what,
                   const T& a_expected,
-                  const T& a_got): 
+                  const U& a_got): 
          m_name(a_name), 
          m_file(a_file), m_line(a_line), m_what(a_what), m_message(),
          m_pdata(failed_data_factory(a_expected,a_got))
