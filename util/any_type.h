@@ -206,6 +206,7 @@ class any_type
             m_data = new detail::any_type_explicit<T_decayed>(std::forward<T>(t));
             m_type = type_index(typeid(T_decayed));
          }
+         return *this;
       }
 
       

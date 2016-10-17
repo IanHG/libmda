@@ -1,2 +1,4 @@
 lib/*.a
 lib/*.o
+
+**/main

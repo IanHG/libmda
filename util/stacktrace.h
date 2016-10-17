@@ -28,10 +28,11 @@ static inline void print_stacktrace(std::ostream& os = std::cerr, unsigned int m
    os << "========================== STACK TRACE ==========================\n";
 
    // storage array for stack trace address data
-   void* addrlist[max_frames+1];
+   int size = max_frames + 1;
+   void* addrlist[size];
 
    // retrieve current stack addresses
-   int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));
+   int addrlen = backtrace(addrlist, size);
 
    if (addrlen == 0) {
       os << "  <empty, possibly corrupt>\n";
@@ -110,6 +111,10 @@ static inline void print_stacktrace(std::ostream& os = std::cerr, unsigned int m
          //std::cout << addr << std::endl;
 
          bool addr_success = address_to_line((void*)addr, buffer, sizeof(buffer));
+         if(!addr_succes)
+         {
+            os << " could not convert address to line\n";
+         }
 
          //if (status == 0) 
          {
