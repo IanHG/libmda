@@ -111,7 +111,7 @@ static inline void print_stacktrace(std::ostream& os = std::cerr, unsigned int m
          //std::cout << addr << std::endl;
 
          bool addr_success = address_to_line((void*)addr, buffer, sizeof(buffer));
-         if(!addr_succes)
+         if(!addr_success)
          {
             os << " could not convert address to line\n";
          }
