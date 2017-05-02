@@ -105,14 +105,16 @@ struct IMDADim: A
 // mixin that provides access to elements via the at function
 // at(i1,...,in): return element at with index i1,...,in
 // RefAccess: switches between access by refence and access by value
-constexpr bool Ref_access()   { return true;  }
-constexpr bool Value_access() { return false; }
+#define LIBMDA_REFACCESS true
+#define LIBMDA_VALUEACCESS false
+constexpr bool Ref_access()   { return LIBMDA_REFACCESS;  }
+constexpr bool Value_access() { return LIBMDA_VALUEACCESS; }
 
 template<bool RefAccess, class A>
 struct IMDAAccess;
 
 template<class A>
-struct IMDAAccess<Ref_access(),A>: A
+struct IMDAAccess<LIBMDA_REFACCESS,A>: A
 {
    typedef A base_type;
    typedef Type<A>       type;
@@ -148,7 +150,7 @@ struct IMDAAccess<Ref_access(),A>: A
 };
 
 template<class A>
-struct IMDAAccess<Value_access(),A>: A
+struct IMDAAccess<LIBMDA_VALUEACCESS,A>: A
 {
    typedef A base_type;
    typedef Value_type<A> value_type;
@@ -184,7 +186,7 @@ template<bool Ref, class A>
 struct IMDAVecAccess;
 
 template<class A>
-struct IMDAVecAccess<Ref_access(),A>: A
+struct IMDAVecAccess<LIBMDA_REFACCESS,A>: A
 {
    typedef A base_type;
    typedef Value_type<A> value_type;
@@ -195,7 +197,7 @@ struct IMDAVecAccess<Ref_access(),A>: A
 };
 
 template<class A>
-struct IMDAVecAccess<Value_access(),A>: A
+struct IMDAVecAccess<LIBMDA_VALUEACCESS,A>: A
 {
    typedef A base_type;
    typedef Value_type<A> value_type;

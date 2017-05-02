@@ -56,7 +56,7 @@ template<bool RefAccess, class A>
 struct char_expression_access;
 
 template<class A>
-struct char_expression_access<Ref_access(),A>: A
+struct char_expression_access<LIBMDA_REFACCESS,A>: A
 {
    using base_type  = A;
    using value_type = Value_type<A>;
@@ -77,7 +77,7 @@ struct char_expression_access<Ref_access(),A>: A
 };
 
 template<class A>
-struct char_expression_access<Value_access(),A>: A
+struct char_expression_access<LIBMDA_VALUEACCESS,A>: A
 {
    using base_type  = A;
    using value_type = Value_type<A>;
@@ -159,7 +159,7 @@ class mda_char_expression:
    public char_expression_assign<
           char_expression<
           char_expression_access_comb<
-          char_expression_access<Ref_access(),
+          char_expression_access<LIBMDA_REFACCESS,
           char_expression_base<
           mda_char_expression<A, cIndicies...>, traits<mda_char_expression<A,cIndicies...> >
           > > > > >
@@ -175,7 +175,7 @@ class mda_char_expression:
    typedef char_expression_assign<
            char_expression<
            char_expression_access_comb<
-           char_expression_access<Ref_access(),
+           char_expression_access<LIBMDA_REFACCESS,
            char_expression_base<
            mda_char_expression<A, cIndicies...>, traits<mda_char_expression<A,cIndicies...> >
            > > > > > interface_type;
@@ -387,7 +387,7 @@ template<typename L, typename R, template<class,class> class Op>
 class binary_char_expression:
    public char_expression<
           char_expression_access_comb<
-          char_expression_access<Value_access(),
+          char_expression_access<LIBMDA_VALUEACCESS,
           char_expression_base<
           binary_char_expression<L, R, Op>, traits<binary_char_expression<L,R,Op> >
           > > > >
