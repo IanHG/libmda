@@ -19,6 +19,8 @@
 #include "../../util/multiple_return.h"
 #include "../float_eq.h"
 
+#include "optimize_interval.h"
+
 namespace libmda
 {
 namespace numeric
@@ -192,12 +194,14 @@ libmda::util::return_type<typename PHI::step_t, typename PHI::step_t> update
          {
             // should not get here ?? :O
             assert(false);
+            return libmda::util::ret(a_hat, d);
          }
      }
    }
    
    // should not get here ?? :O
    assert(false);
+   return libmda::util::ret(a, b);
 }
 
 /*! Double secant step.
@@ -229,13 +233,13 @@ libmda::util::return_type<typename PHI::step_t, typename PHI::step_t> double_sec
    // S2
    auto cc = static_cast<typename PHI::step_t>(0.0);
    auto equal_a = false, equal_b = false;
-   if( equal_b = libmda::numeric::float_eq(c, bb) )
+   if( (equal_b = libmda::numeric::float_eq(c, bb)) )
    {
       auto phi_deriv_bb = phi.first_derivative(bb);
       cc = (b*phi_deriv_bb - bb*phi_deriv_b)/(phi_deriv_bb - phi_deriv_b);
    }
    // S3
-   if( equal_a = libmda::numeric::float_eq(c, aa) )
+   if( (equal_a = libmda::numeric::float_eq(c, aa)) )
    {
       auto phi_deriv_aa = phi.first_derivative(aa);
       cc = (a*phi_deriv_aa - aa*phi_deriv_a)/(phi_deriv_aa - phi_deriv_a);
@@ -329,21 +333,44 @@ bool b_condition
  */
 template<class PHI>
 typename PHI::step_t hager_zhang_line_search
-   ( const PHI& phi
-   , typename PHI::step_t alpha_a
-   , typename PHI::step_t alpha_b
-   , typename PHI::step_t alpha_resolution
-   , typename PHI::step_t delta = 1e-4     // (.0, .5)
-   , typename PHI::step_t sigma = 0.1      // [\delta, 1.0)
-   , typename PHI::step_t epsilon = 1e-6    // [.0, \inf)
-   , typename PHI::step_t theta = 0.5      // (.0, 1.0)
-   , typename PHI::step_t gamma = 0.66      // (.0, 1.0)
-   , typename PHI::step_t rho = 5.0      // (.0, \inf)
+   (  const PHI& phi
+   ,  typename PHI::step_t alpha_a
+   ,  typename PHI::step_t alpha_b
+   ,  bool optimize_interval = false
+   ,  typename PHI::value_t slope_init = -1. // Sign of phi'(alpha_a). Used in optimize_interval.
+   ,  typename PHI::step_t delta = 1e-4     // (.0, .5)
+   ,  typename PHI::step_t sigma = 0.1      // [\delta, 1.0)
+   ,  typename PHI::step_t epsilon = 1e-6    // [.0, \inf)
+   ,  typename PHI::step_t theta = 0.5      // (.0, 1.0)
+   ,  typename PHI::step_t gamma = 0.66      // (.0, 1.0)
+   ,  typename PHI::step_t rho = 5.0      // (.0, \inf)
    )
 {
    using step_t = typename PHI::step_t;
    auto phi_0 = phi(0);
+
+   // Make sure the interval contains an extremum point
+   if (  optimize_interval )
+   {
+      std::cout << " =============== starting interval optimization ================= " << std::endl;
+      std::cout << " alpha_a before opt = " << alpha_a << std::endl;
+      std::cout << " alpha_b before opt = " << alpha_b << std::endl;
+
+      auto p_a = slope_init;
+      auto p_b = phi.first_derivative(alpha_b);
+
+      detail::optimize_interval(phi, alpha_a, alpha_b, p_a, p_b, static_cast<step_t>(1.e2));
+
+      std::cout << " alpha_a after opt = " << alpha_a << std::endl;
+      std::cout << " alpha_b after opt = " << alpha_b << std::endl;
+   }
+
+   // bracket interval
    libmda::util::ret(alpha_a, alpha_b) = detail::bracket(phi, alpha_b, epsilon, theta, rho);
+
+   std::cout << " alpha_a after bracket = " << alpha_a << std::endl;
+   std::cout << " alpha_b after bracket = " << alpha_b << std::endl;
+
    //std::cout << " ALPHA_A " << alpha_a << std::endl;
    //std::cout << " ALPHA_B " << alpha_b << std::endl;
    //if(!detail::a_condition(phi, alpha_a, epsilon, phi_0))
@@ -354,6 +381,7 @@ typename PHI::step_t hager_zhang_line_search
    //{
    //   std::cout << "B CONDITION NOT SATISFIED! alpha_b = " << alpha_b << std::endl;
    //}
+
 
    while(true)
    {  

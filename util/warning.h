@@ -36,23 +36,23 @@ void print_warning(MESSAGE)
 // static warning
 // will print static warning depending on condition
 /////
-//#define static_warning(cond,msg)\
-//template<bool> struct static_warning_impl\
-//{\
-//   static void apply()\
-//   {\
-//   }\
-//};\
-//\
-//template<> struct static_warning_impl<false>\
-//{\
-//   static void apply()\
-//   {\
-//      ::detail::print_warning(msg());\
-//   }\
-//};\
-//\
-//static_warning_impl<cond>::apply()
+/*#define static_warning(cond,msg)\
+template<bool> struct static_warning_impl\
+{\
+   static void apply()\
+   {\
+   }\
+};\
+\
+template<> struct static_warning_impl<false>\
+{\
+   static void apply()\
+   {\
+      ::detail::print_warning(msg());\
+   }\
+};\
+\
+static_warning_impl<cond>::apply() */
 
 } // namespace util
 } // namespace libmda

@@ -12,7 +12,7 @@ namespace testing
 struct index_test_check
 {
    template<typename T, typename U>
-   static void apply(const T index1, const U index2) throw(test_failed)
+   static void apply(const T index1, const U index2)
    { 
       ASSERT(index1>=0, " index is negative ");
       ASSERT(index1<index2, " index has overcounted ");

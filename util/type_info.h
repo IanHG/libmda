@@ -17,13 +17,13 @@ namespace util
 std::string demangle(const char* name);
 
 template <class T>
-std::string typeof(const T& t) 
+std::string type_of(const T& t) 
 {
    return demangle(typeid(t).name());
 }
 
 template<class T>
-std::string typeof()
+std::string type_of()
 {
    return demangle(typeid(T).name());
 }

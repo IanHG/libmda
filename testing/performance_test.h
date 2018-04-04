@@ -34,7 +34,7 @@ class performance_test:
          unit_test(), test(a_name,args...), m_timer()
       { }
 
-      void do_test() throw(test_failed)
+      void do_test()
       { 
          m_timer.start();
          //test::setup();  // setup test (done by test_suite)

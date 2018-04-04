@@ -118,7 +118,7 @@ typename PHI::step_t zoom
    , const typename PHI::value_t& phi_deriv_0
    )
 {
-   typename PHI::step_t a_j;
+   typename PHI::step_t a_j = static_cast<typename PHI::step_t>(0.0);
 
    //std::cout << " zoom begin :  a_low = " << a_low << "    a_high = " << a_high << std::endl;
 
@@ -229,7 +229,6 @@ typename PHI::step_t wolfe_line_search
       }
 
       alpha_old = alpha_new;
-      //alpha_new = (alpha_new+alpha_max)/2.0;
       alpha_new += alpha_resolution;
       
       phi_old = phi_new;
@@ -240,6 +239,7 @@ typename PHI::step_t wolfe_line_search
    if(hard_check && !detail::strong_wolfe_check(phi, c_1, c_2, alpha_new))
    {
       std::cout << " WARNING ALPHA DOES NOT SATISFY STRONG WOLFE CHECK! " << std::endl;
+      std::cout << alpha_new << std::endl;
       exit(1);
    }
 

@@ -42,7 +42,7 @@ class test_case: virtual protected unit_test_holder, virtual public unit_test
       //
       //
       //
-      void do_test() throw(test_failed)
+      void do_test()
       {
          for(int i=0; i<test_size(); ++i)
          {
