@@ -24,8 +24,8 @@ struct signum_pos_test: public virtual unit_test
    void do_test() 
    {
       T a = 2.0;
-      UNIT_ASSERT( numeric::float_pos(numeric::signum(a)),"Signum pos failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_neg(numeric::signum(a)),"Signum pos failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_pos(numeric::signum(a)),"Signum pos failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_neg(numeric::signum(a)),"Signum pos failed for type: "+util::type_of(a));
    }
 };
 
@@ -35,8 +35,8 @@ struct signum_neg_test: public virtual unit_test
    void do_test() 
    {
       T a = -3.3333;
-      UNIT_ASSERT(!numeric::float_pos(numeric::signum(a)),"Signum neg failed for type: "+util::typeof(a));
-      UNIT_ASSERT( numeric::float_neg(numeric::signum(a)),"Signum neg failed for type: "+util::typeof(a));
+      UNIT_ASSERT(!numeric::float_pos(numeric::signum(a)),"Signum neg failed for type: "+util::type_of(a));
+      UNIT_ASSERT( numeric::float_neg(numeric::signum(a)),"Signum neg failed for type: "+util::type_of(a));
    }
 };
 
@@ -46,12 +46,12 @@ struct signum_zero_test: public virtual unit_test
    void do_test() 
    {
       T a = 0.0;
-      UNIT_ASSERT( numeric::float_pos(numeric::signum(a)),"Signum pos zero failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_neg(numeric::signum(a)),"Signum pos zero failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_pos(numeric::signum(a)),"Signum pos zero failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_neg(numeric::signum(a)),"Signum pos zero failed for type: "+util::type_of(a));
       
       T b = -0.0;
-      UNIT_ASSERT( numeric::float_pos(numeric::signum(b)),"Signum neg zero failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_neg(numeric::signum(b)),"Signum neg zero failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_pos(numeric::signum(b)),"Signum neg zero failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_neg(numeric::signum(b)),"Signum neg zero failed for type: "+util::type_of(a));
    }
 };
 

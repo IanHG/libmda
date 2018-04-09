@@ -109,20 +109,20 @@ struct float_sign_test: public virtual unit_test
    void do_test() 
    {
       T a = 2.0;
-      UNIT_ASSERT( numeric::float_pos(a),"sign test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_neg(a),"sign test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_pos(a),"sign test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_neg(a),"sign test failed for type: "+util::type_of(a));
       
       T neg_a = -2.0;
-      UNIT_ASSERT(!numeric::float_pos(neg_a),"sign test failed for type: "+util::typeof(neg_a));
-      UNIT_ASSERT( numeric::float_neg(neg_a),"sign test failed for type: "+util::typeof(neg_a));
+      UNIT_ASSERT(!numeric::float_pos(neg_a),"sign test failed for type: "+util::type_of(neg_a));
+      UNIT_ASSERT( numeric::float_neg(neg_a),"sign test failed for type: "+util::type_of(neg_a));
    
       T zero = 0.0;
-      UNIT_ASSERT( numeric::float_pos(zero),"sign test failed for type: "+util::typeof(zero));
-      UNIT_ASSERT(!numeric::float_neg(zero),"sign test failed for type: "+util::typeof(zero));
+      UNIT_ASSERT( numeric::float_pos(zero),"sign test failed for type: "+util::type_of(zero));
+      UNIT_ASSERT(!numeric::float_neg(zero),"sign test failed for type: "+util::type_of(zero));
       
       T neg_zero = -0.0;
-      UNIT_ASSERT(!numeric::float_pos(neg_zero),"sign test failed for type: "+util::typeof(neg_zero));
-      UNIT_ASSERT( numeric::float_neg(neg_zero),"sign test failed for type: "+util::typeof(neg_zero));
+      UNIT_ASSERT(!numeric::float_pos(neg_zero),"sign test failed for type: "+util::type_of(neg_zero));
+      UNIT_ASSERT( numeric::float_neg(neg_zero),"sign test failed for type: "+util::type_of(neg_zero));
    }
 };
 
@@ -132,24 +132,24 @@ struct float_numeq_zero_test: public virtual unit_test
    void do_test() 
    {
       T a = std::numeric_limits<T>::epsilon();
-      UNIT_ASSERT( numeric::float_numeq_zero(a,1.0,2),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT( numeric::float_numeq_zero(a,1.0,1),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numeq_zero(a,1.0,0),"numeric zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numeq_zero(a,1.0,2),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT( numeric::float_numeq_zero(a,1.0,1),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numeq_zero(a,1.0,0),"numeric zero test failed for type: "+util::type_of(a));
    
       T b = 2*std::numeric_limits<T>::epsilon();
-      UNIT_ASSERT( numeric::float_numeq_zero(b,T(1.0),2),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numeq_zero(b,T(1.0),1),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numeq_zero(b,T(1.0),0),"numeric zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numeq_zero(b,T(1.0),2),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numeq_zero(b,T(1.0),1),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numeq_zero(b,T(1.0),0),"numeric zero test failed for type: "+util::type_of(a));
       
       //std::cout << " here " << std::endl;
       T c = -2*std::numeric_limits<T>::epsilon();
-      UNIT_ASSERT( numeric::float_numeq_zero(c,T(1.0),4),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),3),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),2),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),1),"numeric zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),0),"numeric zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numeq_zero(c,T(1.0),4),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),3),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),2),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),1),"numeric zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numeq_zero(c,T(1.0),0),"numeric zero test failed for type: "+util::type_of(a));
       
-      UNIT_ASSERT( numeric::float_numeq_zero(a*T(1e+2),T(1e+2),2),"numeric zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numeq_zero(a*T(1e+2),T(1e+2),2),"numeric zero test failed for type: "+util::type_of(a));
    }
 };
 
@@ -159,21 +159,21 @@ struct float_numgeq_zero_test: public virtual unit_test
    void do_test() 
    {
       T a = std::numeric_limits<T>::epsilon();
-      UNIT_ASSERT( numeric::float_numgeq_zero(a,T(1.0),1),"numeric geq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT( numeric::float_numgeq_zero(a,T(1.0),0),"numeric geq zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numgeq_zero(a,T(1.0),1),"numeric geq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT( numeric::float_numgeq_zero(a,T(1.0),0),"numeric geq zero test failed for type: "+util::type_of(a));
    
       T b = -2*std::numeric_limits<T>::epsilon();
-      UNIT_ASSERT( numeric::float_numgeq_zero(b,T(1.0),4),"numeric geq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),3),"numeric geq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),2),"numeric geq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),1),"numeric geq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),0),"numeric geq zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numgeq_zero(b,T(1.0),4),"numeric geq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),3),"numeric geq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),2),"numeric geq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),1),"numeric geq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numgeq_zero(b,T(1.0),0),"numeric geq zero test failed for type: "+util::type_of(a));
 
       T c = 2*std::numeric_limits<T>::epsilon();
       // will always be true for positive numbers
-      UNIT_ASSERT( numeric::float_numgeq_zero(c,T(1.0),2),"numeric geq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT( numeric::float_numgeq_zero(c,T(1.0),1),"numeric geq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT( numeric::float_numgeq_zero(c,T(1.0),0),"numeric geq zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numgeq_zero(c,T(1.0),2),"numeric geq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT( numeric::float_numgeq_zero(c,T(1.0),1),"numeric geq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT( numeric::float_numgeq_zero(c,T(1.0),0),"numeric geq zero test failed for type: "+util::type_of(a));
    }
 };
 
@@ -183,19 +183,19 @@ struct float_numleq_zero_test: public virtual unit_test
    void do_test() 
    {
       T a = std::numeric_limits<T>::epsilon();
-      UNIT_ASSERT( numeric::float_numleq_zero(a,T(1.0),1),"numeric leq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numleq_zero(a,T(1.0),0),"numeric leq zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numleq_zero(a,T(1.0),1),"numeric leq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numleq_zero(a,T(1.0),0),"numeric leq zero test failed for type: "+util::type_of(a));
    
       T b = -2*std::numeric_limits<T>::epsilon();
       // numleq_zero will always be true for negative numbers
-      UNIT_ASSERT( numeric::float_numleq_zero(b,T(1.0),2),"numeric leq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT( numeric::float_numleq_zero(b,T(1.0),1),"numeric leq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT( numeric::float_numleq_zero(b,T(1.0),0),"numeric leq zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numleq_zero(b,T(1.0),2),"numeric leq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT( numeric::float_numleq_zero(b,T(1.0),1),"numeric leq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT( numeric::float_numleq_zero(b,T(1.0),0),"numeric leq zero test failed for type: "+util::type_of(a));
 
       T c = 2*std::numeric_limits<T>::epsilon();
-      UNIT_ASSERT( numeric::float_numleq_zero(c,T(1.0),2),"numeric leq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numleq_zero(c,T(1.0),1),"numeric leq zero test failed for type: "+util::typeof(a));
-      UNIT_ASSERT(!numeric::float_numleq_zero(c,T(1.0),0),"numeric leq zero test failed for type: "+util::typeof(a));
+      UNIT_ASSERT( numeric::float_numleq_zero(c,T(1.0),2),"numeric leq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numleq_zero(c,T(1.0),1),"numeric leq zero test failed for type: "+util::type_of(a));
+      UNIT_ASSERT(!numeric::float_numleq_zero(c,T(1.0),0),"numeric leq zero test failed for type: "+util::type_of(a));
    }
 };
 
