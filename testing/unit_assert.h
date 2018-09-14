@@ -20,7 +20,7 @@ struct unit_assert_data
 {
    template<class AA, class EE>
    unit_assert_data(AA&& actual, EE&& expected, const std::string& message):
-      _actual(actual), _expected(expected), _message(message)
+      _actual(std::forward<AA>(actual)), _expected(std::forward<EE>(expected)), _message(message)
    {
    }
 
